@@ -484,7 +484,7 @@
 											"font": "Arial;13;1",
 											"left": 512,
 											"top": 101,
-											"width": 105.10546875,
+											"width": 109.4599609375,
 											"height": 13,
 											"text": "PHIEU DAT"
 										},
@@ -510,7 +510,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 124,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -525,7 +525,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 139,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -540,7 +540,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 154,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -555,7 +555,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 169,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -570,7 +570,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 184,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -585,7 +585,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 199,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -600,7 +600,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 214,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -615,7 +615,7 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 229,
-													"width": 95.10546875,
+													"width": 99.4599609375,
 													"height": 13
 												},
 												{
@@ -630,22 +630,37 @@
 													"font": "Arial;13;0",
 													"left": 517,
 													"top": 244,
-													"width": 95.10546875,
+													"width": 99.4599609375,
+													"height": 13
+												},
+												{
+													"_type": "ERDColumnView",
+													"_id": "AAAAAAF1zyGHtUzbi7c=",
+													"_parent": {
+														"$ref": "AAAAAAF1q28F0KJaNGU="
+													},
+													"model": {
+														"$ref": "AAAAAAF1zyGHb0zYGq0="
+													},
+													"font": "Arial;13;0",
+													"left": 517,
+													"top": 259,
+													"width": 99.4599609375,
 													"height": 13
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 512,
 											"top": 119,
-											"width": 105.10546875,
-											"height": 143
+											"width": 109.4599609375,
+											"height": 158
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 512,
 									"top": 96,
-									"width": 105.10546875,
-									"height": 166,
+									"width": 109.4599609375,
+									"height": 181,
 									"nameLabel": {
 										"$ref": "AAAAAAF1q28F0KJZLmM="
 									},
@@ -2021,6 +2036,15 @@
 										"$ref": "AAAAAAF1q28Fz6JWhwM="
 									},
 									"name": "THANHTIEN",
+									"length": 0
+								},
+								{
+									"_type": "ERDColumn",
+									"_id": "AAAAAAF1zyGHb0zYGq0=",
+									"_parent": {
+										"$ref": "AAAAAAF1q28Fz6JWhwM="
+									},
+									"name": "DONGIA",
 									"length": 0
 								}
 							]

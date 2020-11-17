@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerThemSachThanhLy">
+   <children>
+      <Label layoutX="94.0" layoutY="68.0" text="Mã sách" />
+      <Label layoutX="94.0" layoutY="108.0" text="Ngày thanh lý" />
+      <TextField fx:id="textMaSach" layoutX="206.0" layoutY="64.0" />
+      <TextField fx:id="textNgayThanhLy" layoutX="206.0" layoutY="104.0" />
+      <Button fx:id="buttonThem" layoutX="83.0" layoutY="179.0" mnemonicParsing="false" onAction="#listenerEvent" prefHeight="26.0" prefWidth="110.0" text="Thêm sách" />
+      <Button fx:id="buttonQuayLai" layoutX="264.0" layoutY="179.0" mnemonicParsing="false" onAction="#listenerEvent" prefHeight="26.0" prefWidth="110.0" text="Quay lại" />
+      <Label layoutX="135.0" layoutY="14.0" text="Thêm sách thanh lý">
+         <font>
+            <Font name="System Bold Italic" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

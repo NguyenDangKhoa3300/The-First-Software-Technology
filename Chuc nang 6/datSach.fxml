@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DatSachController">
+   <children>
+      <Label layoutX="231.0" layoutY="21.0" text="Phiếu đặt sách">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="14.0" layoutY="143.0" prefHeight="362.0" prefWidth="570.0">
+        <columns>
+          <TableColumn prefWidth="52.800048828125" text="STT" />
+          <TableColumn prefWidth="72.79998779296875" text="Tên sách" />
+            <TableColumn prefWidth="69.60003662109375" text="Thể loại" />
+            <TableColumn prefWidth="108.7999267578125" text="Năm xuất bản" />
+            <TableColumn prefWidth="106.39996337890625" text="Nhà xuât bản" />
+            <TableColumn prefWidth="75.0" text="Số lượng" />
+            <TableColumn prefWidth="75.0" text="Đơn giá" />
+        </columns>
+      </TableView>
+      <Button fx:id="butThemSach" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#listenerEventButton" prefHeight="26.0" prefWidth="130.0" text="Thêm sách" />
+      <Button fx:id="butPrint" layoutX="169.0" layoutY="547.0" mnemonicParsing="false" onAction="#listenerEventButton" prefHeight="26.0" prefWidth="90.0" text="In" />
+      <Button fx:id="butBack" layoutX="358.0" layoutY="547.0" mnemonicParsing="false" onAction="#listenerEventButton" prefHeight="26.0" prefWidth="90.0" text="Quay lại" />
+      <Label fx:id="lab1" layoutX="115.0" layoutY="64.0" text="Ngày đặt:....." />
+   </children>
+</AnchorPane>

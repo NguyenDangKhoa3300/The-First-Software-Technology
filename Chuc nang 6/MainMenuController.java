@@ -46,7 +46,13 @@ public class MainMenuController {
         stage.setTitle("Phiếu Thanh Lý Sách");
         stage.setScene(scene);
         stage.show();
-        }
+        } else if(event.getSource()==but9){
+        Parent parent = FXMLLoader.load(getClass().getResource("datSach.fxml"));
+        Scene scene = new Scene(parent);
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("Phiếu đặt sách");
+        stage.setScene(scene);
+        stage.show();
     }
-
+    }
 }

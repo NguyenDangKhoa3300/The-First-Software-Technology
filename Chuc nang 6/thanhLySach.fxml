@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="thanhLyController">
+   <children>
+      <TableView fx:id="tableView" layoutX="-1.0" layoutY="83.0" prefHeight="226.0" prefWidth="602.0">
+        <columns>
+          <TableColumn prefWidth="77.59997862577438" text="STT" />
+          <TableColumn prefWidth="190.40000915527344" text="Tên sách" />
+            <TableColumn prefWidth="205.5999755859375" text="Tác giả" />
+            <TableColumn prefWidth="124.79998779296875" text="Ngày thanh lý" />
+        </columns>
+      </TableView>
+      <Button fx:id="butPrint" layoutX="167.0" layoutY="354.0" mnemonicParsing="false" onAction="#listenerEventButton" prefHeight="26.0" prefWidth="94.0" text="In" />
+      <Button fx:id="butBack" layoutX="338.0" layoutY="354.0" mnemonicParsing="false" onAction="#listenerEventButton" prefHeight="26.0" prefWidth="94.0" text="Quay lại" />
+      <Button fx:id="butAdd" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" onAction="#listenerButtonAdd" prefHeight="26.0" prefWidth="94.0" text="Thêm sách" />
+      <Label layoutX="137.0" layoutY="14.0" text="Bảng danh sách sách thanh lý">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

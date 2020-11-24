@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PhieuMuonControler">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="415.0" layoutY="142.0" stroke="BLACK" strokeType="INSIDE" width="393.0" />
+      <Button fx:id="bnThemPM" layoutX="619.0" layoutY="149.0" mnemonicParsing="false" onAction="#actionThemPM" prefHeight="40.0" prefWidth="182.0" text="Thêm Phiếu Mượn" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" />
+      <TextField layoutX="421.0" layoutY="149.0" prefHeight="40.0" prefWidth="169.0" text="Search" />
+      <Text layoutX="136.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phiếu Mượn">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+      </Text>
+      <Text layoutX="-96.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mã PM" wrappingWidth="55.36299133300781" />
+      <Button layoutX="30.0" layoutY="35.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="42.0" />
+      <Text fill="WHITE" layoutX="37.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="47.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <TreeTableView layoutX="72.0" layoutY="233.0" prefHeight="162.0" prefWidth="741.0">
+        <columns>
+          <TreeTableColumn prefWidth="90.39993286132812" text="Mã PM" />
+          <TreeTableColumn prefWidth="80.79998779296875" text="Mã ĐG" />
+            <TreeTableColumn prefWidth="89.60005187988281" text="Tên ĐG" />
+            <TreeTableColumn prefWidth="114.39996337890625" text="Ngày Mượn" />
+            <TreeTableColumn prefWidth="92.7999267578125" text="Ngày Trả" />
+            <TreeTableColumn prefWidth="93.60009765625" text="Phí Mượn" />
+            <TreeTableColumn prefWidth="72.79998779296875" text="Số Sách" />
+        </columns>
+      </TreeTableView>
+      <Button layoutX="722.0" layoutY="272.0" mnemonicParsing="false" text="Sửa" />
+      <Button layoutX="764.0" layoutY="272.0" mnemonicParsing="false" text="Xóa" />
+   </children>
+</AnchorPane>

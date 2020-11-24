@@ -36,7 +36,7 @@
             <TreeTableColumn prefWidth="112.0" text="Tình Trạng Sách" />
         </columns>
       </TreeTableView>
-      <GridPane layoutX="291.0" layoutY="132.0" prefHeight="58.0" prefWidth="348.0">
+      <GridPane layoutX="231.0" layoutY="132.0" prefHeight="58.0" prefWidth="348.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="172.79998779296875" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.20001220703125" minWidth="10.0" prefWidth="175.20001220703125" />
@@ -55,12 +55,20 @@
       </GridPane>
       <Button layoutX="720.0" layoutY="275.0" mnemonicParsing="false" text="Sửa" />
       <Button layoutX="763.0" layoutY="275.0" mnemonicParsing="false" text="Xóa" />
-      <Button layoutX="420.0" layoutY="428.0" mnemonicParsing="false" text="Lưu">
+      <Button layoutX="420.0" layoutY="428.0" mnemonicParsing="false" text="Save">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
          <effect>
             <InnerShadow choke="0.47" color="#fdbe00" height="23.38" radius="12.3825" width="28.15" />
+         </effect>
+      </Button>
+      <Button layoutX="616.0" layoutY="142.0" mnemonicParsing="false" text="Enter">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.32" color="#ffd400" radius="11.192499999999999" width="25.77" />
          </effect>
       </Button>
    </children>

@@ -6724,6 +6724,28 @@
 									"subViews": [
 										{
 											"_type": "EdgeLabelView",
+											"_id": "AAAAAAF2G+XCC0LSZIs=",
+											"_parent": {
+												"$ref": "AAAAAAF15ZGL5QQTWxc="
+											},
+											"model": {
+												"$ref": "AAAAAAF15ZGL5QQSNn0="
+											},
+											"font": "Arial;13;0",
+											"left": 259,
+											"top": 650,
+											"width": 114.21337890625,
+											"height": 13,
+											"alpha": 1.5707963267948966,
+											"distance": 15,
+											"hostEdge": {
+												"$ref": "AAAAAAF15ZGL5QQTWxc="
+											},
+											"edgePosition": 1,
+											"text": "Có muốn lưu không"
+										},
+										{
+											"_type": "EdgeLabelView",
 											"_id": "AAAAAAF15ZGL5gQVcYY=",
 											"_parent": {
 												"$ref": "AAAAAAF15ZGL5QQTWxc="
@@ -6733,8 +6755,8 @@
 											},
 											"visible": null,
 											"font": "Arial;13;0",
-											"left": 335,
-											"top": 657,
+											"left": 331,
+											"top": 651,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 30,
@@ -6754,8 +6776,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 291,
-											"top": 658,
+											"left": 287,
+											"top": 649,
 											"height": 13,
 											"alpha": -1.5707963267948966,
 											"distance": 15,
@@ -6773,8 +6795,11 @@
 										"$ref": "AAAAAAF15ZB5eAPhyU4="
 									},
 									"lineStyle": 1,
-									"points": "306:633;307:695",
+									"points": "304:633;301:679",
 									"showVisibility": true,
+									"nameLabel": {
+										"$ref": "AAAAAAF2G+XCC0LSZIs="
+									},
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF15ZGL5gQVcYY="
 									},
@@ -7948,9 +7973,9 @@
 													"font": "Arial;13;1",
 													"left": 429,
 													"top": 759,
-													"width": 204.40087890625,
+													"width": 211.630859375,
 													"height": 13,
-													"text": "Canel tất cả thông tin đã thay đổi"
+													"text": "Cancel tất cả thông tin đã thay đổi"
 												},
 												{
 													"_type": "LabelView",
@@ -7983,7 +8008,7 @@
 											"font": "Arial;13;0",
 											"left": 424,
 											"top": 752,
-											"width": 214.40087890625,
+											"width": 221.630859375,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAF15ZiNdAWY36o="
@@ -8003,7 +8028,7 @@
 									"containerChangeable": true,
 									"left": 424,
 									"top": 752,
-									"width": 214.40087890625,
+									"width": 221.630859375,
 									"height": 41,
 									"nameCompartment": {
 										"$ref": "AAAAAAF15ZiNdAWXr3Y="
@@ -8029,7 +8054,7 @@
 												"$ref": "AAAAAAF15ZkzEAWzNe4="
 											},
 											"font": "Arial;13;0",
-											"left": 496,
+											"left": 497,
 											"top": 715,
 											"width": 20.22998046875,
 											"height": 13,
@@ -8052,7 +8077,7 @@
 											},
 											"visible": null,
 											"font": "Arial;13;0",
-											"left": 517,
+											"left": 518,
 											"top": 705,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -8073,7 +8098,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 483,
+											"left": 486,
 											"top": 736,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -8092,7 +8117,7 @@
 										"$ref": "AAAAAAF15Zen/gVxZIU="
 									},
 									"lineStyle": 1,
-									"points": "479:713;512:751",
+									"points": "480:713;515:751",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAF15ZkzEAW1Nvo="
@@ -8186,7 +8211,7 @@
 										"$ref": "AAAAAAF15ZiNdAWWg6I="
 									},
 									"lineStyle": 1,
-									"points": "533:751;560:528;442:530",
+									"points": "536:751;560:528;442:530",
 									"showVisibility": true,
 									"nameLabel": {
 										"$ref": "AAAAAAF15ZlKGQXHjvU="
@@ -8336,7 +8361,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF15YQsOAJ/BdU="
 							},
-							"name": "Canel tất cả thông tin đã thay đổi"
+							"name": "Cancel tất cả thông tin đã thay đổi"
 						}
 					],
 					"edges": [

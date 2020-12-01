@@ -34,7 +34,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF17+92Uf7PM1o="
 							},
-							"name": "ActivityDiagram1",
+							"name": "Đăng ký thẻ TV ActivityDiagram1",
 							"ownedViews": [
 								{
 									"_type": "UMLControlNodeView",
@@ -3457,10 +3457,10 @@
 										"$ref": "AAAAAAF17+92Uf7Q9EA="
 									},
 									"font": "Arial;13;0",
-									"left": 64,
+									"left": 8,
 									"top": 32,
-									"width": 81,
-									"height": 64,
+									"width": 169,
+									"height": 38,
 									"text": "ĐĂNG KÝ THẺ THƯ VIỆN"
 								}
 							]
@@ -3939,7 +3939,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF18Ah1hwJLvyU="
 							},
-							"name": "ActivityDiagram1",
+							"name": "Quản Lý Độc Giả ActivityDiagram1",
 							"ownedViews": [
 								{
 									"_type": "UMLControlNodeView",
@@ -8220,7 +8220,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF18AjdxwJRG/g="
 							},
-							"name": "ActivityDiagram1",
+							"name": "Quản Lý Sách ActivityDiagram1",
 							"ownedViews": [
 								{
 									"_type": "UMLControlNodeView",

@@ -44,7 +44,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF18gDHTkocw/c="
 							},
-							"name": "SequenceDiagram1",
+							"name": "Tim Kiem Sach SequenceDiagram1",
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -65,9 +65,9 @@
 											"font": "Arial;13;0",
 											"left": 86.97900390625,
 											"top": 13,
-											"width": 115.9052734375,
+											"width": 207.16552734375,
 											"height": 13,
-											"text": "SequenceDiagram1"
+											"text": "Tim Kiem Sach SequenceDiagram1"
 										},
 										{
 											"_type": "LabelView",

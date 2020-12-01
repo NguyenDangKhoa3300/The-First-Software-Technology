@@ -36,7 +36,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF16cl42LN7kNI="
 					},
-					"name": "ActivityDiagram1",
+					"name": "Tìm Kiếm ActivityDiagram1",
 					"ownedViews": [
 						{
 							"_type": "UMLControlNodeView",

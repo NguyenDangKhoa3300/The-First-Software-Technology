@@ -42,7 +42,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF18dug9TQIA64="
 									},
-									"name": "SequenceDiagram1",
+									"name": "Thanh Ly SequenceDiagram1",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -63,9 +63,9 @@
 													"font": "Arial;12;0",
 													"left": 186.365234375,
 													"top": 13,
-													"width": 107.06640625,
+													"width": 159.98828125,
 													"height": 12,
-													"text": "SequenceDiagram1"
+													"text": "Thanh Ly SequenceDiagram1"
 												},
 												{
 													"_type": "LabelView",

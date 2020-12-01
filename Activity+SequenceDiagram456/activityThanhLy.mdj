@@ -34,7 +34,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF1vcR6BZRkkiY="
 							},
-							"name": "ActivityDiagram1",
+							"name": "Thanh Lý ActivityDiagram1",
 							"ownedViews": [
 								{
 									"_type": "UMLActionView",

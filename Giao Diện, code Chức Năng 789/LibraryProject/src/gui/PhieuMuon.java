@@ -1,22 +1,20 @@
-package application;
+package gui;
 	
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
 
 
-public class Main extends Application {
+public class PhieuMuon extends Application {
 	@Override
 	public void start(Stage myStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("PhieuMuonControler.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("PhieuMuonGD.fxml"));
 		Scene scene = new Scene(root);
 		myStage.setScene(scene);
 		myStage.setTitle("Phiếu Mượn");
 		myStage.show();
-
 	}
 	public static void main(String[] args) {
 		launch(args);

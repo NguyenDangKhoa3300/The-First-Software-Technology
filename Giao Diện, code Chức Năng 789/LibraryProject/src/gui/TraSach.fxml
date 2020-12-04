@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="888.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TraSachMain">
+   <children>
+      <Polyline fill="#ffb71b" layoutX="215.0" layoutY="140.0" points="-178.20001220703125, 269.6000061035156, 119.4000244140625, -28.79999542236328, -29.399993896484375, 324.0000305175781, 558.5999755859375, -103.20000457763672" stroke="WHITE" strokeType="INSIDE" />
+      <Polyline fill="#ffd25f" layoutX="222.0" layoutY="86.0" points="-50.0, -40.0, -112.39999389648438, 13.200004577636719, 587.5999755859375, 386.8000183105469, -50.0, -40.0" stroke="WHITE" strokeType="INSIDE" />
+      <Label layoutX="375.0" layoutY="53.0" text="Trả Sách">
+         <font>
+            <Font name="System Bold Italic" size="40.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.57" color="#ffa100" height="40.06" radius="14.170000000000002" width="18.62" />
+         </effect>
+      </Label>
+      <GridPane layoutX="231.0" layoutY="132.0" prefHeight="58.0" prefWidth="348.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="172.79998779296875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.20001220703125" minWidth="10.0" prefWidth="175.20001220703125" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="30.0" prefWidth="155.0" text="Mã Phiếu Mượn">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="26.0" prefWidth="235.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <Button layoutX="411.0" layoutY="428.0" mnemonicParsing="false" text="Update">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.28" color="#ffd400" radius="14.77" width="40.08" />
+         </effect></Button>
+      <Button layoutX="560.0" layoutY="428.0" mnemonicParsing="false" text="Delete">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.19" color="#ffd000" radius="17.747500000000002" width="51.99" />
+         </effect></Button>
+      <Button layoutX="285.0" layoutY="428.0" mnemonicParsing="false" text="Save">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.47" color="#fdbe00" height="23.38" radius="12.3825" width="28.15" />
+         </effect>
+      </Button>
+      <Button layoutX="616.0" layoutY="142.0" mnemonicParsing="false" text="Enter">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.32" color="#ffd400" radius="11.192499999999999" width="25.77" />
+         </effect>
+      </Button>
+      <TableView fx:id="tbvtrasach" layoutX="94.0" layoutY="201.0" prefHeight="200.0" prefWidth="724.0">
+        <columns>
+          <TableColumn fx:id="col_maphieumuon" prefWidth="102.40005493164062" text="Mã Phiếu Mượn" />
+          <TableColumn fx:id="col_masach" prefWidth="75.199951171875" text="Mã Sách" />
+            <TableColumn fx:id="col_tensach" prefWidth="144.7999267578125" text="Tên Sách" />
+            <TableColumn fx:id="col_solangiahan" prefWidth="94.4000244140625" text="Số Lần Gia Hạn" />
+            <TableColumn fx:id="col_tienphat" prefWidth="85.5999755859375" text="Tiền Phạt" />
+            <TableColumn fx:id="col_sotientralai" prefWidth="111.20001220703125" text="Số Tiền Trả Lại" />
+            <TableColumn fx:id="col_tinhtrangsach" prefWidth="109.5999755859375" text="Tình Trạng Sách" />
+        </columns>
+      </TableView>
+   </children>
+   <effect>
+      <InnerShadow choke="0.49" color="#f8a707" height="32.92" radius="14.77" width="28.16" />
+   </effect>
+</AnchorPane>

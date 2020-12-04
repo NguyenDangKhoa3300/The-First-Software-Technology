@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="948.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PhieuMuon">
+   <children>
+      <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="428.00006103515625" endY="100.0" fill="#35ffbc" layoutX="345.0" layoutY="179.0" startX="-150.0" stroke="WHITE" />
+      <Text layoutX="265.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THÊM PHIẾU MƯỢN">
+         <font>
+            <Font name="System Bold Italic" size="40.0" />
+         </font>
+         <effect>
+            <InnerShadow blurType="GAUSSIAN" choke="0.5" color="#0aff00" height="40.07" radius="17.747500000000002" width="32.92" />
+         </effect>
+      </Text>
+      <GridPane layoutX="114.0" layoutY="187.0" prefHeight="126.0" prefWidth="684.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Mã Phiếu Mượn">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label text="Mã Độc Giả" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label text="Số Lượng Sách" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
+            <Label text="Ngày Mượn" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
+            <Label text="Ngày Hẹn Trả" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
+            <Label text="Tổng Tiền" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Label>
+            <TextField GridPane.columnIndex="1" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker GridPane.columnIndex="4" />
+            <DatePicker GridPane.columnIndex="4" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <TreeTableView layoutX="83.0" layoutY="357.0" prefHeight="206.0" prefWidth="786.0">
+        <columns>
+          <TreeTableColumn prefWidth="61.599998474121094" text="Mã PM" />
+          <TreeTableColumn prefWidth="72.79998779296875" text="Mã Sách" />
+            <TreeTableColumn prefWidth="69.5999755859375" text="Tên Sách" />
+            <TreeTableColumn prefWidth="101.59991455078125" text="Số Lần Gia Hạn" />
+            <TreeTableColumn prefWidth="120.00006103515625" text="Số Ngày Quá Hạn" />
+            <TreeTableColumn prefWidth="67.20004272460938" text="Tiền Phạt" />
+            <TreeTableColumn minWidth="0.0" prefWidth="82.4000244140625" text="Tiền Trả Lại" />
+            <TreeTableColumn prefWidth="109.60009765625" text="Tình Trạng Sách" />
+        </columns>
+      </TreeTableView>
+      <Button layoutX="780.0" layoutY="391.0" mnemonicParsing="false" text="Sửa" />
+      <Button layoutX="823.0" layoutY="391.0" mnemonicParsing="false" text="Xóa" />
+      <Button layoutX="323.0" layoutY="592.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="82.0" text="Lưu">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="537.0" layoutY="592.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Thoát">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Polygon fill="#1fff9b" layoutX="864.0" layoutY="670.0" points="-48.20001220703125, -19.79998779296875, -97.19999694824219, -79.79999542236328, 0.0, -60.0" stroke="WHITE" strokeType="INSIDE" />
+      <Polyline fill="#2ef0bc" layoutX="143.0" layoutY="632.0" points="-50.0, -40.0, 50.0, -40.0, -57.00001525878906, 5.20001220703125, 49.99998474121094, 29.20001220703125" stroke="WHITE" strokeType="INSIDE" />
+   </children>
+   <effect>
+      <InnerShadow choke="0.11" color="#00fa2ed9" height="85.35" radius="39.195" width="73.43" />
+   </effect>
+</AnchorPane>

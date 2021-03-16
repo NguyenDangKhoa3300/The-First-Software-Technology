@@ -39,6 +39,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -339,6 +343,13 @@ public class GD_MainPage extends javax.swing.JFrame{
 		pnlCardNhapSach.add(lblTieuDeDatSach);
 		
 		JButton btnThemPD = new JButton("Thêm Phiếu Đặt");
+		btnThemPD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GD_ThemPhieuDat themPhieuDat = new GD_ThemPhieuDat();
+				themPhieuDat.setVisible(true);
+				themPhieuDat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnThemPD.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnThemPD.setBounds(110, 290, 200, 30);
 		pnlCardNhapSach.add(btnThemPD);
@@ -386,6 +397,35 @@ public class GD_MainPage extends javax.swing.JFrame{
 		pnlCardNhapSach.add(btnTimPD);
 		
 		JButton btnXoaPD = new JButton("Xóa");
+		btnXoaPD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableQuanLyNhapSach.getModel();
+				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();				
+				try {
+					String id = Df.getValueAt(selectedIndex, 0).toString();
+					System.out.println(id);
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?","Warning!",JOptionPane.YES_NO_OPTION);
+					
+					String querry = "delete from ChiTietPhieuDat where MAPD = ?";
+					if(dialog == JOptionPane.YES_OPTION) {
+						Connection con = DataBase.getInstance().getConnection();
+						PreparedStatement ps = con.prepareStatement(querry);
+						
+						ps.setString(1,id);
+						
+						ps.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Deleted");
+						dulieubangPhieuDat();
+						
+					}
+					
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnXoaPD.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnXoaPD.setBounds(635, 580, 85, 40);
 		pnlCardNhapSach.add(btnXoaPD);

@@ -58,7 +58,7 @@ import javax.swing.UIManager;
 import java.awt.SystemColor;
 
 public class GD_MainPage extends javax.swing.JFrame{
-
+	private static GD_MainPage window;
 	private JFrame frame;
 	private JTextField txtNhapMaPM;
 	private JTable tableMuonSach, tableDocGia, tableQuanLySach, tableQuanLyNhapSach, tableQuanLyThanhLySach;
@@ -79,7 +79,7 @@ public class GD_MainPage extends javax.swing.JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GD_MainPage window = new GD_MainPage();
+					window = new GD_MainPage();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,6 +94,9 @@ public class GD_MainPage extends javax.swing.JFrame{
 	
 	public GD_MainPage() {
 		initialize();
+	}
+	public GD_MainPage getInstanceOfMainPage() {
+		return window;
 	}
 
 	/**

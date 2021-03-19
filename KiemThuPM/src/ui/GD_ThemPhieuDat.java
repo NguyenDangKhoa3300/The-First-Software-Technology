@@ -93,8 +93,13 @@ public class GD_ThemPhieuDat extends JFrame {
 				String soLuong = txtSL.getText();
 				String donGia = txtDonGia.getText();
 				new PhieuDatDAO().themPhieuDat(tenSach, maNSX, soLuong, donGia);
-																			
-				new GD_MainPage().dulieubangPhieuDat();
+				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();	
+				mainframe.dulieubangPhieuDat();
+				txtTenSach.setText("");
+				txtMaNSX.setText("");
+				txtSL.setText("");
+				txtDonGia.setText("");
+				txtTenSach.requestFocus();
 			}
 		});
 		btnLuu.setFont(new Font("Tahoma", Font.PLAIN, 16));

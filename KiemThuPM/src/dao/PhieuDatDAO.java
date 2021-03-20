@@ -12,6 +12,7 @@ import entities.PhieuDat;
 import entities.PhieuMuon;
 
 public class PhieuDatDAO {
+	private static int tienToPD = 10;
 	public PhieuDatDAO() {
 
 	}
@@ -19,9 +20,7 @@ public class PhieuDatDAO {
 	public ArrayList<PhieuDat> doctubangPhieuDat() {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuDat> dsPD = new ArrayList<PhieuDat>();
-		String sql = "select PD.MaPD, NV.TenNV, PD.NgayNhap, SUM(CTPD.Soluong) as \"Số Lượng Sách\" , SUM(CTPD.DonGia * CTPD.Soluong) as \"Tổng Tiền\"\r\n"
-				+ "from PhieuDat PD, NhanVien NV, ChiTietPhieuDat CTPD\r\n"
-				+ "where PD.MaPD = CTPD.MaPD AND NV.MaNV = PD.MaNV\r\n" + "group by PD.MaPD, NV.TenNV, PD.NgayNhap";
+		String sql = "Select PD.MAPD,NV.TenNV,PD.NGAYNHAP from PhieuDat PD, NHANVIEN NV  " + "WHERE PD.MANV = NV.MANV";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			// ps.setString(1, ma);
@@ -30,9 +29,8 @@ public class PhieuDatDAO {
 				String maPD = rs.getString(1);
 				String tenNV = rs.getString(2);
 				String ngayDat = rs.getString(3);
-				String soLuongSach = rs.getString(4);
-				String tongTien = rs.getString(5);
-				PhieuDat pd = new PhieuDat(maPD, tenNV, ngayDat, soLuongSach, tongTien);
+
+				PhieuDat pd = new PhieuDat(maPD, tenNV, ngayDat);
 				dsPD.add(pd);
 			}
 
@@ -45,10 +43,9 @@ public class PhieuDatDAO {
 	public ArrayList<PhieuDat> TimPhieuDatBangMa(String ma) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuDat> list = new ArrayList<>();
-		String sql = "select PD.MaPD, NV.TenNV, PD.NgayNhap, SUM(CTPD.Soluong) as \"Số Lượng Sách\" , SUM(CTPD.DonGia * CTPD.Soluong) as \"Tổng Tiền\"\r\n"
-				+ "from PhieuDat PD, NhanVien NV, ChiTietPhieuDat CTPD\r\n"
-				+ "where PD.MaPD = ? AND PD.MaPD = CTPD.MaPD AND NV.MaNV = PD.MaNV\r\n"
-				+ "group by PD.MaPD, NV.TenNV, PD.NgayNhap";
+		String sql = "Select PD.MAPD,NV.TenNV,PD.NGAYNHAP from PhieuDat PD, NHANVIEN NV  "
+				+ "WHERE MAPD = ? AND PD.MANV = NV.MANV" + " group by PD.MaPD, NV.TenNV, PD.NgayNhap";
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ma);
@@ -57,9 +54,7 @@ public class PhieuDatDAO {
 				String maPD = rs.getString(1);
 				String tenNV = rs.getString(2);
 				String ngayDat = rs.getString(3);
-				String soLuongSach = rs.getString(4);
-				String tongTien = rs.getString(5);
-				PhieuDat pd = new PhieuDat(maPD, tenNV, ngayDat, soLuongSach, tongTien);
+				PhieuDat pd = new PhieuDat(maPD, tenNV, ngayDat);
 				list.add(pd);
 			}
 
@@ -69,23 +64,64 @@ public class PhieuDatDAO {
 		return list;
 	}
 
-	public void themPhieuDat(String tenSach, String maNSX, String soLuong, String donGia) {
-		int sl = Integer.parseInt(soLuong);
-		float dg = Float.parseFloat(donGia);
+	public void themPhieuDat(String tenNV, String timeDat) {
+		String maPD = "PD"+ tienToPD; 
+		String manv = getMaNV(tenNV);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "INSERT INTO ChiTietPhieuDat (MAPD,TENSACH,MANXB,SOLUONG,DONGIA)" + " VALUES ('PD4'"+ ",'"+tenSach+"','"+  maNSX + "'," + sl + " ," + dg + ");";
-			System.out.println(querry);
+			String querry = "Insert into PhieuDat values('"+maPD+"','"+manv+"','"+timeDat+"');";
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Added");
+			tienToPD++;
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	public String getMaNV(String tenNV) {
+		
+		String maNV = "";
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Select manv from nhanvien where tenNV = N'"+tenNV+"'";
+			System.out.println(querry);
+			PreparedStatement ps = con.prepareStatement(querry);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				 maNV = rs.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return maNV;
+	}
+
+	public ArrayList<String> JComBoBoxNV() {
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<String> listNV = new ArrayList<String>();
+		String sql = "SELECT * FROM NHANVIEN";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String tenNV = rs.getString("tennv");
+				listNV.add(tenNV);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listNV;
 	}
 }

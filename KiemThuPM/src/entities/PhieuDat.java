@@ -1,7 +1,7 @@
 package entities;
 
 public class PhieuDat {
-	private String maPD, tenNV, ngayDat, soLuongSach, tongTien;
+	private String maPD, maNV, ngayDat;
 
 	public String getMaPD() {
 		return maPD;
@@ -12,11 +12,11 @@ public class PhieuDat {
 	}
 
 	public String getTenNV() {
-		return tenNV;
+		return maNV;
 	}
 
-	public void setTenNV(String tenNV) {
-		this.tenNV = tenNV;
+	public void setTenNV(String maNV) {
+		this.maNV = maNV;
 	}
 
 	public String getNgayDat() {
@@ -27,39 +27,20 @@ public class PhieuDat {
 		this.ngayDat = ngayDat;
 	}
 
-	public String getSoLuongSach() {
-		return soLuongSach;
-	}
-
-	public void setSoLuongSach(String soLuongSach) {
-		this.soLuongSach = soLuongSach;
-	}
-
-	public String getTongTien() {
-		return tongTien;
-	}
-
-	public void setTongTien(String tongTien) {
-		this.tongTien = tongTien;
-	}
-
 	@Override
 	public String toString() {
-		return "PhieuDat [maPD=" + maPD + ", tenNV=" + tenNV + ", ngayDat=" + ngayDat + ", soLuongSach=" + soLuongSach
-				+ ", tongTien=" + tongTien + "]";
+		return "PhieuDat [maPD=" + maPD + ", maNV=" + maNV + ", ngayDat=" + ngayDat + ", getMaPD()=" + getMaPD()
+				+ ", getTenNV()=" + getTenNV() + ", getNgayDat()=" + getNgayDat() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
-	public PhieuDat(String maPD, String tenNV, String ngayDat, String soLuongSach, String tongTien) {
+	public PhieuDat(String maPD, String maNV, String ngayDat) {
 		super();
 		this.maPD = maPD;
-		this.tenNV = tenNV;
+		this.maNV = maNV;
 		this.ngayDat = ngayDat;
-		this.soLuongSach = soLuongSach;
-		this.tongTien = tongTien;
 	}
 
-	public PhieuDat() {
-		super();
-	}
+	
 	
 }

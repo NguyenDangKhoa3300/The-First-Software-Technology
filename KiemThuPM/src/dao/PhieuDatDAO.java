@@ -12,7 +12,7 @@ import entities.PhieuDat;
 import entities.PhieuMuon;
 
 public class PhieuDatDAO {
-	private static int tienToPD = 10;
+	private static int tienToPD = 4;
 	public PhieuDatDAO() {
 
 	}

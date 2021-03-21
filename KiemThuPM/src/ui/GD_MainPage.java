@@ -428,12 +428,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 			}
 		});
 		btnXoaPD.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXoaPD.setBounds(635, 580, 85, 40);
+		btnXoaPD.setBounds(760, 580, 85, 40);
 		pnlCardNhapSach.add(btnXoaPD);
 
 		JButton btnSuaPD = new JButton("Sửa");
 		btnSuaPD.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnSuaPD.setBounds(411, 580, 85, 40);
+		btnSuaPD.setBounds(502, 580, 85, 40);
 		pnlCardNhapSach.add(btnSuaPD);
 
 		JScrollPane scrollPaneQuanLyDatSach = new JScrollPane();
@@ -446,6 +446,23 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableModelQuanLyNhapSach = new DefaultTableModel(headers3, 0);
 		tableQuanLyNhapSach = new JTable(tableModelQuanLyNhapSach);
 		scrollPaneQuanLyDatSach.setViewportView(tableQuanLyNhapSach);
+		
+		JButton btnXem = new JButton("Xem");
+		btnXem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
+				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
+				String maPD = Df.getValueAt(selectedIndex, 0).toString();
+			
+				GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);				
+				ctPD.setVisible(true);
+				ctPD.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
+			}
+		});
+		btnXem.setFont(new Font("Verdana", Font.PLAIN, 20));
+		btnXem.setBounds(260, 580, 85, 40);
+		pnlCardNhapSach.add(btnXem);
 ///////////////////////panelCard Quản Lý Thanh Lý
 
 		JButton btnThemPTL = new JButton("Thêm Phiếu Thanh Lý");

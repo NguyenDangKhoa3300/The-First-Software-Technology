@@ -11,10 +11,11 @@ import javax.swing.JOptionPane;
 import entities.ChiTietPhieuDat;
 
 public class CTPhieuDatDAO {
+	
 	public ArrayList<ChiTietPhieuDat> doctubangPhieuDat(String mapPD) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<ChiTietPhieuDat> dsCTPD = new ArrayList<ChiTietPhieuDat>();
-		String sql = "select * from ChiTietPhieuDat where mapd = '"+mapPD+"'";
+		String sql = "select ctpd.MaPD,nxb.TenNXB , ctpd.TenSach , ctpd.Soluong,ctpd.DonGia,ctpd.maCTPD from ChiTietPhieuDat ctpd , NhaXuatBan nxb where mapd = '"+mapPD+"' and ctpd.MaNXB = nxb.MaNXB";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			
@@ -25,7 +26,8 @@ public class CTPhieuDatDAO {
 				String tenSach = rs.getString(3);
 				String soLuong = rs.getString(4);
 				String donGia = rs.getString(5);
-				ChiTietPhieuDat ctPD = new ChiTietPhieuDat(maPD, maNXB, tenSach, soLuong, donGia);
+				String maCTPD = rs.getString(6);
+				ChiTietPhieuDat ctPD = new ChiTietPhieuDat(maPD,maCTPD ,maNXB, tenSach, soLuong, donGia);
 				dsCTPD.add(ctPD);
 			}
 
@@ -44,8 +46,7 @@ public class CTPhieuDatDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String tenNV = rs.getString("tennxb");
-				listNXB.add(tenNV);
-				
+				listNXB.add(tenNV);				
 			}
 
 		} catch (SQLException e) {
@@ -55,16 +56,39 @@ public class CTPhieuDatDAO {
 	}
 	public void themPhieuDat(String maPD,String tenNXB, String tenSach, String soLuong, String donGia) {
 		
+		String maCTPD = getLastMaCTPD();
+		
 		String maNXB = getMaNXB(tenNXB);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into ChiTietPhieuDat values('"+maPD+"','"+maNXB+"','"+tenSach+"',"+soLuong+","+donGia+");";
-			System.out.print(querry);
+			String querry = "Insert into ChiTietPhieuDat values('"+maPD+"','"
+					+maNXB+"','"+tenSach+"',"+soLuong+","+donGia+",'"+maCTPD+"');";
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Added");
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public void suaPhieuDat(String tenNXB, String tenSach, String soLuong, String donGia, String maCTPD) {
+		
+		String maNXB = getMaNXB(tenNXB);
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update ChiTietPhieuDat set MaNXB = '"+maNXB+"',tensach = '"+tenSach+"',soluong = " +soLuong+",dongia = "+donGia+" where maCTPD = '"+ maCTPD+"'";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated");
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -79,7 +103,7 @@ public String getMaNXB(String tenNXB) {
 		try {
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Select manxb from NhaXuatBan where tenNXB = N'"+tenNXB+"'";
-			System.out.println(querry);
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 			
 			ResultSet rs = ps.executeQuery();
@@ -93,12 +117,48 @@ public String getMaNXB(String tenNXB) {
 		}
 		return maNXB;
 	}
-public void xoaCTPD(String idTenSach) {
+public String getLastMaCTPD() {
+	String tienTo = "maCTPD_";
+	String toanMa = "";
+	String maCTPD = "";
+	int max = 1;
+	int hauTo;
+	try {
+		Connection con = DataBase.getInstance().getConnection();
+		String querry = "Select maCTPD from ChitietPhieuDat";
+		
+		PreparedStatement ps = con.prepareStatement(querry);
+		
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			toanMa = rs.getString(1);
+			String[] part = toanMa.split("_");
+			hauTo = Integer.parseInt(part[1].trim());
+			if(max < hauTo) {
+				max = hauTo;
+			}
+		}
+		
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	max++;
+	
+	maCTPD = tienTo + max;
+	
+	return maCTPD;
+}
+public void xoaCTPD(String maCTPD) {
 	
 	
 	try {
 		Connection con = DataBase.getInstance().getConnection();
-		String querry = "delete from ChiTietPhieuDat where TenSach = N'"+idTenSach+"'";
+		String querry = "delete from ChiTietPhieuDat where MACTPD = '"+maCTPD+"'";
 		System.out.println(querry);
 		PreparedStatement ps = con.prepareStatement(querry);
 		

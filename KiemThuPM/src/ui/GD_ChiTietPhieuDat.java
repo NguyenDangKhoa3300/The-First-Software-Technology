@@ -89,11 +89,11 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		ArrayList<ChiTietPhieuDat> list = dsCTPhieuDat.doctubangPhieuDat(getMaPD());
 		if(list.size()>0) {
 			Df.setRowCount(0);		
-			int stt = 1;
+			
 			for (ChiTietPhieuDat pd : list) {				
-				String[] rowtable = {stt+"",pd.getMaNXB(),pd.getTenSach(),pd.getSoLuong(),pd.getDonGia()};
+				String[] rowtable = {pd.getMaCTPD(),pd.getMaNXB(),pd.getTenSach(),pd.getSoLuong(),pd.getDonGia()};
 				Df.addRow(rowtable);	
-				stt++;
+				
 			}					
 			table.setModel(Df);
 		}
@@ -127,7 +127,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"STT","Nh\u00E0 xu\u1EA5t b\u1EA3n", "T\u00EAn s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1"
+				"Mã CTPD","Nh\u00E0 xu\u1EA5t b\u1EA3n", "T\u00EAn s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -144,7 +144,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			}
 		});
 		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(65);
+		table.getColumnModel().getColumn(0).setPreferredWidth(75);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(95);
 		table.getColumnModel().getColumn(2).setResizable(false);
@@ -214,6 +214,9 @@ public class GD_ChiTietPhieuDat extends JFrame {
 				String donGia = txtDonGia.getText();
 				new CTPhieuDatDAO().themPhieuDat(maPD, tenNXB, tenSach, soLuong, donGia);
 				bangdulieuCTPD();
+				txtTenSach.setText("");
+				txtSoLuong.setText("");
+				txtDonGia.setText("");
 			}
 		});
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -225,11 +228,15 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel)table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				int idTenSach = Integer.parseInt(Df.getValueAt(selectedIndex, 3).toString());
+				String maCTPD = Df.getValueAt(selectedIndex, 0).toString();
 				String tenSach = txtTenSach.getText();
 				String soLuong = txtSoLuong.getText();
 				String donGia = txtDonGia.getText();
-				
+				new CTPhieuDatDAO().suaPhieuDat(tenNXB, tenSach, soLuong, donGia,maCTPD);
+				bangdulieuCTPD();
+				txtTenSach.setText("");
+				txtSoLuong.setText("");
+				txtDonGia.setText("");
 			}
 		});
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -241,7 +248,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				String idTenSach = Df.getValueAt(selectedIndex, 2).toString();
+				String idTenSach = Df.getValueAt(selectedIndex, 0).toString();
 				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 						JOptionPane.YES_NO_OPTION);
 				if (dialog == JOptionPane.YES_OPTION) {

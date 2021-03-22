@@ -1,17 +1,21 @@
 package entities;
 
 public class ChiTietPhieuDat {
-	private String maPD, maNXB, tenSach, soLuong, donGia;
+	private String maPD, maCTPD ,maNXB, tenSach, soLuong, donGia;
 	
+	public String getMaCTPD() {
+		return maCTPD;
+	}
 	public String getMaPD() {
 		return maPD;
 	}
 	public ChiTietPhieuDat() {
 		super();
 	}
-	public ChiTietPhieuDat(String maPD, String maNXB, String tenSach, String soLuong, String donGia) {
+	public ChiTietPhieuDat(String maPD,String maCTPD , String maNXB, String tenSach, String soLuong, String donGia) {
 		super();
 		this.maPD = maPD;
+		this.maCTPD = maCTPD;
 		this.maNXB = maNXB;
 		this.tenSach = tenSach;
 		this.soLuong = soLuong;
@@ -21,7 +25,9 @@ public class ChiTietPhieuDat {
 	public void setMaPD(String maPD) {
 		this.maPD = maPD;
 	}
-	
+	public void setMaCTPD(String maCTPD) {
+		this.maCTPD = maCTPD;
+	}
 
 	public String getMaNXB() {
 		return maNXB;

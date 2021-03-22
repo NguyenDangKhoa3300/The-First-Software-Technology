@@ -12,7 +12,7 @@ import entities.PhieuDat;
 import entities.PhieuMuon;
 
 public class PhieuDatDAO {
-	private static int tienToPD = 4;
+	
 	public PhieuDatDAO() {
 
 	}
@@ -65,7 +65,7 @@ public class PhieuDatDAO {
 	}
 
 	public void themPhieuDat(String tenNV, String timeDat) {
-		String maPD = "PD"+ tienToPD; 
+		String maPD = getLastMaPD();
 		String manv = getMaNV(tenNV);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
@@ -76,7 +76,7 @@ public class PhieuDatDAO {
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Added");
-			tienToPD++;
+			
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -123,5 +123,41 @@ public class PhieuDatDAO {
 			e.printStackTrace();
 		}
 		return listNV;
+	}
+	public String getLastMaPD() {
+		String tienTo = "PD_";
+		String toanMa = "";
+		String maPD = "";
+		int max = 1;
+		int hauTo;
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Select maPD from PhieuDat";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				toanMa = rs.getString(1);
+				String[] part = toanMa.split("_");
+				hauTo = Integer.parseInt(part[1].trim());
+				if(max < hauTo) {
+					max = hauTo;
+				}
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		max++;
+		
+		maPD = tienTo + max;
+		
+		return maPD;
 	}
 }

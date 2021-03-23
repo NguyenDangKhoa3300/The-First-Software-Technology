@@ -1,7 +1,7 @@
 package entities;
 
 public class PhieuThanhLy {
-	private String maPTL, tenNV, ngayTL, soLuongSach, tongTien;
+	private String maPTL, tenNV, ngayTL;
 
 	public String getMaPTL() {
 		return maPTL;
@@ -27,39 +27,19 @@ public class PhieuThanhLy {
 		this.ngayTL = ngayTL;
 	}
 
-	public String getSoLuongSach() {
-		return soLuongSach;
+	public PhieuThanhLy() {
+		super();
+		
 	}
 
-	public void setSoLuongSach(String soLuongSach) {
-		this.soLuongSach = soLuongSach;
-	}
-
-	public String getTongTien() {
-		return tongTien;
-	}
-
-	public void setTongTien(String tongTien) {
-		this.tongTien = tongTien;
-	}
-
-	@Override
-	public String toString() {
-		return "PhieuThanhLy [maPTL=" + maPTL + ", tenNV=" + tenNV + ", ngayTL=" + ngayTL + ", soLuongSach="
-				+ soLuongSach + ", tongTien=" + tongTien + "]";
-	}
-
-	public PhieuThanhLy(String maPTL, String tenNV, String ngayTL, String soLuongSach, String tongTien) {
+	public PhieuThanhLy(String maPTL, String tenNV, String ngayTL) {
 		super();
 		this.maPTL = maPTL;
 		this.tenNV = tenNV;
 		this.ngayTL = ngayTL;
-		this.soLuongSach = soLuongSach;
-		this.tongTien = tongTien;
 	}
 
-	public PhieuThanhLy() {
-		super();
-	}
+	
+	
 	
 }

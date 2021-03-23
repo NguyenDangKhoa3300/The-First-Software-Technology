@@ -62,6 +62,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JFrame frame;
 	private JTextField txtNhapMaPM;
 	private JTable tableMuonSach, tableDocGia, tableQuanLySach, tableQuanLyNhapSach, tableQuanLyThanhLySach;
+	private JTable tableQuanLyThanhLySach_1;
 	private DefaultTableModel tableModelMuonSach, tableModelDocGia, tableModelQuanLySach, tableModelQuanLyNhapSach,
 			tableModelQuanLyThanhLySach;
 	private PhieuMuonDAO dsPhieuMuon = new PhieuMuonDAO();
@@ -452,6 +453,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
+				
 				String maPD = Df.getValueAt(selectedIndex, 0).toString();
 			
 				GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);				
@@ -466,6 +468,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 ///////////////////////panelCard Quản Lý Thanh Lý
 
 		JButton btnThemPTL = new JButton("Thêm Phiếu Thanh Lý");
+		btnThemPTL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GD_ThemPhieuThanhLy themPhieuTL = new GD_ThemPhieuThanhLy();
+				themPhieuTL.setVisible(true);
+				themPhieuTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnThemPTL.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnThemPTL.setBounds(206, 312, 200, 30);
 		pnlCardThanhLySach.add(btnThemPTL);
@@ -479,7 +488,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JLabel lblNhapMaPTL = new JLabel("Nhập Mã Phiếu Thanh Lý:");
 		lblNhapMaPTL.setForeground(Color.WHITE);
 		lblNhapMaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
-		lblNhapMaPTL.setBounds(541, 305, 259, 40);
+		lblNhapMaPTL.setBounds(507, 305, 293, 40);
 		pnlCardThanhLySach.add(lblNhapMaPTL);
 
 		txtTimPTL = new JTextField();
@@ -503,7 +512,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 							tableModelQuanLyThanhLySach.setRowCount(0);
 							for (PhieuThanhLy ptl : list) {
 								String[] rowtable = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL(),
-										ptl.getSoLuongSach(), ptl.getTongTien() };
+										 };
 								tableModelQuanLyThanhLySach.addRow(rowtable);
 							}
 							tableQuanLyThanhLySach.setModel(tableModelQuanLyThanhLySach);
@@ -521,12 +530,49 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		JButton btnSuaPTL = new JButton("Sửa");
 		btnSuaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnSuaPTL.setBounds(507, 602, 85, 40);
+		btnSuaPTL.setBounds(659, 602, 85, 40);
 		pnlCardThanhLySach.add(btnSuaPTL);
 
 		JButton btnXoaPTL = new JButton("Xóa");
+		btnXoaPTL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach.getModel();
+				int selectedIndex = tableQuanLyThanhLySach.getSelectedRow();
+				try {
+					String id = Df.getValueAt(selectedIndex, 0).toString();
+					
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+
+					String querry1 = "delete from ChiTietPhieuThanhLy where MAPTL = ?";
+					String querry2 = "delete from PhieuThanhLy where MAPTL = ?";
+					if (dialog == JOptionPane.YES_OPTION) {
+						Connection con = DataBase.getInstance().getConnection();
+						PreparedStatement ps = con.prepareStatement(querry1);
+
+						ps.setString(1, id);
+
+						ps.executeUpdate();
+						
+						ps = con.prepareStatement(querry2);
+
+						ps.setString(1, id);
+
+						ps.executeUpdate();
+						 JOptionPane.showMessageDialog(null, "Deleted");
+						 dulieubangPhieuThanhLy();
+
+					}
+
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnXoaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXoaPTL.setBounds(731, 602, 85, 40);
+		btnXoaPTL.setBounds(951, 602, 85, 40);
 		pnlCardThanhLySach.add(btnXoaPTL);
 
 		JScrollPane scrollPaneQuanLyPTL = new JScrollPane();
@@ -534,10 +580,28 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardThanhLySach.add(scrollPaneQuanLyPTL);
 
 		tableQuanLyThanhLySach = new JTable();
-		String[] headers4 = "Mã Phiếu Thanh Lý; Tên Nhân Viên; Ngày Thanh Lý; Số Lượng Sách; Tổng Tiền".split(";");
+		String[] headers4 = "Mã Phiếu Thanh Lý; Tên Nhân Viên; Ngày Thanh Lý".split(";");
 		tableModelQuanLyThanhLySach = new DefaultTableModel(headers4, 0);
-		tableQuanLyThanhLySach = new JTable(tableModelQuanLyThanhLySach);
-		scrollPaneQuanLyPTL.setViewportView(tableQuanLyThanhLySach);
+		tableQuanLyThanhLySach_1 = new JTable(tableModelQuanLyThanhLySach);
+		
+		scrollPaneQuanLyPTL.setViewportView(tableQuanLyThanhLySach_1);
+		
+		JButton btnXemPTL = new JButton("Xem");
+		btnXemPTL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
+				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
+			
+				String maPTL = Df.getValueAt(selectedIndex, 0).toString();
+				
+				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);				
+				ctPTL.setVisible(true);
+				ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnXemPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
+		btnXemPTL.setBounds(345, 602, 85, 40);
+		pnlCardThanhLySach.add(btnXemPTL);
 
 //////////////////////PanelCard Quản Lý Sách
 		JButton btnThemSach = new JButton("Thêm Sách");
@@ -857,11 +921,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		ArrayList<PhieuThanhLy> list = dsPhieuThanhLy.doctubangPhieuThanhLy();
 		tableModelQuanLyThanhLySach.setRowCount(0);
 		for (PhieuThanhLy ptl : list) {
-			String[] rowdata1 = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL(), ptl.getSoLuongSach(),
-					ptl.getTongTien() };
+			String[] rowdata1 = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL() };
+					
 			tableModelQuanLyThanhLySach.addRow(rowdata1);
 		}
-		tableQuanLyThanhLySach.setModel(tableModelQuanLyThanhLySach);
+		tableQuanLyThanhLySach_1.setModel(tableModelQuanLyThanhLySach);
 	}
 
 	public void dulieubangPhieuDat() {

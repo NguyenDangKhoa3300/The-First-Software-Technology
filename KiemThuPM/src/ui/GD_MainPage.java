@@ -536,8 +536,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnXoaPTL = new JButton("Xóa");
 		btnXoaPTL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach.getModel();
-				int selectedIndex = tableQuanLyThanhLySach.getSelectedRow();
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
+				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
 				try {
 					String id = Df.getValueAt(selectedIndex, 0).toString();
 					
@@ -597,6 +597,9 @@ public class GD_MainPage extends javax.swing.JFrame {
 				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);				
 				ctPTL.setVisible(true);
 				ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				GD_DanhSachHienCo dshc = new GD_DanhSachHienCo();
+				dshc.setVisible(true);
+				dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
 		});
 		btnXemPTL.setFont(new Font("Verdana", Font.PLAIN, 20));

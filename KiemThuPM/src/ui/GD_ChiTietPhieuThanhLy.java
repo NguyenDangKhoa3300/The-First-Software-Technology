@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -220,5 +222,11 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		LabelMaPTL.setBounds(23, 13, 161, 22);
 		contentPane.add(LabelMaPTL);
 		LabelMaPTL.setText("Mã Phiếu: "+maPTL);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();  
+		Dimension screenSize = toolkit.getScreenSize(); 
+		int x = 800; 
+		int y = (screenSize.height - getHeight()) / 2;  
+		setLocation(x, y);  
+		
 	}
 }

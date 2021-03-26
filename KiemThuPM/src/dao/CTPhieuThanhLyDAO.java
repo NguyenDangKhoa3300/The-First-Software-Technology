@@ -152,5 +152,50 @@ public class CTPhieuThanhLyDAO {
 		}
 		return dsshc;
 	}
+	public boolean validationTrungThemPhieuThanhLy (String maSach){
+		boolean ck = false;
+		Connection con = DataBase.getInstance().getConnection();		
+		String sql = "select maSach from sach";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach1 = rs.getString(1);
+				if(maSach.equalsIgnoreCase(maSach1)) {
+					ck = true;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ck;
+	}
+	public ArrayList<String> validationTonTaiThemPhieuThanhLy (String maSach){
+		ArrayList<String> ar = new ArrayList<String>();
+		ar.add("kotrung");
+		ar.add("kocomaphieu");
+		Connection con = DataBase.getInstance().getConnection();
+		String sql = "select ctptl.maSach, ptl.MaPTL from ChiTietPhieuThanhLy ctptl, PhieuThanhLy ptl where ptl.MaPTL = ctptl.MaPTL";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach1 = rs.getString(1);
+				String maphieu = rs.getString(2);
+				if(maSach.equalsIgnoreCase(maSach1)) {
+					ar.set(0, "cotrung");
+					ar.set(1, maphieu);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ar;
+	}
 
 }

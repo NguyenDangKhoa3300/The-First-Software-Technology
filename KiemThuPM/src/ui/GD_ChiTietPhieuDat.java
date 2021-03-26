@@ -38,6 +38,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GD_ChiTietPhieuDat extends JFrame {
 	private String maPD = "";
@@ -192,6 +194,21 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		contentPane.add(lblSLng);
 		
 		txtSoLuong = new JTextField();
+		txtSoLuong.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				String value = txtSoLuong.getText();
+	            
+	            if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+	            	txtSoLuong.setEditable(true);
+	               
+	            } else {
+	            	String mess = "Khong duoc nhap chu!";
+	               JOptionPane.showMessageDialog(null, mess);
+	               txtSoLuong.setText("");
+	            }
+			}
+		});
 		txtSoLuong.setBounds(133, 188, 96, 19);
 		contentPane.add(txtSoLuong);
 		txtSoLuong.setColumns(10);
@@ -202,6 +219,21 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		contentPane.add(lblnGi);
 		
 		txtDonGia = new JTextField();
+		txtDonGia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+					String value = txtDonGia.getText();
+	            
+	            if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+	            	txtDonGia.setEditable(true);
+	               
+	            } else {
+	            	String mess = "Khong duoc nhap chu!";
+	               JOptionPane.showMessageDialog(null, mess);
+	               txtDonGia.setText("");
+	            }
+			}
+		});
 		txtDonGia.setBounds(133, 226, 96, 19);
 		contentPane.add(txtDonGia);
 		txtDonGia.setColumns(10);

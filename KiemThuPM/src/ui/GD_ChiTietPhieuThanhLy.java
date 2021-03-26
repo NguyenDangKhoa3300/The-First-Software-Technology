@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class GD_ChiTietPhieuThanhLy extends JFrame {
 	private String maPTL = "";
 	private JPanel contentPane;
@@ -148,6 +150,21 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		txtMaSach.setColumns(10);
 		
 		txtDonGia = new JTextField();
+		txtDonGia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				String value = txtDonGia.getText();
+	            
+	            if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+	            	txtDonGia.setEditable(true);
+	               
+	            } else {
+	            	String mess = "Khong duoc nhap chu!";
+	               JOptionPane.showMessageDialog(null, mess);
+	               txtDonGia.setText("");
+	            }
+			}
+		});
 		txtDonGia.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDonGia.setColumns(10);
 		txtDonGia.setBounds(127, 115, 126, 23);

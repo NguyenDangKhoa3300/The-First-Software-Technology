@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import entities.ChitietPhieuThanhLy;
-
+import entities.SachHienCo;
 public class CTPhieuThanhLyDAO {
 	public ArrayList<ChitietPhieuThanhLy> doctubangPhieuDat(String mapPTL) {
 		Connection con = DataBase.getInstance().getConnection();
@@ -127,6 +127,30 @@ public class CTPhieuThanhLyDAO {
 			e.printStackTrace();
 		}
 		return maSach;
+	}
+	public ArrayList<SachHienCo> doctubangSachHienCo(){
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<SachHienCo> dsshc = new ArrayList<SachHienCo>();
+		String sql = "select s.MaSach , s.TenSach, s.TheLoai, s.NamXB, nxb.TenNXB, s.Tinhtrangsach from Sach s, NhaXuatBan nxb where s.MaNXB = nxb.MaNXB";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach = rs.getString(1);
+				String tenSach = rs.getString(2);
+				String theLoai = rs.getString(3);
+				String namXB = rs.getString(4);
+				String tenNXB = rs.getString(5);
+				String tinhTrangSach = rs.getString(6);
+				SachHienCo ds = new SachHienCo(maSach, tenSach, theLoai, namXB,tenNXB,tinhTrangSach);
+				dsshc.add(ds);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dsshc;
 	}
 
 }

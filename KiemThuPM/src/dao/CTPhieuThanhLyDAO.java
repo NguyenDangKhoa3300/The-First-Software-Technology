@@ -91,7 +91,27 @@ public class CTPhieuThanhLyDAO {
 		}
 
 	}
+	public void suaChiTietPhieuTL(String maCTPTL, String maSach, String donGia) {
 
+		
+
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update ChiTietPhieuThanhLy set masach = '"+maSach+"',donGia = "+donGia+" where maCTPTL = '"+ maCTPTL+"'";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated");
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	public void xoaCTPTL(String maCTPTL) {
 
 		try {
@@ -108,11 +128,11 @@ public class CTPhieuThanhLyDAO {
 		}
 
 	}
-	public String getMaSach(String tenSach) {		
+	public String getMaSach(String mactptl) {		
 		String maSach = "";
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Select maSach from sach where tensach = N'"+tenSach+"'";
+			String querry = "Select maSach from  ChiTietPhieuThanhLy ctptl where mactptl = '"+mactptl+"'";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 

@@ -444,6 +444,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				String ngays = part[2];
 				String thangs = part[1];
 				String nams = part[0];
+				
 				GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds,tennvs,ngays,thangs,nams);
 				spd.setVisible(true);
 				spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -545,6 +546,24 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardThanhLySach.add(btnTimPTL);
 
 		JButton btnSuaPTL = new JButton("Sửa");
+		btnSuaPTL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableQuanLyThanhLySach_1.getModel();
+				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
+				String maptls = Df.getValueAt(selectedIndex, 0).toString();
+				String tennvs = Df.getValueAt(selectedIndex,1).toString();
+				String dates = Df.getValueAt(selectedIndex,2).toString();
+				String[] part = dates.split("-");
+				String ngays = part[2];
+				String thangs = part[1];
+				String nams = part[0];
+				
+				GD_SuaPhieuThanhLy sptl = new GD_SuaPhieuThanhLy(maptls,tennvs,ngays,thangs,nams);
+				sptl.setVisible(true);
+				sptl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
+			}
+		});
 		btnSuaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaPTL.setBounds(659, 602, 85, 40);
 		pnlCardThanhLySach.add(btnSuaPTL);

@@ -97,13 +97,13 @@ public class GD_ThemPhieuThanhLy extends JFrame {
 		});
 		comboNam.setBounds(384, 174, 76, 21);
 		contentPane.add(comboNam);
-		for(int i = 1900 ; i <= 2021 ; i++) {
+		for(int i = 2019 ; i <= 2024 ; i++) {
 			comboNam.addItem(i);
 		}
 		JButton btnLu = new JButton("Lưu");
 		btnLu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String timeDat = ngayNhap + "-" + thangNhap + "-" + namNhap;
+				String timeDat = namNhap + "-" + thangNhap + "-" + ngayNhap;
 				
 			    new PhieuThanhLyDAO().themThanhLy(tenNV, timeDat);
 				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();

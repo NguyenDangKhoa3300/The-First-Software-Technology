@@ -110,9 +110,9 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 				DefaultTableModel Df = (DefaultTableModel) table.getModel();
 				int selectedIndex = table.getSelectedRow();
 
-				String tenSach = Df.getValueAt(selectedIndex, 1).toString();
+				String mactptl = Df.getValueAt(selectedIndex, 0).toString();
 
-				txtMaSach.setText(dsCTPhieuTL.getMaSach(tenSach));
+				txtMaSach.setText(dsCTPhieuTL.getMaSach(mactptl));
 				txtDonGia.setText(Df.getValueAt(selectedIndex, 2).toString());
 
 			}
@@ -187,8 +187,8 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 						txtMaSach.setText("");
 						txtDonGia.setText("");
 						bangdulieuCTPTL();
-					}else {
-						JOptionPane.showMessageDialog(null, "Trung ma sach o phieu "+ck.get(1)+"!");
+					} else {
+						JOptionPane.showMessageDialog(null, "Trung ma sach o phieu " + ck.get(1) + "!");
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Ma sach khong hop le!");
@@ -220,6 +220,24 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		contentPane.add(btnXoa);
 
 		JButton btnSua = new JButton("Sửa");
+		btnSua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
+				int selectedIndex = table.getSelectedRow();
+				String maCTPTLs = Df.getValueAt(selectedIndex, 0).toString();
+				String maSachs = txtMaSach.getText();
+				String donGias = txtDonGia.getText();
+				if (dsCTPhieuTL.getMaSach(maCTPTLs).equalsIgnoreCase(maSachs)) {
+					dsCTPhieuTL.suaChiTietPhieuTL(maCTPTLs, maSachs, donGias);
+					bangdulieuCTPTL();
+					txtMaSach.setText("");
+					txtDonGia.setText("");
+				}else {
+					JOptionPane.showMessageDialog(null, "Khong duoc sua ma sach");
+					txtMaSach.setText(dsCTPhieuTL.getMaSach(maCTPTLs));
+				}
+			}
+		});
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSua.setBounds(231, 256, 85, 35);
 		contentPane.add(btnSua);

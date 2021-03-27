@@ -104,6 +104,26 @@ public class PhieuThanhLyDAO {
 		}
 
 	}
+	public void suaPhieuThanhLy(String tenNV, String timeDat,String mapd) {
+		
+		String manv = getMaNV(tenNV);
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update PhieuThanhLy set manv = '"+manv+"', ngaythanhly = '"+timeDat+"' where maptl = '"+mapd+"'";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated");
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	public String getMaNV(String tenNV) {
 
@@ -111,7 +131,7 @@ public class PhieuThanhLyDAO {
 		try {
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Select manv from nhanvien where tenNV = N'" + tenNV + "'";
-			System.out.println(querry);
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ResultSet rs = ps.executeQuery();

@@ -433,6 +433,22 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardNhapSach.add(btnXoaPD);
 
 		JButton btnSuaPD = new JButton("Sửa");
+		btnSuaPD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableQuanLyNhapSach.getModel();
+				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
+				String mapds = Df.getValueAt(selectedIndex, 0).toString();
+				String tennvs = Df.getValueAt(selectedIndex,1).toString();
+				String dates = Df.getValueAt(selectedIndex,2).toString();
+				String[] part = dates.split("-");
+				String ngays = part[2];
+				String thangs = part[1];
+				String nams = part[0];
+				GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds,tennvs,ngays,thangs,nams);
+				spd.setVisible(true);
+				spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnSuaPD.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaPD.setBounds(502, 580, 85, 40);
 		pnlCardNhapSach.add(btnSuaPD);

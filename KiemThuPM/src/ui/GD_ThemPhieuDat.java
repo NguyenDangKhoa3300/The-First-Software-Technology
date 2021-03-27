@@ -75,7 +75,7 @@ public class GD_ThemPhieuDat extends JFrame {
 
 		btnLuu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String timeDat = ngayNhap + "-" + thangNhap + "-" + namNhap;
+				String timeDat = namNhap + "-" + thangNhap + "-" + ngayNhap;
 				
 			    new PhieuDatDAO().themPhieuDat(tenNV, timeDat);;
 				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
@@ -153,7 +153,7 @@ public class GD_ThemPhieuDat extends JFrame {
 		for (int i = 0; i < dsnv.size(); i++) {
 			comboBoxTenNV.addItem(dsnv.get(i));
 		}
-		for (int i = 1900; i <= 2021; i++) {
+		for (int i = 2019; i <= 2024; i++) {
 			comboBoxNam.addItem(i);
 		}
 		Toolkit toolkit = Toolkit.getDefaultToolkit();

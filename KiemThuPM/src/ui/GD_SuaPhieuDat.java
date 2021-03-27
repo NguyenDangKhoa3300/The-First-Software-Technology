@@ -28,6 +28,9 @@ public class GD_SuaPhieuDat extends JFrame {
 	private String ngayNhap;
 	private String thangNhap;
 	private String namNhap;
+	private JComboBox comboBoxNam;
+	private JComboBox comboBoxThang;
+	private JComboBox comboBoxNgay;
 	
 	private String mapdFromMain;
 	private String tenNVFromMain;
@@ -55,6 +58,44 @@ public class GD_SuaPhieuDat extends JFrame {
 	 */
 	public GD_SuaPhieuDat() {
 		initialize();
+		
+	}
+	public void setComBoBox() {
+		int ngays = Integer.parseInt(ngayNhapFromMain);
+		for (int i=0; i<comboBoxNgay.getItemCount(); i++) {
+		      if (comboBoxNgay.getItemAt(i).equals(ngays+"")) {
+		    	  comboBoxNgay.setSelectedIndex(i);
+		        break;
+		      }
+		    }
+		
+		
+		int thangs = Integer.parseInt(thangNhapFromMain);
+		for (int i=0; i<comboBoxThang.getItemCount(); i++) {
+			 String thangfor = comboBoxThang.getItemAt(i)+"";
+		      if (thangfor.equalsIgnoreCase(thangs+"")) {
+		    	  comboBoxThang.setSelectedIndex(i);
+		        break;
+		      }
+		    }
+		
+		int nams = Integer.parseInt(namNhapFromMain);
+		for (int i=0; i<comboBoxNam.getItemCount(); i++) {
+			
+			String namfor = comboBoxNam.getItemAt(i)+"";
+		      if (namfor.equalsIgnoreCase(nams+"")) {
+		    	  comboBoxNam.setSelectedIndex(i);
+		        break;
+		      }
+		    }
+		
+		for (int i=0; i<comboBoxTenNV.getItemCount(); i++) {
+		      if (comboBoxTenNV.getItemAt(i).equals(this.tenNVFromMain)) {
+		    	  comboBoxTenNV.setSelectedIndex(i);
+		        break;
+		      }
+		    }
+		
 	}
 	public GD_SuaPhieuDat(String mapdFromMain,String tenNVFromMain,String ngayNhapFromMain,String thangNhapFromMain,String namNhapFromMain) {
 		this.mapdFromMain = mapdFromMain;
@@ -62,9 +103,9 @@ public class GD_SuaPhieuDat extends JFrame {
 		this.ngayNhapFromMain = ngayNhapFromMain;
 		this.thangNhapFromMain = thangNhapFromMain;
 		this.namNhapFromMain = namNhapFromMain;
-		System.out.println(this.mapdFromMain);
-		System.out.println(this.tenNVFromMain);
+	
 		initialize();
+		
 	}
 	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +124,10 @@ public class GD_SuaPhieuDat extends JFrame {
 
 		btnLuu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String timeDat = namNhap + "-" + thangNhap + "-" + ngayNhap;
+				new PhieuDatDAO().suaPhieuDat(tenNV, timeDat,mapdFromMain);
+				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
+				mainframe.dulieubangPhieuDat();
 			}
 		});
 
@@ -111,7 +155,7 @@ public class GD_SuaPhieuDat extends JFrame {
 		lblNmt.setBounds(385, 194, 58, 17);
 		contentPane.add(lblNmt);
 
-		JComboBox comboBoxNgay = new JComboBox();
+		comboBoxNgay = new JComboBox();
 		comboBoxNgay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ngayNhap =  comboBoxNgay.getItemAt(comboBoxNgay.getSelectedIndex()).toString();
@@ -119,16 +163,17 @@ public class GD_SuaPhieuDat extends JFrame {
 		});
 		comboBoxNgay.setBounds(162, 194, 50, 21);
 		for (int i = 1; i <= 31; i++) {
-			comboBoxNgay.addItem(i);
+			comboBoxNgay.addItem(i+"");
 		}
 		contentPane.add(comboBoxNgay);
+		
 		for (int i=0; i<comboBoxNgay.getItemCount(); i++) {
 		      if (comboBoxNgay.getItemAt(i).equals(this.ngayNhapFromMain)) {
 		    	  comboBoxNgay.setSelectedIndex(i);
 		        break;
 		      }
 		    }
-		JComboBox comboBoxThang = new JComboBox();
+		comboBoxThang = new JComboBox();
 		comboBoxThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				thangNhap =  comboBoxThang.getItemAt(comboBoxThang.getSelectedIndex()).toString();
@@ -136,16 +181,11 @@ public class GD_SuaPhieuDat extends JFrame {
 		});
 		comboBoxThang.setBounds(323, 194, 50, 21);
 		contentPane.add(comboBoxThang);
-		for (int i=0; i<comboBoxThang.getItemCount(); i++) {
-		      if (comboBoxThang.getItemAt(i).equals(this.thangNhapFromMain)) {
-		    	  comboBoxThang.setSelectedIndex(i);
-		        break;
-		      }
-		    }
+		
 		for (int i = 1; i <= 12; i++) {
 			comboBoxThang.addItem(i);
 		}
-		JComboBox comboBoxNam = new JComboBox();
+		comboBoxNam = new JComboBox();
 		comboBoxNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				namNhap =  comboBoxNam.getItemAt(comboBoxNam.getSelectedIndex()).toString();
@@ -154,12 +194,7 @@ public class GD_SuaPhieuDat extends JFrame {
 		comboBoxNam.setBounds(489, 194, 70, 21);
 		contentPane.add(comboBoxNam);
 		
-		for (int i=0; i<comboBoxNam.getItemCount(); i++) {
-		      if (comboBoxNam.getItemAt(i).equals(this.namNhapFromMain)) {
-		    	  comboBoxNam.setSelectedIndex(i);
-		        break;
-		      }
-		    }
+		
 		comboBoxTenNV = new JComboBox();
 		comboBoxTenNV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -170,18 +205,13 @@ public class GD_SuaPhieuDat extends JFrame {
 		comboBoxTenNV.setBounds(215, 143, 135, 21);
 		contentPane.add(comboBoxTenNV);
 		
-		for (int i=0; i<comboBoxTenNV.getItemCount(); i++) {
-		      if (comboBoxTenNV.getItemAt(i).equals(this.tenNVFromMain)) {
-		    	  comboBoxTenNV.setSelectedIndex(i);
-		        break;
-		      }
-		    }
-		System.out.println(this.tenNVFromMain);
+		
+		
 		ArrayList<String> dsnv = phieuDatDAO.JComBoBoxNV();
 		for (int i = 0; i < dsnv.size(); i++) {
 			comboBoxTenNV.addItem(dsnv.get(i));
 		}
-		for (int i = 1900; i <= 2021; i++) {
+		for (int i = 2019; i <= 2024; i++) {
 			comboBoxNam.addItem(i);
 		}
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -189,5 +219,6 @@ public class GD_SuaPhieuDat extends JFrame {
 		int x = (screenSize.width - getWidth()) / 2;
 		int y = (screenSize.height - getHeight()) / 2;
 		setLocation(x, y);
+		setComBoBox();
 	}	
 }

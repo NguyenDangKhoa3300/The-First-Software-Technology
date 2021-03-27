@@ -84,6 +84,26 @@ public class PhieuDatDAO {
 		}
 
 	}
+	public void suaPhieuDat(String tenNV, String timeDat,String mapd) {
+		
+		String manv = getMaNV(tenNV);
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update PhieuDat set manv = '"+manv+"', ngaynhap = '"+timeDat+"' where mapd = '"+mapd+"'";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated");
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	public String getMaNV(String tenNV) {
 		
 		String maNV = "";

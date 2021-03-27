@@ -78,13 +78,13 @@ public class GD_DanhSachHienCo extends JFrame {
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, Object.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, true, false, false
+				false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];

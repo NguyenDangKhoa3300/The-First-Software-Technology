@@ -51,7 +51,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 	private CTPhieuDatDAO dsCTPhieuDat = new CTPhieuDatDAO();
 	private JTable table;
 	private String tenNXB;
-	
+	private JComboBox comboBox;
 	/**
 	 * Launch the application.
 	 */
@@ -119,7 +119,13 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				DefaultTableModel Df = (DefaultTableModel)table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				
+				String valueCombo = Df.getValueAt(selectedIndex,1).toString();
+				 for (int i=0; i<comboBox.getItemCount(); i++) {
+				      if (comboBox.getItemAt(i).equals(valueCombo)) {
+				    	  comboBox.setSelectedIndex(i);
+				        break;
+				      }
+				    }
 				txtTenSach.setText(Df.getValueAt(selectedIndex,2).toString());
 				txtSoLuong.setText(Df.getValueAt(selectedIndex,3).toString());
 				txtDonGia.setText(Df.getValueAt(selectedIndex,4).toString());
@@ -157,7 +163,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(65);
 		scrollPane.setViewportView(table);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tenNXB =  (String) comboBox.getItemAt(comboBox.getSelectedIndex());

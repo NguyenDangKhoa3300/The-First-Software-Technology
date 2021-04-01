@@ -975,7 +975,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		tableDocGia = new JTable();
 		String[] headers1 = "Mã Độc Giả; Tên Độc Giả; Năm Sinh; CMND ; Số Điện Thoại".split(";");
-		tableModelDocGia = new DefaultTableModel(headers1, 0);
+		tableModelDocGia = new DefaultTableModel(headers1, 0){
+			
+			boolean[] columnEditables = new boolean[] {
+					false,false, false,false, false
+				};	
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableDocGia_1 = new JTable(tableModelDocGia);
 		tableDocGia_1.addMouseListener(new MouseAdapter() {
 			@Override

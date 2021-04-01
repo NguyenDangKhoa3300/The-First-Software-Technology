@@ -15,6 +15,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import dao.CTPhieuDatDAO;
 import dao.DataBase;
 import dao.DocGiaDAO;
 import dao.PhieuDatDAO;
@@ -56,6 +57,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
+import javax.swing.JComboBox;
 
 public class GD_MainPage extends javax.swing.JFrame {
 	private static GD_MainPage window;
@@ -72,9 +74,17 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private PhieuThanhLyDAO dsPhieuThanhLy = new PhieuThanhLyDAO();
 	private JTextField txtTimDocGia;
 	private JTextField txtNhapMaSach;
-	private JTextField txtTimPhieuDat;
+	private JTextField txtTimPhieuDat; 
 	private JTextField txtTimPTL;
-
+	private JTextField hoTenDG;
+	private JTextField soCMNDDG;
+	private JTextField soDTDG;
+	private JComboBox comboBoxDKTVNgay;
+	private JComboBox comboBoxDKTVThang;
+	private JComboBox comboBoxDKTVNam;
+	private String ngaySinhDG_DKTV;
+	private String thangSinhDG_DKTV;
+	private String namSinhDG_DKTV;
 	/**
 	 * Launch the application.
 	 */
@@ -174,6 +184,133 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JPanel pnlCardDangKyTheTV = new JPanel();
 		pnlCardDangKyTheTV.setBackground(UIManager.getColor("Table.dropLineColor"));
 		pnlCard.add(pnlCardDangKyTheTV, "pnlCardDangKyTheTV");
+		pnlCardDangKyTheTV.setLayout(null);
+		
+		JLabel lblNewLabel_7 = new JLabel("Họ Tên:");
+		lblNewLabel_7.setForeground(Color.BLACK);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7.setBounds(127, 183, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_7_1 = new JLabel("Số CMND:");
+		lblNewLabel_7_1.setForeground(Color.BLACK);
+		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7_1.setBounds(127, 219, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7_1);
+		
+		JLabel lblNewLabel_7_2 = new JLabel("Số Điện Thoại: ");
+		lblNewLabel_7_2.setForeground(Color.BLACK);
+		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7_2.setBounds(127, 261, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7_2);
+		
+		JLabel lblNewLabel_7_2_1 = new JLabel("Ngày sinh:");
+		lblNewLabel_7_2_1.setForeground(Color.BLACK);
+		lblNewLabel_7_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7_2_1.setBounds(127, 330, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1);
+		
+		JLabel lblNewLabel_7_2_1_1 = new JLabel("Tháng Sinh");
+		lblNewLabel_7_2_1_1.setForeground(Color.BLACK);
+		lblNewLabel_7_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7_2_1_1.setBounds(327, 330, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_1);
+		
+		JLabel lblNewLabel_7_2_1_2 = new JLabel("Năm Sinh:");
+		lblNewLabel_7_2_1_2.setForeground(Color.BLACK);
+		lblNewLabel_7_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_7_2_1_2.setBounds(558, 330, 106, 17);
+		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_2);
+		
+		hoTenDG = new JTextField();
+		hoTenDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		hoTenDG.setBounds(243, 180, 126, 23);
+		pnlCardDangKyTheTV.add(hoTenDG);
+		hoTenDG.setColumns(10);
+		
+		soCMNDDG = new JTextField();
+		soCMNDDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		soCMNDDG.setColumns(10);
+		soCMNDDG.setBounds(243, 216, 126, 23);
+		pnlCardDangKyTheTV.add(soCMNDDG);
+		
+		soDTDG = new JTextField();
+		soDTDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		soDTDG.setColumns(10);
+		soDTDG.setBounds(243, 258, 126, 23);
+		pnlCardDangKyTheTV.add(soDTDG);
+		
+		comboBoxDKTVNgay = new JComboBox();
+		comboBoxDKTVNgay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ngaySinhDG_DKTV = comboBoxDKTVNgay.getItemAt(comboBoxDKTVNgay.getSelectedIndex()).toString();
+			}
+		});
+		comboBoxDKTVNgay.setBounds(226, 330, 58, 21);
+		pnlCardDangKyTheTV.add(comboBoxDKTVNgay);
+		
+		for(int i = 1 ; i <= 31; i++) {
+			comboBoxDKTVNgay.addItem(i);
+		}
+		
+		comboBoxDKTVThang = new JComboBox();
+		comboBoxDKTVThang.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				thangSinhDG_DKTV = comboBoxDKTVThang.getItemAt(comboBoxDKTVThang.getSelectedIndex()).toString();
+			}
+		});
+		comboBoxDKTVThang.setBounds(430, 330, 72, 21);
+		pnlCardDangKyTheTV.add(comboBoxDKTVThang);
+		
+		for(int i = 1 ; i <= 12; i++) {
+			comboBoxDKTVThang.addItem(i);
+		}
+		
+		comboBoxDKTVNam = new JComboBox();
+		comboBoxDKTVNam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				namSinhDG_DKTV = comboBoxDKTVNam.getItemAt(comboBoxDKTVNam.getSelectedIndex()).toString();
+			}
+		});
+		comboBoxDKTVNam.setBounds(657, 330, 77, 21);
+		pnlCardDangKyTheTV.add(comboBoxDKTVNam);
+		
+		for(int i = 1980 ; i <= 2021; i++) {
+			comboBoxDKTVNam.addItem(i);
+		}
+		
+		JButton btnLuuDKTV = new JButton("Lưu");
+		btnLuuDKTV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String hoTen = hoTenDG.getText();
+				String soCMND = soCMNDDG.getText();
+				String soDT = soDTDG.getText();
+				String birthday = namSinhDG_DKTV + "-" + thangSinhDG_DKTV + "-" + ngaySinhDG_DKTV;
+				DocGiaDAO dg = new DocGiaDAO();
+				dg.themDG(hoTen, birthday, soCMND, soDT);
+				dulieubangDocGia();
+			}
+		});
+		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLuuDKTV.setBounds(254, 514, 93, 36);
+		pnlCardDangKyTheTV.add(btnLuuDKTV);
+		
+		JButton btnDatLaiDKTV = new JButton("Đặt Lại");
+		btnDatLaiDKTV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				hoTenDG.setText("");
+				soCMNDDG.setText("");
+				soDTDG.setText("");
+			}
+		});
+		btnDatLaiDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnDatLaiDKTV.setBounds(462, 514, 93, 36);
+		pnlCardDangKyTheTV.add(btnDatLaiDKTV);
+		
+		JLabel lblngKTh = new JLabel("Đăng Ký Thẻ Thư Viện");
+		lblngKTh.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblngKTh.setBounds(330, 46, 318, 61);
+		pnlCardDangKyTheTV.add(lblngKTh);
 
 		JPanel pnlCardNhapSach = new JPanel();
 		pnlCardNhapSach.setBackground(new Color(51, 153, 153));
@@ -753,21 +890,16 @@ public class GD_MainPage extends javax.swing.JFrame {
 		lblTitleQuanLyDocGia.setBounds(160, 108, 410, 56);
 		pnlCardQuanLyDocGia.add(lblTitleQuanLyDocGia);
 
-		JButton btnThemDocGia = new JButton("Thêm Độc Giả");
-		btnThemDocGia.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btnThemDocGia.setBounds(161, 249, 200, 30);
-		pnlCardQuanLyDocGia.add(btnThemDocGia);
-
-		JLabel lblNhapMaDocGia = new JLabel("Nhập Mã Độc Giả:");
+		JLabel lblNhapMaDocGia = new JLabel("Nhập Tên Độc Giả:");
 		lblNhapMaDocGia.setForeground(Color.WHITE);
 		lblNhapMaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		lblNhapMaDocGia.setBounds(521, 242, 234, 40);
+		lblNhapMaDocGia.setBounds(650, 242, 234, 40);
 		pnlCardQuanLyDocGia.add(lblNhapMaDocGia);
 
 		txtTimDocGia = new JTextField();
 		txtTimDocGia.setFont(new Font("Verdana", Font.PLAIN, 15));
 		txtTimDocGia.setColumns(10);
-		txtTimDocGia.setBounds(767, 247, 200, 35);
+		txtTimDocGia.setBounds(891, 247, 200, 35);
 		pnlCardQuanLyDocGia.add(txtTimDocGia);
 
 		JButton btnTimDocGia = new JButton("Tìm");
@@ -798,21 +930,36 @@ public class GD_MainPage extends javax.swing.JFrame {
 			}
 		});
 		btnTimDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnTimDocGia.setBounds(1002, 247, 114, 35);
+		btnTimDocGia.setBounds(1131, 245, 114, 35);
 		pnlCardQuanLyDocGia.add(btnTimDocGia);
 
 		JButton btnXoaDocGia = new JButton("Xóa");
+		btnXoaDocGia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableDocGia.getModel();
+				int selectedIndex = tableDocGia.getSelectedRow();
+				String idDG = Df.getValueAt(selectedIndex, 0).toString();
+				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+						JOptionPane.YES_NO_OPTION);
+				if (dialog == JOptionPane.YES_OPTION) {
+					DocGiaDAO dg = new DocGiaDAO();
+					dg.xoaDG(idDG);
+					JOptionPane.showMessageDialog(null, "Deleted");
+					dulieubangDocGia();
+				}
+			}
+		});
 		btnXoaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXoaDocGia.setBounds(686, 539, 85, 40);
+		btnXoaDocGia.setBounds(1045, 539, 85, 40);
 		pnlCardQuanLyDocGia.add(btnXoaDocGia);
 
 		JButton btnSuaDocGia = new JButton("Sửa");
 		btnSuaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnSuaDocGia.setBounds(462, 539, 85, 40);
+		btnSuaDocGia.setBounds(799, 539, 85, 40);
 		pnlCardQuanLyDocGia.add(btnSuaDocGia);
 
 		JScrollPane scrollPaneQuanLyDocGia = new JScrollPane();
-		scrollPaneQuanLyDocGia.setBounds(160, 311, 959, 197);
+		scrollPaneQuanLyDocGia.setBounds(650, 313, 595, 197);
 		pnlCardQuanLyDocGia.add(scrollPaneQuanLyDocGia);
 
 		tableDocGia = new JTable();

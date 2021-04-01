@@ -159,7 +159,7 @@ public void xoaCTPD(String maCTPD) {
 	try {
 		Connection con = DataBase.getInstance().getConnection();
 		String querry = "delete from ChiTietPhieuDat where MACTPD = '"+maCTPD+"'";
-		System.out.println(querry);
+		
 		PreparedStatement ps = con.prepareStatement(querry);
 		
 		ps.executeUpdate();

@@ -64,6 +64,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JFrame frame;
 	private JTextField txtNhapMaPM;
 	private JTable tableMuonSach, tableDocGia, tableQuanLySach, tableQuanLyNhapSach, tableQuanLyThanhLySach;
+	private JTable tableDocGia_1;
 	private JTable tableQuanLyThanhLySach_1;
 	private DefaultTableModel tableModelMuonSach, tableModelDocGia, tableModelQuanLySach, tableModelQuanLyNhapSach,
 			tableModelQuanLyThanhLySach;
@@ -76,6 +77,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JTextField txtNhapMaSach;
 	private JTextField txtTimPhieuDat; 
 	private JTextField txtTimPTL;
+	//DatTheTV_DKTV
 	private JTextField hoTenDG;
 	private JTextField soCMNDDG;
 	private JTextField soDTDG;
@@ -85,6 +87,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private String ngaySinhDG_DKTV;
 	private String thangSinhDG_DKTV;
 	private String namSinhDG_DKTV;
+	
+	//QLDG
+	private JTextField txtTenDG_QLDG;
+	private JTextField txtSoCMND_QLDG;
+	private JTextField txtSoDT_QLDG;
+	private JTextField txtNgaySinh_QLDG;
+	private JTextField txtThangSinh_QLDG;
+	private JTextField txtNamSinhQLDG;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -887,19 +898,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JLabel lblTitleQuanLyDocGia = new JLabel("Quản Lý Độc Giả");
 		lblTitleQuanLyDocGia.setForeground(Color.WHITE);
 		lblTitleQuanLyDocGia.setFont(new Font("Verdana", Font.PLAIN, 45));
-		lblTitleQuanLyDocGia.setBounds(160, 108, 410, 56);
+		lblTitleQuanLyDocGia.setBounds(343, 73, 410, 56);
 		pnlCardQuanLyDocGia.add(lblTitleQuanLyDocGia);
 
 		JLabel lblNhapMaDocGia = new JLabel("Nhập Tên Độc Giả:");
 		lblNhapMaDocGia.setForeground(Color.WHITE);
 		lblNhapMaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		lblNhapMaDocGia.setBounds(650, 242, 234, 40);
+		lblNhapMaDocGia.setBounds(582, 242, 234, 40);
 		pnlCardQuanLyDocGia.add(lblNhapMaDocGia);
 
 		txtTimDocGia = new JTextField();
 		txtTimDocGia.setFont(new Font("Verdana", Font.PLAIN, 15));
 		txtTimDocGia.setColumns(10);
-		txtTimDocGia.setBounds(891, 247, 200, 35);
+		txtTimDocGia.setBounds(826, 247, 200, 35);
 		pnlCardQuanLyDocGia.add(txtTimDocGia);
 
 		JButton btnTimDocGia = new JButton("Tìm");
@@ -930,7 +941,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 			}
 		});
 		btnTimDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnTimDocGia.setBounds(1131, 245, 114, 35);
+		btnTimDocGia.setBounds(1065, 245, 114, 35);
 		pnlCardQuanLyDocGia.add(btnTimDocGia);
 
 		JButton btnXoaDocGia = new JButton("Xóa");
@@ -950,23 +961,111 @@ public class GD_MainPage extends javax.swing.JFrame {
 			}
 		});
 		btnXoaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXoaDocGia.setBounds(1045, 539, 85, 40);
+		btnXoaDocGia.setBounds(908, 539, 85, 40);
 		pnlCardQuanLyDocGia.add(btnXoaDocGia);
 
 		JButton btnSuaDocGia = new JButton("Sửa");
 		btnSuaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnSuaDocGia.setBounds(799, 539, 85, 40);
+		btnSuaDocGia.setBounds(700, 539, 85, 40);
 		pnlCardQuanLyDocGia.add(btnSuaDocGia);
 
 		JScrollPane scrollPaneQuanLyDocGia = new JScrollPane();
-		scrollPaneQuanLyDocGia.setBounds(650, 313, 595, 197);
+		scrollPaneQuanLyDocGia.setBounds(516, 311, 677, 197);
 		pnlCardQuanLyDocGia.add(scrollPaneQuanLyDocGia);
 
 		tableDocGia = new JTable();
 		String[] headers1 = "Mã Độc Giả; Tên Độc Giả; Năm Sinh; CMND ; Số Điện Thoại".split(";");
 		tableModelDocGia = new DefaultTableModel(headers1, 0);
-		tableDocGia = new JTable(tableModelDocGia);
-		scrollPaneQuanLyDocGia.setViewportView(tableDocGia);
+		tableDocGia_1 = new JTable(tableModelDocGia);
+		tableDocGia_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableDocGia_1.getModel();
+				int selectedIndex = tableDocGia_1.getSelectedRow();
+				String birthDay = Df.getValueAt(selectedIndex,2).toString();
+				String[] part = birthDay.split("-");
+				txtNgaySinh_QLDG.setText(part[2]);
+				txtThangSinh_QLDG.setText(part[1]);
+				txtNamSinhQLDG.setText(part[0]);
+				txtTenDG_QLDG.setText(Df.getValueAt(selectedIndex,1).toString());
+				txtSoDT_QLDG.setText(Df.getValueAt(selectedIndex,4).toString());
+				txtSoCMND_QLDG.setText(Df.getValueAt(selectedIndex,3).toString());
+				
+			}
+		});
+		scrollPaneQuanLyDocGia.setViewportView(tableDocGia_1);
+		
+		JLabel lblTncGi = new JLabel("Tên Độc Giả:");
+		lblTncGi.setForeground(Color.WHITE);
+		lblTncGi.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblTncGi.setBounds(78, 318, 94, 18);
+		pnlCardQuanLyDocGia.add(lblTncGi);
+		
+		JLabel lblSCmnd = new JLabel("Số CMND: ");
+		lblSCmnd.setForeground(Color.WHITE);
+		lblSCmnd.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblSCmnd.setBounds(78, 357, 83, 17);
+		pnlCardQuanLyDocGia.add(lblSCmnd);
+		
+		JLabel lblSinThoi = new JLabel("Số Điện Thoại: ");
+		lblSinThoi.setForeground(Color.WHITE);
+		lblSinThoi.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblSinThoi.setBounds(78, 395, 111, 18);
+		pnlCardQuanLyDocGia.add(lblSinThoi);
+		
+		JLabel lblNgySinh = new JLabel("Ngày sinh:");
+		lblNgySinh.setForeground(Color.WHITE);
+		lblNgySinh.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNgySinh.setBounds(78, 443, 83, 17);
+		pnlCardQuanLyDocGia.add(lblNgySinh);
+		
+		JLabel lblThngSinh = new JLabel("Tháng Sinh");
+		lblThngSinh.setForeground(Color.WHITE);
+		lblThngSinh.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblThngSinh.setBounds(78, 480, 83, 17);
+		pnlCardQuanLyDocGia.add(lblThngSinh);
+		
+		JLabel lblNmSinh = new JLabel("Năm Sinh: ");
+		lblNmSinh.setForeground(Color.WHITE);
+		lblNmSinh.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNmSinh.setBounds(78, 520, 83, 17);
+		pnlCardQuanLyDocGia.add(lblNmSinh);
+		
+		txtTenDG_QLDG = new JTextField();
+		txtTenDG_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtTenDG_QLDG.setBounds(196, 319, 146, 24);
+		pnlCardQuanLyDocGia.add(txtTenDG_QLDG);
+		txtTenDG_QLDG.setColumns(10);
+		
+		txtSoCMND_QLDG = new JTextField();
+		txtSoCMND_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtSoCMND_QLDG.setColumns(10);
+		txtSoCMND_QLDG.setBounds(196, 353, 146, 24);
+		pnlCardQuanLyDocGia.add(txtSoCMND_QLDG);
+		
+		txtSoDT_QLDG = new JTextField();
+		txtSoDT_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtSoDT_QLDG.setColumns(10);
+		txtSoDT_QLDG.setBounds(196, 389, 146, 24);
+		pnlCardQuanLyDocGia.add(txtSoDT_QLDG);
+		
+		txtNgaySinh_QLDG = new JTextField();
+		txtNgaySinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtNgaySinh_QLDG.setColumns(10);
+		txtNgaySinh_QLDG.setBounds(196, 436, 42, 24);
+		pnlCardQuanLyDocGia.add(txtNgaySinh_QLDG);
+		
+		txtThangSinh_QLDG = new JTextField();
+		txtThangSinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtThangSinh_QLDG.setColumns(10);
+		txtThangSinh_QLDG.setBounds(196, 481, 42, 24);
+		pnlCardQuanLyDocGia.add(txtThangSinh_QLDG);
+		
+		txtNamSinhQLDG = new JTextField();
+		txtNamSinhQLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
+		txtNamSinhQLDG.setColumns(10);
+		txtNamSinhQLDG.setBounds(196, 521, 42, 24);
+		pnlCardQuanLyDocGia.add(txtNamSinhQLDG);
 
 /////////////////////////////////////////////////////////////////////////////		
 
@@ -1131,7 +1230,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					docGia.getSdt() };
 			tableModelDocGia.addRow(rowdata);
 		}
-		tableDocGia.setModel(tableModelDocGia);
+		tableDocGia_1.setModel(tableModelDocGia);
 	}
 
 	public void dulieubangSach() {

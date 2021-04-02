@@ -74,9 +74,9 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 
 	public void bangdulieuCTPTL() {
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
-		ChiTietPhieuDat ctpd = new ChiTietPhieuDat();
+		
 		ArrayList<ChitietPhieuThanhLy> list = dsCTPhieuTL.doctubangPhieuDat(getMaPTL());
-		if (list.size() > 0) {
+		
 			Df.setRowCount(0);
 
 			for (ChitietPhieuThanhLy ptl : list) {
@@ -85,7 +85,7 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 
 			}
 			table.setModel(Df);
-		}
+		
 	}
 
 	/**

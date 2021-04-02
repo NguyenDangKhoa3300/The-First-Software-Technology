@@ -70,9 +70,8 @@ public class DocGiaDAO {
 
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into DocGia values('" + maDG + "','" + hoTen + "','" + namSinh + "'," + soCMND + ","
-					+ soDT + ");";
-
+			String querry = "Insert into DocGia values('" + maDG + "','" + hoTen + "','" + namSinh + "','" + soCMND + "','"+ soDT + "'"+");";
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
@@ -133,6 +132,26 @@ public class DocGiaDAO {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+public void suaDocGia(String masv, String hoTen, String namSinh, String CMND, String soDT) {
+		
+		
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update DocGia set hoten = '"+hoTen+"',namSinh = '"+namSinh+"',CMND = '" +CMND+"',soDienThoai = '"+soDT+"' where masv = '"+ masv+"'";
+			
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Updated");
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
 			e.printStackTrace();
 		}
 

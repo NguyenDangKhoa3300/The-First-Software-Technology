@@ -1148,6 +1148,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardMuonSach.add(txtNhapMaPM);
 
 		JButton btnThemPM = new JButton("Thêm Phiếu Mượn");
+		btnThemPM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GD_ThemPhieuMuon2 tpm = new GD_ThemPhieuMuon2();
+				tpm.setVisible(true);
+				tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnThemPM.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnThemPM.setBounds(202, 287, 200, 30);
 		pnlCardMuonSach.add(btnThemPM);
@@ -1157,17 +1164,44 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardMuonSach.add(scrollPanePhieuMuon);
 
 		tableMuonSach = new JTable();
-		String[] headers = " Mã Phiếu Mượn; Mã Độc Giả; Tên Độc Giả; Ngày Mượn; Ngày Trả".split(";");
+		String[] headers = " Mã Phiếu Mượn; Tên Độc Giả; Tên Nhân Viên; Ngày Mượn; Ngày Trả".split(";");
 		tableModelMuonSach = new DefaultTableModel(headers, 0);
 		tableMuonSach = new JTable(tableModelMuonSach);
 		scrollPanePhieuMuon.setViewportView(tableMuonSach);
 
 		JButton btnSuaPM = new JButton("Sửa");
+		btnSuaPM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableMuonSach.getModel();
+				int selectedIndex = tableMuonSach.getSelectedRow();
+				String mapm = Df.getValueAt(selectedIndex, 0).toString();
+				String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
+				String tenNV = Df.getValueAt(selectedIndex, 2).toString();
+				GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm,maDG,tenNV);
+				tpm.setVisible(true);
+				tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnSuaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaPM.setBounds(503, 577, 85, 40);
 		pnlCardMuonSach.add(btnSuaPM);
 
 		JButton btnXoaPM = new JButton("Xóa");
+		btnXoaPM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
+				int selectedIndex = tableMuonSach.getSelectedRow();
+				String idPM = Df.getValueAt(selectedIndex, 0).toString();
+				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+						JOptionPane.YES_NO_OPTION);
+				if (dialog == JOptionPane.YES_OPTION) {
+					PhieuMuonDAO pm = new PhieuMuonDAO();
+					pm.xoaPM(idPM);
+					JOptionPane.showMessageDialog(null, "Deleted");
+					dulieubangPhieuMuon();
+				}
+			}
+		});
 		btnXoaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnXoaPM.setBounds(727, 577, 85, 40);
 		pnlCardMuonSach.add(btnXoaPM);
@@ -1192,7 +1226,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						if (list.size() > 0) {
 							tableModelMuonSach.setRowCount(0);
 							for (PhieuMuon pm : list) {
-								String[] rowtable = { pm.getMaPM(), pm.getMaDG(), pm.getTenDG(), pm.getNgayMuon(),
+								String[] rowtable = { pm.getMaPM(),pm.getTenDG(),pm.getTenNV(), pm.getNgayMuon(),
 										pm.getNgayTra() };
 								tableModelMuonSach.addRow(rowtable);
 							}
@@ -1223,7 +1257,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		ArrayList<PhieuMuon> list = dsPhieuMuon.doctubangPhieuMuon();
 		tableModelMuonSach.setRowCount(0);
 		for (PhieuMuon phieumuon : list) {
-			String[] rowdata1 = { phieumuon.getMaPM(), phieumuon.getMaDG(), phieumuon.getTenDG(),
+			String[] rowdata1 = { phieumuon.getMaPM(),phieumuon.getTenDG(),phieumuon.getTenNV(),
 					phieumuon.getNgayMuon(), phieumuon.getNgayTra() };
 			tableModelMuonSach.addRow(rowdata1);
 		}

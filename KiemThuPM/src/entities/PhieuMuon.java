@@ -1,7 +1,7 @@
 package entities;
 
 public class PhieuMuon {
-	private String maPM, maDG, tenDG, ngayMuon, ngayTra, soSachMuon;
+	private String maPM, tenDG, tenNV, ngayMuon, ngayTra;
 
 	public String getMaPM() {
 		return maPM;
@@ -11,20 +11,20 @@ public class PhieuMuon {
 		this.maPM = maPM;
 	}
 
-	public String getMaDG() {
-		return maDG;
-	}
-
-	public void setMaDG(String maDG) {
-		this.maDG = maDG;
-	}
-
 	public String getTenDG() {
 		return tenDG;
 	}
 
 	public void setTenDG(String tenDG) {
 		this.tenDG = tenDG;
+	}
+
+	public String getTenNV() {
+		return tenNV;
+	}
+
+	public void setTenNV(String tenNV) {
+		this.tenNV = tenNV;
 	}
 
 	public String getNgayMuon() {
@@ -43,31 +43,19 @@ public class PhieuMuon {
 		this.ngayTra = ngayTra;
 	}
 
-	public String getSoSachMuon() {
-		return soSachMuon;
-	}
-
-	public void setSoSachMuon(String soSachMuon) {
-		this.soSachMuon = soSachMuon;
-	}
-
-	public PhieuMuon(String maPM, String maDG, String tenDG, String ngayMuon, String ngayTra, String soSachMuon) {
+	public PhieuMuon(String maPM, String tenDG, String tenNV, String ngayMuon, String ngayTra) {
 		super();
 		this.maPM = maPM;
-		this.maDG = maDG;
 		this.tenDG = tenDG;
+		this.tenNV = tenNV;
 		this.ngayMuon = ngayMuon;
 		this.ngayTra = ngayTra;
-		this.soSachMuon = soSachMuon;
 	}
 
 	public PhieuMuon() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "PhieuMuon [maPM=" + maPM + ", maDG=" + maDG + ", tenDG=" + tenDG + ", ngayMuon=" + ngayMuon
-				+ ", ngayTra=" + ngayTra + ", soSachMuon=" + soSachMuon + "]";
-	}
+	
 }

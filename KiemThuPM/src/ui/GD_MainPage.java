@@ -947,8 +947,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnXoaDocGia = new JButton("Xóa");
 		btnXoaDocGia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel) tableDocGia.getModel();
-				int selectedIndex = tableDocGia.getSelectedRow();
+				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
+				int selectedIndex = tableDocGia_1.getSelectedRow();
 				String idDG = Df.getValueAt(selectedIndex, 0).toString();
 				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 						JOptionPane.YES_NO_OPTION);
@@ -965,6 +965,27 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardQuanLyDocGia.add(btnXoaDocGia);
 
 		JButton btnSuaDocGia = new JButton("Sửa");
+		btnSuaDocGia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel)tableDocGia_1.getModel();
+				int selectedIndex = tableDocGia_1.getSelectedRow();
+				
+				String maDG = Df.getValueAt(selectedIndex, 0).toString();
+				String hoTen = txtTenDG_QLDG.getText();
+				String soCMND = txtSoCMND_QLDG.getText();
+				String soDT = txtSoDT_QLDG.getText();
+				String birthday = txtNamSinhQLDG.getText() + "-" + txtThangSinh_QLDG.getText() + "-" + txtNgaySinh_QLDG.getText();
+				DocGiaDAO dg = new DocGiaDAO();
+				dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
+				dulieubangDocGia();
+				txtTenDG_QLDG.setText("");
+				txtSoCMND_QLDG.setText("");
+				txtSoDT_QLDG.setText("");
+				txtNamSinhQLDG.setText("");
+				txtThangSinh_QLDG.setText("");
+				txtNgaySinh_QLDG.setText("");
+			}
+		});
 		btnSuaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaDocGia.setBounds(700, 539, 85, 40);
 		pnlCardQuanLyDocGia.add(btnSuaDocGia);
@@ -1136,7 +1157,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardMuonSach.add(scrollPanePhieuMuon);
 
 		tableMuonSach = new JTable();
-		String[] headers = " Mã Phiếu Mượn; Mã Độc Giả; Tên Độc Giả; Ngày Mượn; Ngày Trả; Số Sách Mượn".split(";");
+		String[] headers = " Mã Phiếu Mượn; Mã Độc Giả; Tên Độc Giả; Ngày Mượn; Ngày Trả".split(";");
 		tableModelMuonSach = new DefaultTableModel(headers, 0);
 		tableMuonSach = new JTable(tableModelMuonSach);
 		scrollPanePhieuMuon.setViewportView(tableMuonSach);
@@ -1172,7 +1193,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 							tableModelMuonSach.setRowCount(0);
 							for (PhieuMuon pm : list) {
 								String[] rowtable = { pm.getMaPM(), pm.getMaDG(), pm.getTenDG(), pm.getNgayMuon(),
-										pm.getNgayTra(), pm.getSoSachMuon() };
+										pm.getNgayTra() };
 								tableModelMuonSach.addRow(rowtable);
 							}
 							tableMuonSach.setModel(tableModelMuonSach);
@@ -1203,7 +1224,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableModelMuonSach.setRowCount(0);
 		for (PhieuMuon phieumuon : list) {
 			String[] rowdata1 = { phieumuon.getMaPM(), phieumuon.getMaDG(), phieumuon.getTenDG(),
-					phieumuon.getNgayMuon(), phieumuon.getNgayTra(), phieumuon.getSoSachMuon() };
+					phieumuon.getNgayMuon(), phieumuon.getNgayTra() };
 			tableModelMuonSach.addRow(rowdata1);
 		}
 		tableMuonSach.setModel(tableModelMuonSach);

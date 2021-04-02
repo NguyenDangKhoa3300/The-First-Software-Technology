@@ -16,7 +16,7 @@ public class PhieuMuonDAO {
 	public ArrayList<PhieuMuon> doctubangPhieuMuon() {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuMuon> dsPM = new ArrayList<PhieuMuon>();
-		String sql = "select MaPM, Madocgia,HoTen , Ngaymuon, Ngaytra,Soluong  from DocGia, PhieuMuon where MaSV = Madocgia";
+		String sql = "select MaPM, Madocgia,HoTen , Ngaymuon, Ngaytra from DocGia, PhieuMuon where MaSV = Madocgia";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			//ps.setString(1, ma);
@@ -27,8 +27,8 @@ public class PhieuMuonDAO {
 				String tenDG = rs.getString(3);
 				String ngayMuon = rs.getString(4);
 				String ngayTra = rs.getString(5);
-				String soSachMuon = rs.getString(6);
-				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra, soSachMuon);
+				
+				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra);
 				dsPM.add(pm);
 			}
 
@@ -41,7 +41,7 @@ public class PhieuMuonDAO {
 	public ArrayList<PhieuMuon> TimPhieuMuonBangMa(String ma) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuMuon> list = new ArrayList<>();
-		String sql = "select MaPM, Madocgia,HoTen , Ngaymuon, Ngaytra,Soluong  from DocGia, PhieuMuon where MaPM = ? AND MaSV = Madocgia";
+		String sql = "select MaPM, Madocgia,HoTen , Ngaymuon, Ngaytra from DocGia, PhieuMuon where MaPM = ? AND MaSV = Madocgia";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ma);
@@ -52,8 +52,8 @@ public class PhieuMuonDAO {
 				String tenDG = rs.getString(3);
 				String ngayMuon = rs.getString(4);
 				String ngayTra = rs.getString(5);
-				String soSachMuon = rs.getString(6);
-				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra, soSachMuon);
+				
+				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra);
 				list.add(pm);
 			}
 			

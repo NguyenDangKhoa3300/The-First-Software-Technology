@@ -89,7 +89,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		DefaultTableModel Df = (DefaultTableModel)table.getModel();
 		ChiTietPhieuDat ctpd = new ChiTietPhieuDat();
 		ArrayList<ChiTietPhieuDat> list = dsCTPhieuDat.doctubangPhieuDat(getMaPD());
-		if(list.size()>0) {
+		
 			Df.setRowCount(0);		
 			
 			for (ChiTietPhieuDat pd : list) {				
@@ -98,7 +98,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 				
 			}					
 			table.setModel(Df);
-		}
+		
 	}
 	private void initialize() {
 		

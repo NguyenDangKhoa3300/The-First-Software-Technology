@@ -15,6 +15,7 @@ import dao.PhieuDatDAO;
 import entities.DocGia_PM;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -145,18 +146,22 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		JButton btnLu = new JButton("Lưu");
 		btnLu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String maDG = txtMaDG.getText();
 
-				LocalDate currentDate = LocalDate.now();
-				
-				dateLap = ""+currentDate;
-				LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
-				
-				dateAfter1Week = ""+result;
-				new PhieuMuonDAO().themPhieuMuon(maDG, dateLap, dateAfter1Week, tenNV);
-				txtMaDG.setText("");
-				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
-				mainframe.dulieubangPhieuMuon();
+				String maDG = txtMaDG.getText();
+				if (pm.validationTrungThemPhieuMuon(maDG)) {
+					LocalDate currentDate = LocalDate.now();
+
+					dateLap = "" + currentDate;
+					LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
+
+					dateAfter1Week = "" + result;
+					pm.themPhieuMuon(maDG, dateLap, dateAfter1Week, tenNV);
+					txtMaDG.setText("");
+					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
+					mainframe.dulieubangPhieuMuon();
+				}else {
+					JOptionPane.showMessageDialog(null, "Doc gia chua tra phieu muon!");
+				}
 			}
 		});
 		btnLu.setFont(new Font("Tahoma", Font.PLAIN, 14));

@@ -121,7 +121,7 @@ public class CTPhieuThanhLyDAO {
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
-
+			JOptionPane.showMessageDialog(null, "Deleted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

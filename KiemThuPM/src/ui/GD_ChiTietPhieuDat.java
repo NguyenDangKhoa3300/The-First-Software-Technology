@@ -40,6 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class GD_ChiTietPhieuDat extends JFrame {
 	private String maPD = "";
@@ -105,6 +106,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 938, 523);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 140, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -179,11 +181,13 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		
 		
 		JLabel lblNhXutBn = new JLabel("Nhà xuất bản:");
+		lblNhXutBn.setForeground(new Color(255, 255, 255));
 		lblNhXutBn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNhXutBn.setBounds(10, 110, 112, 17);
 		contentPane.add(lblNhXutBn);
 		
 		JLabel lblNewLabel = new JLabel("Tên sách:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(10, 150, 62, 17);
 		contentPane.add(lblNewLabel);
@@ -195,6 +199,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		txtTenSach.setColumns(10);
 		
 		JLabel lblSLng = new JLabel("Số lượng:");
+		lblSLng.setForeground(new Color(255, 255, 255));
 		lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSLng.setBounds(10, 190, 62, 17);
 		contentPane.add(lblSLng);
@@ -220,6 +225,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		txtSoLuong.setColumns(10);
 		
 		JLabel lblnGi = new JLabel("Đơn giá:");
+		lblnGi.setForeground(new Color(255, 255, 255));
 		lblnGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblnGi.setBounds(10, 228, 62, 17);
 		contentPane.add(lblnGi);
@@ -244,7 +250,24 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		contentPane.add(txtDonGia);
 		txtDonGia.setColumns(10);
 		
+		lblmaPD = new JLabel("Phiếu đặt:");
+		lblmaPD.setForeground(new Color(255, 255, 255));
+		lblmaPD.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblmaPD.setBounds(10, 21, 151, 22);
+		contentPane.add(lblmaPD);
+		lblmaPD.setText("Phiếu đặt: " +this.maPD);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 139));
+		panel.setBounds(0, 351, 924, 135);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(new Color(0, 0, 255));
+		btnThem.setForeground(new Color(255, 255, 255));
+		btnThem.setBounds(145, 58, 103, 31);
+		panel.add(btnThem);
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tenSach = txtTenSach.getText();
@@ -258,10 +281,12 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			}
 		});
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnThem.setBounds(144, 410, 103, 31);
-		contentPane.add(btnThem);
 		
 		JButton btnSua = new JButton("Sửa");
+		btnSua.setForeground(new Color(255, 255, 255));
+		btnSua.setBackground(new Color(0, 0, 255));
+		btnSua.setBounds(424, 58, 103, 31);
+		panel.add(btnSua);
 		btnSua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel)table.getModel();
@@ -278,10 +303,12 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			}
 		});
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSua.setBounds(423, 410, 103, 31);
-		contentPane.add(btnSua);
 		
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setForeground(new Color(255, 255, 255));
+		btnXoa.setBackground(new Color(0, 0, 255));
+		btnXoa.setBounds(692, 58, 103, 31);
+		panel.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) table.getModel();
@@ -292,20 +319,12 @@ public class GD_ChiTietPhieuDat extends JFrame {
 				if (dialog == JOptionPane.YES_OPTION) {
 					CTPhieuDatDAO ctpd = new CTPhieuDatDAO();
 					ctpd.xoaCTPD(idTenSach);
-					JOptionPane.showMessageDialog(null, "Deleted");
+					
 					bangdulieuCTPD();
 				}
 			}
 		});
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnXoa.setBounds(691, 410, 103, 31);
-		contentPane.add(btnXoa);
-		
-		lblmaPD = new JLabel("Phiếu đặt:");
-		lblmaPD.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblmaPD.setBounds(10, 21, 151, 22);
-		contentPane.add(lblmaPD);
-		lblmaPD.setText("Phiếu đặt: " +this.maPD);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();  
 		Dimension screenSize = toolkit.getScreenSize(); 
 		int x = (screenSize.width -  getWidth()) / 2;  

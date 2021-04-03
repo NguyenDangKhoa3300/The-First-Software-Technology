@@ -258,7 +258,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		lblmaPD.setText("Phiếu đặt: " +this.maPD);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 139));
+		panel.setBackground(new Color(0, 0, 102));
 		panel.setBounds(0, 351, 924, 135);
 		contentPane.add(panel);
 		panel.setLayout(null);

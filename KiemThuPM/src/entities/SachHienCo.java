@@ -72,4 +72,10 @@ public class SachHienCo {
 		this.tenNXB = tenNXB;
 		this.tinhTrangSach = tinhTrangSach;
 	}
+	public SachHienCo(String maSach, String tenSach) {
+		super();
+		this.maSach = maSach;
+		this.tenSach = tenSach;
+	}
+	
 }

@@ -955,7 +955,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				if (dialog == JOptionPane.YES_OPTION) {
 					DocGiaDAO dg = new DocGiaDAO();
 					dg.xoaDG(idDG);
-					JOptionPane.showMessageDialog(null, "Deleted");
+					
 					dulieubangDocGia();
 				}
 			}
@@ -1197,7 +1197,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				if (dialog == JOptionPane.YES_OPTION) {
 					PhieuMuonDAO pm = new PhieuMuonDAO();
 					pm.xoaPM(idPM);
-					JOptionPane.showMessageDialog(null, "Deleted");
+				
 					dulieubangPhieuMuon();
 				}
 			}
@@ -1242,6 +1242,23 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnTimPM.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnTimPM.setBounds(1043, 285, 114, 35);
 		pnlCardMuonSach.add(btnTimPM);
+		
+		JButton btnXemPM = new JButton("Xem");
+		btnXemPM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
+				int selectedIndex = tableMuonSach.getSelectedRow();
+				
+				String maPM = Df.getValueAt(selectedIndex, 0).toString();
+				String tenDG = Df.getValueAt(selectedIndex, 1).toString();
+				GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM,tenDG);
+				ctpm.setVisible(true);
+				ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
+		btnXemPM.setFont(new Font("Verdana", Font.PLAIN, 20));
+		btnXemPM.setBounds(266, 577, 85, 40);
+		pnlCardMuonSach.add(btnXemPM);
 
 ///////////////////////////////////////////
 		DataBase.getInstance().connect();

@@ -129,9 +129,10 @@ public class DocGiaDAO {
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
-
+			JOptionPane.showMessageDialog(null, "Deleted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Khong the xoa khi doc gia con dang muon sach!");
 			e.printStackTrace();
 		}
 

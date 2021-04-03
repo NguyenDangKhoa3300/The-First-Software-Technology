@@ -10,36 +10,39 @@ import javax.swing.JOptionPane;
 
 import entities.DocGia;
 import entities.PhieuMuon;
+import entities.SachHienCo;
 import entities.DocGia_PM;
+
 public class PhieuMuonDAO {
 	public PhieuMuonDAO() {
-		
+
 	}
+
 	public ArrayList<PhieuMuon> doctubangPhieuMuon() {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuMuon> dsPM = new ArrayList<PhieuMuon>();
 		String sql = "select pm.MaPM ,dg.HoTen, nv.TenNV , pm.Ngaymuon, pm.Ngaytra from DocGia dg, PhieuMuon pm, NhanVien nv where dg.MaSV = pm.Madocgia and nv.MaNV = pm.MaNV";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			//ps.setString(1, ma);
+			// ps.setString(1, ma);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				String maPM = rs.getString(1);
 				String tenDG = rs.getString(2);
 				String tenNV = rs.getString(3);
 				String ngayMuon = rs.getString(4);
 				String ngayTra = rs.getString(5);
-				
+
 				PhieuMuon pm = new PhieuMuon(maPM, tenDG, tenNV, ngayMuon, ngayTra);
 				dsPM.add(pm);
 			}
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsPM;
 	}
+
 	public ArrayList<PhieuMuon> TimPhieuMuonBangMa(String ma) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<PhieuMuon> list = new ArrayList<>();
@@ -48,60 +51,60 @@ public class PhieuMuonDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, ma);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				String maPM = rs.getString(1);
 				String maDG = rs.getString(2);
 				String tenDG = rs.getString(3);
 				String ngayMuon = rs.getString(4);
 				String ngayTra = rs.getString(5);
-				
+
 				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra);
 				list.add(pm);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
+
 	public ArrayList<DocGia_PM> doctubangThemPhieuMuon() {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<DocGia_PM> dsDG = new ArrayList<DocGia_PM>();
 		String sql = "select MaSV,HoTen,CMND from DocGia ";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			//ps.setString(1, ma);
+			// ps.setString(1, ma);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				String maDG = rs.getString(1);
 				String tenDG = rs.getString(2);
 				String cmnd = rs.getString(3);
-				
-				
+
 				DocGia_PM dg = new DocGia_PM(maDG, tenDG, cmnd);
 				dsDG.add(dg);
 			}
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dsDG;
 	}
-	public void themPhieuMuon(String maDG, String ngayMuon,String ngayTra,String tenNV) {
+
+	public void themPhieuMuon(String maDG, String ngayMuon, String ngayTra, String tenNV) {
 		String maPM = getLastMaPM();
 		String manv = getMaNV(tenNV);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into PhieuMuon values('"+maPM+"','"+maDG+"','"+ngayMuon+"','"+ngayTra+"','"+manv+"'"+");";
-			
+			String querry = "Insert into PhieuMuon values('" + maPM + "','" + maDG + "','" + ngayMuon + "','" + ngayTra
+					+ "','" + manv + "'" + ");";
+
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Added");
-			
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -109,19 +112,60 @@ public class PhieuMuonDAO {
 		}
 
 	}
-public void suaPhieuMuon(String maPM, String maDG, String ngayMuon, String ngayTra, String tenNV) {
-		String manv = getMaNV(tenNV); 
-		
+	public ArrayList<SachHienCo> doctubangSachDangMuon(String maPM){
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<SachHienCo> dsshc = new ArrayList<SachHienCo>();
+		String sql = "Select ctpm.MaSach, s.TenSach from ChiTietPhieuMuon ctpm, Sach s where ctpm.MaPM = '"+maPM+"' and s.MaSach = ctpm.MaSach;";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach = rs.getString(1);
+				String tenSach = rs.getString(2);
+				
+				SachHienCo ds = new SachHienCo(maSach, tenSach);
+				dsshc.add(ds);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dsshc;
+	}
+	public void themPhieuChiTietMuon(String maPM, String maSach) {
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Update PhieuMuon set madocgia = '"+maDG+"',ngaymuon = '"+ngayMuon+"',ngaytra = '" +ngayTra+"',manv = '"+manv+"' where maPM = '"+ maPM+"'";
-			
+			String querry = "Insert into ChiTietPhieuMuon values('" + maPM + "','" + maSach + "');";
+
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Added");
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Sach da dc muon vui long chon sach khac!");
+			e.printStackTrace();
+		}
+
+	}
+
+	public void suaPhieuMuon(String maPM, String maDG, String ngayMuon, String ngayTra, String tenNV) {
+		String manv = getMaNV(tenNV);
+
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update PhieuMuon set madocgia = '" + maDG + "',ngaymuon = '" + ngayMuon + "',ngaytra = '"
+					+ ngayTra + "',manv = '" + manv + "' where maPM = '" + maPM + "'";
+
 			PreparedStatement ps = con.prepareStatement(querry);
 
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Updated");
-			
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
@@ -129,6 +173,7 @@ public void suaPhieuMuon(String maPM, String maDG, String ngayMuon, String ngayT
 		}
 
 	}
+
 	public String getLastMaPM() {
 		String tienTo = "PM_";
 		String toanMa = "";
@@ -138,91 +183,131 @@ public void suaPhieuMuon(String maPM, String maDG, String ngayMuon, String ngayT
 		try {
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Select maPM from PhieuMuon";
-			
+
 			PreparedStatement ps = con.prepareStatement(querry);
-			
+
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				toanMa = rs.getString(1);
 				String[] part = toanMa.split("_");
 				hauTo = Integer.parseInt(part[1].trim());
-				if(max < hauTo) {
+				if (max < hauTo) {
 					max = hauTo;
 				}
 			}
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		max++;
-		
+
 		maPD = tienTo + max;
-		
+
 		return maPD;
 	}
-public String getMaNV(String tenNV) {
-		
+
+	public String getMaNV(String tenNV) {
+
 		String maNV = "";
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Select manv from nhanvien where tenNV = N'"+tenNV+"'";
-			
+			String querry = "Select manv from nhanvien where tenNV = N'" + tenNV + "'";
+
 			PreparedStatement ps = con.prepareStatement(querry);
-			
+
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				 maNV = rs.getString(1);
+				maNV = rs.getString(1);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return maNV;
 	}
-public String getMaDG(String tenDG) {
-	
-	String maDG = "";
-	try {
-		Connection con = DataBase.getInstance().getConnection();
-		String querry = "Select maSV from DocGia where HoTen = N'"+tenDG+"';";
-		
-		PreparedStatement ps = con.prepareStatement(querry);
-		
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			maDG = rs.getString(1);
+
+	public String getMaDG(String tenDG) {
+
+		String maDG = "";
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Select maSV from DocGia where HoTen = N'" + tenDG + "';";
+
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				maDG = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		return maDG;
 	}
-	return maDG;
-}
-public void xoaPM(String maPM) {
 
-	try {
+	public void xoaPM(String maPM) {
+
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry2 = "delete from PhieuMuon where maPM = '" + maPM + "'";
+			String querry1 = "delete from ChiTietPhieuMuon where maPM = '" + maPM + "'";
+			PreparedStatement ps = con.prepareStatement(querry1);
+
+			ps.executeUpdate();
+			ps = con.prepareStatement(querry2);
+
+			ps.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Deleted");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public void xoaChiTietPhieuMuon(String maSach) {
+
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			
+			String querry1 = "delete from ChiTietPhieuMuon where MaSach = '" + maSach + "'";
+			PreparedStatement ps = con.prepareStatement(querry1);
+
+			ps.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Deleted");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean validationTrungThemPhieuMuon(String maDG) {
+		boolean ck = true;
 		Connection con = DataBase.getInstance().getConnection();
-		String querry2 = "delete from PhieuMuon where maPM = '" + maPM + "'";
-		String querry1 = "delete from ChiTietPhieuMuon where maPM = '"+maPM+"'";
-		PreparedStatement ps = con.prepareStatement(querry1);
+		String sql = "select madocgia from PhieuMuon";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.executeUpdate();
-		ps = con.prepareStatement(querry2);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maDG1 = rs.getString(1);
+				if (maDG.equalsIgnoreCase(maDG1)) {
+					ck = false;
+					break;
+				}
+			}
 
-		ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		return ck;
 	}
 
-}
-	
 }

@@ -28,6 +28,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class GD_ThemPhieuDat extends JFrame {
 	private final String sql = "SELECT TENNV FROM NHANVIEN";
@@ -62,16 +64,22 @@ public class GD_ThemPhieuDat extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 623, 459);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 139));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblThmPhiut = new JLabel("Thêm Phiếu Đặt");
-		lblThmPhiut.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 26));
-		lblThmPhiut.setBounds(183, 10, 240, 79);
+		JLabel lblThmPhiut = new JLabel("Thêm Phiếu Đặt",SwingConstants.CENTER);
+		lblThmPhiut.setForeground(new Color(255, 255, 255));
+		lblThmPhiut.setBackground(new Color(255, 140, 0));
+		lblThmPhiut.setOpaque(true);
+		lblThmPhiut.setFont(new Font("Tahoma", Font.BOLD, 26));
+		lblThmPhiut.setBounds(0, 0, 609, 89);
 		contentPane.add(lblThmPhiut);
 		/* Event nut luu*/
 		JButton btnLuu = new JButton("Lưu");
+		btnLuu.setForeground(new Color(255, 255, 255));
+		btnLuu.setBackground(new Color(0, 0, 255));
 
 		btnLuu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,21 +97,25 @@ public class GD_ThemPhieuDat extends JFrame {
 		contentPane.add(btnLuu);
 
 		JLabel lblChnNhnVin = new JLabel("Chọn Nhân Viên:");
+		lblChnNhnVin.setForeground(new Color(255, 255, 255));
 		lblChnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblChnNhnVin.setBounds(90, 143, 107, 17);
 		contentPane.add(lblChnNhnVin);
 
 		JLabel lblNgy = new JLabel("Ngày đặt:");
+		lblNgy.setForeground(new Color(255, 255, 255));
 		lblNgy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNgy.setBounds(90, 194, 62, 17);
 		contentPane.add(lblNgy);
 
 		JLabel lblThngt = new JLabel("Tháng đặt:");
+		lblThngt.setForeground(new Color(255, 255, 255));
 		lblThngt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblThngt.setBounds(231, 194, 70, 17);
 		contentPane.add(lblThngt);
 
 		JLabel lblNmt = new JLabel("Năm đặt:");
+		lblNmt.setForeground(new Color(255, 255, 255));
 		lblNmt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNmt.setBounds(385, 194, 58, 17);
 		contentPane.add(lblNmt);

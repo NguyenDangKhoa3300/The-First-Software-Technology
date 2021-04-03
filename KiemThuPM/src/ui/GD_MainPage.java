@@ -193,7 +193,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardQuanLyDocGia.setLayout(null);
 
 		JPanel pnlCardDangKyTheTV = new JPanel();
-		pnlCardDangKyTheTV.setBackground(UIManager.getColor("Table.dropLineColor"));
+		pnlCardDangKyTheTV.setBackground(new Color(144, 238, 144));
 		pnlCard.add(pnlCardDangKyTheTV, "pnlCardDangKyTheTV");
 		pnlCardDangKyTheTV.setLayout(null);
 		
@@ -645,13 +645,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardThanhLySach.add(btnThemPTL);
 
 		JLabel lblTitleQuanLyTLS = new JLabel("Quản Lý Thanh Lý Sách");
-		lblTitleQuanLyTLS.setForeground(Color.WHITE);
+		lblTitleQuanLyTLS.setForeground(new Color(0, 0, 0));
 		lblTitleQuanLyTLS.setFont(new Font("Verdana", Font.BOLD, 45));
 		lblTitleQuanLyTLS.setBounds(206, 113, 594, 64);
 		pnlCardThanhLySach.add(lblTitleQuanLyTLS);
 
 		JLabel lblNhapMaPTL = new JLabel("Nhập Mã Phiếu Thanh Lý:");
-		lblNhapMaPTL.setForeground(Color.WHITE);
+		lblNhapMaPTL.setForeground(new Color(0, 0, 0));
 		lblNhapMaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
 		lblNhapMaPTL.setBounds(507, 305, 293, 40);
 		pnlCardThanhLySach.add(lblNhapMaPTL);

@@ -146,7 +146,7 @@ public class PhieuMuonDAO {
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,"Sach da dc muon vui long chon sach khac!");
+			
 			e.printStackTrace();
 		}
 
@@ -307,6 +307,27 @@ public class PhieuMuonDAO {
 			e.printStackTrace();
 		}
 
+		return ck;
+	}
+	public boolean validationTonTaiSach (String maSach){
+		boolean ck = true;
+		Connection con = DataBase.getInstance().getConnection();
+		String sql = "select masach from chitietphieumuon";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSachFromDB = rs.getString(1);
+				if(maSach.equalsIgnoreCase(maSachFromDB)) {
+					ck = false;
+					break;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return ck;
 	}
 

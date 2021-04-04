@@ -1177,12 +1177,16 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
+				if(selectedIndex != -1) {
 				String mapm = Df.getValueAt(selectedIndex, 0).toString();
 				String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
 				String tenNV = Df.getValueAt(selectedIndex, 2).toString();
 				GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV);
 				tpm.setVisible(true);
 				tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+			}
 			}
 		});
 		btnSuaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1194,6 +1198,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
+				if(selectedIndex != -1) {
 				String idPM = Df.getValueAt(selectedIndex, 0).toString();
 				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 						JOptionPane.YES_NO_OPTION);
@@ -1203,6 +1208,9 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 					dulieubangPhieuMuon();
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+			}
 			}
 		});
 		btnXoaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1251,12 +1259,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-
+				if(selectedIndex != -1) {
 				String maPM = Df.getValueAt(selectedIndex, 0).toString();
 				String tenDG = Df.getValueAt(selectedIndex, 1).toString();
 				GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM, tenDG);
 				ctpm.setVisible(true);
 				ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+			}
 			}
 		});
 		btnXemPM.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1269,25 +1280,29 @@ public class GD_MainPage extends javax.swing.JFrame {
 				PhieuMuonDAO pmd = new PhieuMuonDAO();
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-				String maPM = Df.getValueAt(selectedIndex, 0).toString();
-				String ngayTraCu = Df.getValueAt(selectedIndex, 4).toString();
-				if(pmd.validationDaGiaHan(maPM)) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				Calendar c = Calendar.getInstance();
+				if (selectedIndex != -1) {
+					String maPM = Df.getValueAt(selectedIndex, 0).toString();
+					String ngayTraCu = Df.getValueAt(selectedIndex, 4).toString();
+					if (pmd.validationDaGiaHan(maPM)) {
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						Calendar c = Calendar.getInstance();
 
-				try {
-					c.setTime(sdf.parse(ngayTraCu));
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				c.add(Calendar.DAY_OF_MONTH, 3);  
-				
-				String ngayTraMoi = sdf.format(c.getTime());
-				pmd.giaHanPM(maPM, ngayTraMoi);
-				dulieubangPhieuMuon();
-				}else {
-					JOptionPane.showMessageDialog(null, "Phieu muon chi duoc gia han 1 lan");
+						try {
+							c.setTime(sdf.parse(ngayTraCu));
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						c.add(Calendar.DAY_OF_MONTH, 3);
+
+						String ngayTraMoi = sdf.format(c.getTime());
+						pmd.giaHanPM(maPM, ngayTraMoi);
+						dulieubangPhieuMuon();
+					} else {
+						JOptionPane.showMessageDialog(null, "Phieu muon chi duoc gia han 1 lan!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
 				}
 			}
 		});

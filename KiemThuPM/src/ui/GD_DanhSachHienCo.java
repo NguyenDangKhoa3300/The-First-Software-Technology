@@ -18,12 +18,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GD_DanhSachHienCo extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private CTPhieuThanhLyDAO dsshc = new CTPhieuThanhLyDAO();
+	private GD_ChiTietPhieuThanhLy ctPTL;
 	/**
 	 * Launch the application.
 	 */
@@ -38,6 +41,11 @@ public class GD_DanhSachHienCo extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public GD_ChiTietPhieuThanhLy getOject() {
+		return ctPTL;
+		
 	}
 	public void bangdulieuSachHienCo() {
 		DefaultTableModel Df = (DefaultTableModel)table.getModel();
@@ -57,7 +65,14 @@ public class GD_DanhSachHienCo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GD_DanhSachHienCo() {
+	public GD_DanhSachHienCo(GD_ChiTietPhieuThanhLy ctPTL) {
+		this.ctPTL = ctPTL;
+		khoiTao();
+	}
+	public GD_DanhSachHienCo(){
+		khoiTao();
+	}
+	public void khoiTao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 707, 417);
 		contentPane = new JPanel();
@@ -70,6 +85,16 @@ public class GD_DanhSachHienCo extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
+				int selectedIndex = table.getSelectedRow();
+			
+				String maSach = Df.getValueAt(selectedIndex, 0).toString();
+				ctPTL.setTextMaSach(maSach);
+			}
+		});
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},

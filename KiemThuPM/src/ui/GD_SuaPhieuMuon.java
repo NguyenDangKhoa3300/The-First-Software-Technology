@@ -15,6 +15,7 @@ import dao.PhieuDatDAO;
 import entities.DocGia_PM;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -38,10 +39,12 @@ public class GD_SuaPhieuMuon extends JFrame {
 	private String tenNV;
 	private String dateLap;
 	private String maPM;
+	private String maDGFromeMain;
 	private String dateAfter1Week;
 	private PhieuMuonDAO pm = new PhieuMuonDAO();
 	private JLabel lblSuaPhieuMuon;
 	private JComboBox comboBoxNV;
+
 	/**
 	 * Launch the application.
 	 */
@@ -57,9 +60,15 @@ public class GD_SuaPhieuMuon extends JFrame {
 			}
 		});
 	}
-	public String getmaPM(){
+
+	public String getmaPM() {
 		return this.maPM;
 	}
+
+	public String getmaDG() {
+		return this.maDGFromeMain;
+	}
+
 	public void bangdulieuDocGiaHienCo() {
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
 
@@ -74,26 +83,28 @@ public class GD_SuaPhieuMuon extends JFrame {
 		}
 
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
-	public GD_SuaPhieuMuon(String maPM,String maDG,String tenNVFromMain){		
+	public GD_SuaPhieuMuon(String maPM, String maDG, String tenNVFromMain) {
 		initialize();
 		this.maPM = maPM;
-		
+		this.maDGFromeMain = maDG;
 		lblSuaPhieuMuon.setText("Sửa Phiếu Mượn: " + maPM);
-		for (int i=0; i<comboBoxNV.getItemCount(); i++) {
-		      if (comboBoxNV.getItemAt(i).equals(tenNVFromMain)) {
-		    	  comboBoxNV.setSelectedIndex(i);
-		        break;
-		      }
-		    }
+		for (int i = 0; i < comboBoxNV.getItemCount(); i++) {
+			if (comboBoxNV.getItemAt(i).equals(tenNVFromMain)) {
+				comboBoxNV.setSelectedIndex(i);
+				break;
+			}
+		}
 		txtMaDG.setText(maDG);
 	}
+
 	public GD_SuaPhieuMuon() {
 		initialize();
 	}
+
 	public void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 739, 521);
@@ -166,17 +177,33 @@ public class GD_SuaPhieuMuon extends JFrame {
 		btnLu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String maDG = txtMaDG.getText();
+				if (!maDG.equalsIgnoreCase(getmaDG())) {
+					if (pm.validationTrungThemPhieuMuon(maDG)) {
+						LocalDate currentDate = LocalDate.now();
 
-				LocalDate currentDate = LocalDate.now();
-				
-				dateLap = ""+currentDate;
-				LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
-				
-				dateAfter1Week = ""+result;
-				new PhieuMuonDAO().suaPhieuMuon(getmaPM(),maDG, dateLap, dateAfter1Week, tenNV);
-				txtMaDG.setText("");
-				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
-				mainframe.dulieubangPhieuMuon();
+						dateLap = "" + currentDate;
+						LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
+
+						dateAfter1Week = "" + result;
+						new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, dateLap, dateAfter1Week, tenNV);
+						txtMaDG.setText("");
+						GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
+						mainframe.dulieubangPhieuMuon();
+					} else {
+						JOptionPane.showMessageDialog(null, "Doc gia chua tra phieu muon!");
+					}
+				} else {
+					LocalDate currentDate = LocalDate.now();
+
+					dateLap = "" + currentDate;
+					LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
+
+					dateAfter1Week = "" + result;
+					new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, dateLap, dateAfter1Week, tenNV);
+					txtMaDG.setText("");
+					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
+					mainframe.dulieubangPhieuMuon();
+				}
 			}
 		});
 		btnLu.setFont(new Font("Tahoma", Font.PLAIN, 14));

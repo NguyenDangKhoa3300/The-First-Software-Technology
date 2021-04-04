@@ -193,7 +193,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardQuanLyDocGia.setLayout(null);
 
 		JPanel pnlCardDangKyTheTV = new JPanel();
-		pnlCardDangKyTheTV.setBackground(new Color(144, 238, 144));
+		pnlCardDangKyTheTV.setBackground(new Color(147, 112, 219));
 		pnlCard.add(pnlCardDangKyTheTV, "pnlCardDangKyTheTV");
 		pnlCardDangKyTheTV.setLayout(null);
 		

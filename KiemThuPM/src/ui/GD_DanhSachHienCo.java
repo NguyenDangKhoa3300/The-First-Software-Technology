@@ -20,6 +20,8 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import javax.swing.JTextField;
 
 public class GD_DanhSachHienCo extends JFrame {
 
@@ -27,6 +29,7 @@ public class GD_DanhSachHienCo extends JFrame {
 	private JTable table;
 	private CTPhieuThanhLyDAO dsshc = new CTPhieuThanhLyDAO();
 	private GD_ChiTietPhieuThanhLy ctPTL;
+	private JTextField textFieldTenSach;
 	/**
 	 * Launch the application.
 	 */
@@ -74,14 +77,15 @@ public class GD_DanhSachHienCo extends JFrame {
 	}
 	public void khoiTao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 707, 417);
+		setBounds(100, 100, 720, 436);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 140, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 68, 683, 239);
+		scrollPane.setBounds(0, 150, 706, 249);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -126,13 +130,27 @@ public class GD_DanhSachHienCo extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblDanhSchSch = new JLabel("Danh sách sách hiện có");
+		lblDanhSchSch.setForeground(new Color(255, 255, 255));
 		lblDanhSchSch.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblDanhSchSch.setBounds(242, 21, 253, 25);
 		contentPane.add(lblDanhSchSch);
+		
+		textFieldTenSach = new JTextField();
+		textFieldTenSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textFieldTenSach.setForeground(new Color(0, 0, 0));
+		textFieldTenSach.setBounds(120, 107, 126, 23);
+		contentPane.add(textFieldTenSach);
+		textFieldTenSach.setColumns(10);
+		
+		JLabel lblTenSach = new JLabel("Nhập tên sách:");
+		lblTenSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTenSach.setForeground(new Color(255, 255, 255));
+		lblTenSach.setBounds(15, 110, 95, 17);
+		contentPane.add(lblTenSach);
 		bangdulieuSachHienCo();
 		Toolkit toolkit = Toolkit.getDefaultToolkit();  
 		Dimension screenSize = toolkit.getScreenSize(); 
-		int x = 100; 
+		int x = 90; 
 		int y = (screenSize.height - getHeight()) / 2;  
 		setLocation(x, y);  
 		

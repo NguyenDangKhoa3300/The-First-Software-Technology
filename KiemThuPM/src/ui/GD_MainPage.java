@@ -547,35 +547,39 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
-				try {
-					String id = Df.getValueAt(selectedIndex, 0).toString();
+				if (selectedIndex != -1) {
+					try {
+						String id = Df.getValueAt(selectedIndex, 0).toString();
 
-					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-							JOptionPane.YES_NO_OPTION);
+						int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+								JOptionPane.YES_NO_OPTION);
 
-					String querry1 = "delete from ChiTietPhieuDat where MAPD = ?";
-					String querry2 = "delete from phieudat where MAPD = ?";
-					if (dialog == JOptionPane.YES_OPTION) {
-						Connection con = DataBase.getInstance().getConnection();
-						PreparedStatement ps = con.prepareStatement(querry1);
+						String querry1 = "delete from ChiTietPhieuDat where MAPD = ?";
+						String querry2 = "delete from phieudat where MAPD = ?";
+						if (dialog == JOptionPane.YES_OPTION) {
+							Connection con = DataBase.getInstance().getConnection();
+							PreparedStatement ps = con.prepareStatement(querry1);
 
-						ps.setString(1, id);
+							ps.setString(1, id);
 
-						ps.executeUpdate();
+							ps.executeUpdate();
 
-						ps = con.prepareStatement(querry2);
+							ps = con.prepareStatement(querry2);
 
-						ps.setString(1, id);
+							ps.setString(1, id);
 
-						ps.executeUpdate();
-						JOptionPane.showMessageDialog(null, "Deleted");
-						dulieubangPhieuDat();
+							ps.executeUpdate();
+							JOptionPane.showMessageDialog(null, "Deleted");
+							dulieubangPhieuDat();
 
+						}
+
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
 				}
 			}
 		});
@@ -588,17 +592,21 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
-				String mapds = Df.getValueAt(selectedIndex, 0).toString();
-				String tennvs = Df.getValueAt(selectedIndex, 1).toString();
-				String dates = Df.getValueAt(selectedIndex, 2).toString();
-				String[] part = dates.split("-");
-				String ngays = part[2];
-				String thangs = part[1];
-				String nams = part[0];
+				if (selectedIndex != -1) {
+					String mapds = Df.getValueAt(selectedIndex, 0).toString();
+					String tennvs = Df.getValueAt(selectedIndex, 1).toString();
+					String dates = Df.getValueAt(selectedIndex, 2).toString();
+					String[] part = dates.split("-");
+					String ngays = part[2];
+					String thangs = part[1];
+					String nams = part[0];
 
-				GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds, tennvs, ngays, thangs, nams);
-				spd.setVisible(true);
-				spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds, tennvs, ngays, thangs, nams);
+					spd.setVisible(true);
+					spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
+				}
 			}
 		});
 		btnSuaPD.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -621,13 +629,16 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
+				if (selectedIndex != -1) {
+					String maPD = Df.getValueAt(selectedIndex, 0).toString();
 
-				String maPD = Df.getValueAt(selectedIndex, 0).toString();
+					GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);
+					ctPD.setVisible(true);
+					ctPD.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-				GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);
-				ctPD.setVisible(true);
-				ctPD.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
+				}
 			}
 		});
 		btnXem.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -700,18 +711,22 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
-				String maptls = Df.getValueAt(selectedIndex, 0).toString();
-				String tennvs = Df.getValueAt(selectedIndex, 1).toString();
-				String dates = Df.getValueAt(selectedIndex, 2).toString();
-				String[] part = dates.split("-");
-				String ngays = part[2];
-				String thangs = part[1];
-				String nams = part[0];
+				if (selectedIndex != -1) {
+					String maptls = Df.getValueAt(selectedIndex, 0).toString();
+					String tennvs = Df.getValueAt(selectedIndex, 1).toString();
+					String dates = Df.getValueAt(selectedIndex, 2).toString();
+					String[] part = dates.split("-");
+					String ngays = part[2];
+					String thangs = part[1];
+					String nams = part[0];
 
-				GD_SuaPhieuThanhLy sptl = new GD_SuaPhieuThanhLy(maptls, tennvs, ngays, thangs, nams);
-				sptl.setVisible(true);
-				sptl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					GD_SuaPhieuThanhLy sptl = new GD_SuaPhieuThanhLy(maptls, tennvs, ngays, thangs, nams);
+					sptl.setVisible(true);
+					sptl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
+				}
 			}
 		});
 		btnSuaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -723,37 +738,41 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
-				try {
-					String id = Df.getValueAt(selectedIndex, 0).toString();
+				if (selectedIndex != -1) {
+					try {
+						String id = Df.getValueAt(selectedIndex, 0).toString();
 
-					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-							JOptionPane.YES_NO_OPTION);
+						int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+								JOptionPane.YES_NO_OPTION);
 
-					String querry1 = "delete from ChiTietPhieuThanhLy where MAPTL = ?";
-					String querry2 = "delete from PhieuThanhLy where MAPTL = ?";
-					if (dialog == JOptionPane.YES_OPTION) {
-						Connection con = DataBase.getInstance().getConnection();
-						PreparedStatement ps = con.prepareStatement(querry1);
+						String querry1 = "delete from ChiTietPhieuThanhLy where MAPTL = ?";
+						String querry2 = "delete from PhieuThanhLy where MAPTL = ?";
+						if (dialog == JOptionPane.YES_OPTION) {
+							Connection con = DataBase.getInstance().getConnection();
+							PreparedStatement ps = con.prepareStatement(querry1);
 
-						ps.setString(1, id);
+							ps.setString(1, id);
 
-						ps.executeUpdate();
+							ps.executeUpdate();
 
-						ps = con.prepareStatement(querry2);
+							ps = con.prepareStatement(querry2);
 
-						ps.setString(1, id);
+							ps.setString(1, id);
 
-						ps.executeUpdate();
-						JOptionPane.showMessageDialog(null, "Deleted");
-						dulieubangPhieuThanhLy();
+							ps.executeUpdate();
+							JOptionPane.showMessageDialog(null, "Deleted");
+							dulieubangPhieuThanhLy();
 
+						}
+
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
 				}
-
 			}
 		});
 		btnXoaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -776,16 +795,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
+				if (selectedIndex != -1) {
+					String maPTL = Df.getValueAt(selectedIndex, 0).toString();
 
-				String maPTL = Df.getValueAt(selectedIndex, 0).toString();
+					GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);
+					ctPTL.setVisible(true);
+					ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					GD_DanhSachHienCo dshc = new GD_DanhSachHienCo(ctPTL);
 
-				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);
-				ctPTL.setVisible(true);
-				ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				GD_DanhSachHienCo dshc = new GD_DanhSachHienCo(ctPTL);
-
-				dshc.setVisible(true);
-				dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					dshc.setVisible(true);
+					dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
+				}
 			}
 		});
 		btnXemPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -794,6 +816,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 //////////////////////PanelCard Quản Lý Sách
 		JButton btnThemSach = new JButton("Thêm Sách");
+		btnThemSach.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GD_ThemSach themSach = new GD_ThemSach();
+				themSach.setVisible(true);
+				themSach.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+		});
 		btnThemSach.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnThemSach.setBounds(189, 361, 200, 30);
 		pnlCardQuanLySach.add(btnThemSach);
@@ -842,11 +871,52 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardQuanLySach.add(btnTimSach);
 
 		JButton btnSuaSach = new JButton("Sửa");
+		btnSuaSach.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLySach.getModel();
+				int selectedIndex = tableQuanLySach.getSelectedRow();
+				if (selectedIndex != -1) {
+					String maSach = Df.getValueAt(selectedIndex, 0).toString();
+					String tenSach = Df.getValueAt(selectedIndex, 1).toString();
+					String theLoai = Df.getValueAt(selectedIndex, 2).toString();
+					String namXB = Df.getValueAt(selectedIndex, 3).toString();
+					String tenNXB = Df.getValueAt(selectedIndex, 4).toString();
+					String trinhTrang = Df.getValueAt(selectedIndex, 5).toString();
+					
+
+					GD_SuaSach spd = new GD_SuaSach(maSach, tenSach, theLoai, namXB, tenNXB,trinhTrang);
+					spd.setVisible(true);
+					spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon sach!");
+				}
+			
+			}
+		});
 		btnSuaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaSach.setBounds(490, 651, 85, 40);
 		pnlCardQuanLySach.add(btnSuaSach);
 
 		JButton btnXoaSach = new JButton("Xóa");
+		btnXoaSach.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLySach.getModel();
+				int selectedIndex = tableQuanLySach.getSelectedRow();
+				if(selectedIndex != -1) {
+				String maSach = Df.getValueAt(selectedIndex, 0).toString();
+				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+						JOptionPane.YES_NO_OPTION);
+				if (dialog == JOptionPane.YES_OPTION) {
+					SachDAO s = new SachDAO();
+					s.xoaSach(maSach);
+
+					dulieubangSach();
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon sach!");
+			}				
+			}
+		});
 		btnXoaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnXoaSach.setBounds(714, 651, 85, 40);
 		pnlCardQuanLySach.add(btnXoaSach);
@@ -952,6 +1022,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
 				int selectedIndex = tableDocGia_1.getSelectedRow();
+				if(selectedIndex != -1) {
 				String idDG = Df.getValueAt(selectedIndex, 0).toString();
 				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 						JOptionPane.YES_NO_OPTION);
@@ -961,6 +1032,9 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 					dulieubangDocGia();
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
+			}
 			}
 		});
 		btnXoaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -972,7 +1046,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
 				int selectedIndex = tableDocGia_1.getSelectedRow();
-
+				if(selectedIndex != -1 ) {
 				String maDG = Df.getValueAt(selectedIndex, 0).toString();
 				String hoTen = txtTenDG_QLDG.getText();
 				String soCMND = txtSoCMND_QLDG.getText();
@@ -982,13 +1056,17 @@ public class GD_MainPage extends javax.swing.JFrame {
 				DocGiaDAO dg = new DocGiaDAO();
 				dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
 				dulieubangDocGia();
+				dulieubangPhieuMuon();
 				txtTenDG_QLDG.setText("");
 				txtSoCMND_QLDG.setText("");
 				txtSoDT_QLDG.setText("");
 				txtNamSinhQLDG.setText("");
 				txtThangSinh_QLDG.setText("");
 				txtNgaySinh_QLDG.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
 			}
+				}
 		});
 		btnSuaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaDocGia.setBounds(700, 539, 85, 40);
@@ -1177,16 +1255,16 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-				if(selectedIndex != -1) {
-				String mapm = Df.getValueAt(selectedIndex, 0).toString();
-				String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
-				String tenNV = Df.getValueAt(selectedIndex, 2).toString();
-				GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV);
-				tpm.setVisible(true);
-				tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
-			}
+				if (selectedIndex != -1) {
+					String mapm = Df.getValueAt(selectedIndex, 0).toString();
+					String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
+					String tenNV = Df.getValueAt(selectedIndex, 2).toString();
+					GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV);
+					tpm.setVisible(true);
+					tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+				}
 			}
 		});
 		btnSuaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1198,19 +1276,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-				if(selectedIndex != -1) {
-				String idPM = Df.getValueAt(selectedIndex, 0).toString();
-				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-						JOptionPane.YES_NO_OPTION);
-				if (dialog == JOptionPane.YES_OPTION) {
-					PhieuMuonDAO pm = new PhieuMuonDAO();
-					pm.xoaPM(idPM);
+				if (selectedIndex != -1) {
+					String idPM = Df.getValueAt(selectedIndex, 0).toString();
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
+						PhieuMuonDAO pm = new PhieuMuonDAO();
+						pm.xoaPM(idPM);
 
-					dulieubangPhieuMuon();
+						dulieubangPhieuMuon();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
-			}
 			}
 		});
 		btnXoaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1259,15 +1337,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-				if(selectedIndex != -1) {
-				String maPM = Df.getValueAt(selectedIndex, 0).toString();
-				String tenDG = Df.getValueAt(selectedIndex, 1).toString();
-				GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM, tenDG);
-				ctpm.setVisible(true);
-				ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
-			}
+				if (selectedIndex != -1) {
+					String maPM = Df.getValueAt(selectedIndex, 0).toString();
+					String tenDG = Df.getValueAt(selectedIndex, 1).toString();
+					GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM, tenDG);
+					ctpm.setVisible(true);
+					ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+				}
 			}
 		});
 		btnXemPM.setFont(new Font("Verdana", Font.PLAIN, 20));

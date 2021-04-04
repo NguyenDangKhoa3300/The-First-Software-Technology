@@ -44,7 +44,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -75,9 +78,9 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private PhieuThanhLyDAO dsPhieuThanhLy = new PhieuThanhLyDAO();
 	private JTextField txtTimDocGia;
 	private JTextField txtNhapMaSach;
-	private JTextField txtTimPhieuDat; 
+	private JTextField txtTimPhieuDat;
 	private JTextField txtTimPTL;
-	//DatTheTV_DKTV
+	// DatTheTV_DKTV
 	private JTextField hoTenDG;
 	private JTextField soCMNDDG;
 	private JTextField soDTDG;
@@ -87,15 +90,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private String ngaySinhDG_DKTV;
 	private String thangSinhDG_DKTV;
 	private String namSinhDG_DKTV;
-	
-	//QLDG
+
+	// QLDG
 	private JTextField txtTenDG_QLDG;
 	private JTextField txtSoCMND_QLDG;
 	private JTextField txtSoDT_QLDG;
 	private JTextField txtNgaySinh_QLDG;
 	private JTextField txtThangSinh_QLDG;
 	private JTextField txtNamSinhQLDG;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -196,61 +199,61 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardDangKyTheTV.setBackground(new Color(147, 112, 219));
 		pnlCard.add(pnlCardDangKyTheTV, "pnlCardDangKyTheTV");
 		pnlCardDangKyTheTV.setLayout(null);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("Họ Tên:");
 		lblNewLabel_7.setForeground(Color.BLACK);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7.setBounds(127, 183, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_7_1 = new JLabel("Số CMND:");
 		lblNewLabel_7_1.setForeground(Color.BLACK);
 		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7_1.setBounds(127, 219, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_1);
-		
+
 		JLabel lblNewLabel_7_2 = new JLabel("Số Điện Thoại: ");
 		lblNewLabel_7_2.setForeground(Color.BLACK);
 		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7_2.setBounds(127, 261, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2);
-		
+
 		JLabel lblNewLabel_7_2_1 = new JLabel("Ngày sinh:");
 		lblNewLabel_7_2_1.setForeground(Color.BLACK);
 		lblNewLabel_7_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7_2_1.setBounds(127, 330, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1);
-		
+
 		JLabel lblNewLabel_7_2_1_1 = new JLabel("Tháng Sinh");
 		lblNewLabel_7_2_1_1.setForeground(Color.BLACK);
 		lblNewLabel_7_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7_2_1_1.setBounds(327, 330, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_1);
-		
+
 		JLabel lblNewLabel_7_2_1_2 = new JLabel("Năm Sinh:");
 		lblNewLabel_7_2_1_2.setForeground(Color.BLACK);
 		lblNewLabel_7_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7_2_1_2.setBounds(558, 330, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_2);
-		
+
 		hoTenDG = new JTextField();
 		hoTenDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		hoTenDG.setBounds(243, 180, 126, 23);
 		pnlCardDangKyTheTV.add(hoTenDG);
 		hoTenDG.setColumns(10);
-		
+
 		soCMNDDG = new JTextField();
 		soCMNDDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		soCMNDDG.setColumns(10);
 		soCMNDDG.setBounds(243, 216, 126, 23);
 		pnlCardDangKyTheTV.add(soCMNDDG);
-		
+
 		soDTDG = new JTextField();
 		soDTDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		soDTDG.setColumns(10);
 		soDTDG.setBounds(243, 258, 126, 23);
 		pnlCardDangKyTheTV.add(soDTDG);
-		
+
 		comboBoxDKTVNgay = new JComboBox();
 		comboBoxDKTVNgay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -259,11 +262,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		});
 		comboBoxDKTVNgay.setBounds(226, 330, 58, 21);
 		pnlCardDangKyTheTV.add(comboBoxDKTVNgay);
-		
-		for(int i = 1 ; i <= 31; i++) {
+
+		for (int i = 1; i <= 31; i++) {
 			comboBoxDKTVNgay.addItem(i);
 		}
-		
+
 		comboBoxDKTVThang = new JComboBox();
 		comboBoxDKTVThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -272,11 +275,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		});
 		comboBoxDKTVThang.setBounds(430, 330, 72, 21);
 		pnlCardDangKyTheTV.add(comboBoxDKTVThang);
-		
-		for(int i = 1 ; i <= 12; i++) {
+
+		for (int i = 1; i <= 12; i++) {
 			comboBoxDKTVThang.addItem(i);
 		}
-		
+
 		comboBoxDKTVNam = new JComboBox();
 		comboBoxDKTVNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -285,11 +288,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		});
 		comboBoxDKTVNam.setBounds(657, 330, 77, 21);
 		pnlCardDangKyTheTV.add(comboBoxDKTVNam);
-		
-		for(int i = 1980 ; i <= 2021; i++) {
+
+		for (int i = 1980; i <= 2021; i++) {
 			comboBoxDKTVNam.addItem(i);
 		}
-		
+
 		JButton btnLuuDKTV = new JButton("Lưu");
 		btnLuuDKTV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -305,7 +308,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLuuDKTV.setBounds(254, 514, 93, 36);
 		pnlCardDangKyTheTV.add(btnLuuDKTV);
-		
+
 		JButton btnDatLaiDKTV = new JButton("Đặt Lại");
 		btnDatLaiDKTV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -317,7 +320,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnDatLaiDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnDatLaiDKTV.setBounds(462, 514, 93, 36);
 		pnlCardDangKyTheTV.add(btnDatLaiDKTV);
-		
+
 		JLabel lblngKTh = new JLabel("Đăng Ký Thẻ Thư Viện");
 		lblngKTh.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblngKTh.setBounds(330, 46, 318, 61);
@@ -546,7 +549,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
 				try {
 					String id = Df.getValueAt(selectedIndex, 0).toString();
-					
+
 					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 							JOptionPane.YES_NO_OPTION);
 
@@ -559,14 +562,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 						ps.setString(1, id);
 
 						ps.executeUpdate();
-						
+
 						ps = con.prepareStatement(querry2);
 
 						ps.setString(1, id);
 
 						ps.executeUpdate();
-						 JOptionPane.showMessageDialog(null, "Deleted");
-						 dulieubangPhieuDat();
+						JOptionPane.showMessageDialog(null, "Deleted");
+						dulieubangPhieuDat();
 
 					}
 
@@ -583,17 +586,17 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnSuaPD = new JButton("Sửa");
 		btnSuaPD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)tableQuanLyNhapSach.getModel();
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
 				String mapds = Df.getValueAt(selectedIndex, 0).toString();
-				String tennvs = Df.getValueAt(selectedIndex,1).toString();
-				String dates = Df.getValueAt(selectedIndex,2).toString();
+				String tennvs = Df.getValueAt(selectedIndex, 1).toString();
+				String dates = Df.getValueAt(selectedIndex, 2).toString();
 				String[] part = dates.split("-");
 				String ngays = part[2];
 				String thangs = part[1];
 				String nams = part[0];
-				
-				GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds,tennvs,ngays,thangs,nams);
+
+				GD_SuaPhieuDat spd = new GD_SuaPhieuDat(mapds, tennvs, ngays, thangs, nams);
 				spd.setVisible(true);
 				spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
@@ -612,19 +615,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableModelQuanLyNhapSach = new DefaultTableModel(headers3, 0);
 		tableQuanLyNhapSach = new JTable(tableModelQuanLyNhapSach);
 		scrollPaneQuanLyDatSach.setViewportView(tableQuanLyNhapSach);
-		
+
 		JButton btnXem = new JButton("Xem");
 		btnXem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyNhapSach.getModel();
 				int selectedIndex = tableQuanLyNhapSach.getSelectedRow();
-				
+
 				String maPD = Df.getValueAt(selectedIndex, 0).toString();
-			
-				GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);				
+
+				GD_ChiTietPhieuDat ctPD = new GD_ChiTietPhieuDat(maPD);
 				ctPD.setVisible(true);
 				ctPD.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				
+
 			}
 		});
 		btnXem.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -676,8 +679,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						if (list.size() > 0) {
 							tableModelQuanLyThanhLySach.setRowCount(0);
 							for (PhieuThanhLy ptl : list) {
-								String[] rowtable = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL(),
-										 };
+								String[] rowtable = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL(), };
 								tableModelQuanLyThanhLySach.addRow(rowtable);
 							}
 							tableQuanLyThanhLySach.setModel(tableModelQuanLyThanhLySach);
@@ -696,20 +698,20 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnSuaPTL = new JButton("Sửa");
 		btnSuaPTL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)tableQuanLyThanhLySach_1.getModel();
+				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
 				String maptls = Df.getValueAt(selectedIndex, 0).toString();
-				String tennvs = Df.getValueAt(selectedIndex,1).toString();
-				String dates = Df.getValueAt(selectedIndex,2).toString();
+				String tennvs = Df.getValueAt(selectedIndex, 1).toString();
+				String dates = Df.getValueAt(selectedIndex, 2).toString();
 				String[] part = dates.split("-");
 				String ngays = part[2];
 				String thangs = part[1];
 				String nams = part[0];
-				
-				GD_SuaPhieuThanhLy sptl = new GD_SuaPhieuThanhLy(maptls,tennvs,ngays,thangs,nams);
+
+				GD_SuaPhieuThanhLy sptl = new GD_SuaPhieuThanhLy(maptls, tennvs, ngays, thangs, nams);
 				sptl.setVisible(true);
 				sptl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				
+
 			}
 		});
 		btnSuaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -723,7 +725,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
 				try {
 					String id = Df.getValueAt(selectedIndex, 0).toString();
-					
+
 					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
 							JOptionPane.YES_NO_OPTION);
 
@@ -736,14 +738,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 						ps.setString(1, id);
 
 						ps.executeUpdate();
-						
+
 						ps = con.prepareStatement(querry2);
 
 						ps.setString(1, id);
 
 						ps.executeUpdate();
-						 JOptionPane.showMessageDialog(null, "Deleted");
-						 dulieubangPhieuThanhLy();
+						JOptionPane.showMessageDialog(null, "Deleted");
+						dulieubangPhieuThanhLy();
 
 					}
 
@@ -751,7 +753,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnXoaPTL.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -766,22 +768,22 @@ public class GD_MainPage extends javax.swing.JFrame {
 		String[] headers4 = "Mã Phiếu Thanh Lý; Tên Nhân Viên; Ngày Thanh Lý".split(";");
 		tableModelQuanLyThanhLySach = new DefaultTableModel(headers4, 0);
 		tableQuanLyThanhLySach_1 = new JTable(tableModelQuanLyThanhLySach);
-		
+
 		scrollPaneQuanLyPTL.setViewportView(tableQuanLyThanhLySach_1);
-		
+
 		JButton btnXemPTL = new JButton("Xem");
 		btnXemPTL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLyThanhLySach_1.getModel();
 				int selectedIndex = tableQuanLyThanhLySach_1.getSelectedRow();
-			
+
 				String maPTL = Df.getValueAt(selectedIndex, 0).toString();
-				
-				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);				
+
+				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);
 				ctPTL.setVisible(true);
 				ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				GD_DanhSachHienCo dshc = new GD_DanhSachHienCo(ctPTL);
-				
+
 				dshc.setVisible(true);
 				dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
@@ -956,7 +958,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				if (dialog == JOptionPane.YES_OPTION) {
 					DocGiaDAO dg = new DocGiaDAO();
 					dg.xoaDG(idDG);
-					
+
 					dulieubangDocGia();
 				}
 			}
@@ -968,14 +970,15 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnSuaDocGia = new JButton("Sửa");
 		btnSuaDocGia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)tableDocGia_1.getModel();
+				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
 				int selectedIndex = tableDocGia_1.getSelectedRow();
-				
+
 				String maDG = Df.getValueAt(selectedIndex, 0).toString();
 				String hoTen = txtTenDG_QLDG.getText();
 				String soCMND = txtSoCMND_QLDG.getText();
 				String soDT = txtSoDT_QLDG.getText();
-				String birthday = txtNamSinhQLDG.getText() + "-" + txtThangSinh_QLDG.getText() + "-" + txtNgaySinh_QLDG.getText();
+				String birthday = txtNamSinhQLDG.getText() + "-" + txtThangSinh_QLDG.getText() + "-"
+						+ txtNgaySinh_QLDG.getText();
 				DocGiaDAO dg = new DocGiaDAO();
 				dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
 				dulieubangDocGia();
@@ -997,11 +1000,10 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		tableDocGia = new JTable();
 		String[] headers1 = "Mã Độc Giả; Tên Độc Giả; Năm Sinh; CMND ; Số Điện Thoại".split(";");
-		tableModelDocGia = new DefaultTableModel(headers1, 0){
-			
-			boolean[] columnEditables = new boolean[] {
-					false,false, false,false, false
-				};	
+		tableModelDocGia = new DefaultTableModel(headers1, 0) {
+
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -1010,87 +1012,87 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableDocGia_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)tableDocGia_1.getModel();
+				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
 				int selectedIndex = tableDocGia_1.getSelectedRow();
-				String birthDay = Df.getValueAt(selectedIndex,2).toString();
+				String birthDay = Df.getValueAt(selectedIndex, 2).toString();
 				String[] part = birthDay.split("-");
 				txtNgaySinh_QLDG.setText(part[2]);
 				txtThangSinh_QLDG.setText(part[1]);
 				txtNamSinhQLDG.setText(part[0]);
-				txtTenDG_QLDG.setText(Df.getValueAt(selectedIndex,1).toString());
-				txtSoDT_QLDG.setText(Df.getValueAt(selectedIndex,4).toString());
-				txtSoCMND_QLDG.setText(Df.getValueAt(selectedIndex,3).toString());
-				
+				txtTenDG_QLDG.setText(Df.getValueAt(selectedIndex, 1).toString());
+				txtSoDT_QLDG.setText(Df.getValueAt(selectedIndex, 4).toString());
+				txtSoCMND_QLDG.setText(Df.getValueAt(selectedIndex, 3).toString());
+
 			}
 		});
 		scrollPaneQuanLyDocGia.setViewportView(tableDocGia_1);
-		
+
 		JLabel lblTncGi = new JLabel("Tên Độc Giả:");
 		lblTncGi.setForeground(Color.WHITE);
 		lblTncGi.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblTncGi.setBounds(78, 318, 94, 18);
 		pnlCardQuanLyDocGia.add(lblTncGi);
-		
+
 		JLabel lblSCmnd = new JLabel("Số CMND: ");
 		lblSCmnd.setForeground(Color.WHITE);
 		lblSCmnd.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblSCmnd.setBounds(78, 357, 83, 17);
 		pnlCardQuanLyDocGia.add(lblSCmnd);
-		
+
 		JLabel lblSinThoi = new JLabel("Số Điện Thoại: ");
 		lblSinThoi.setForeground(Color.WHITE);
 		lblSinThoi.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblSinThoi.setBounds(78, 395, 111, 18);
 		pnlCardQuanLyDocGia.add(lblSinThoi);
-		
+
 		JLabel lblNgySinh = new JLabel("Ngày sinh:");
 		lblNgySinh.setForeground(Color.WHITE);
 		lblNgySinh.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblNgySinh.setBounds(78, 443, 83, 17);
 		pnlCardQuanLyDocGia.add(lblNgySinh);
-		
+
 		JLabel lblThngSinh = new JLabel("Tháng Sinh");
 		lblThngSinh.setForeground(Color.WHITE);
 		lblThngSinh.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblThngSinh.setBounds(78, 480, 83, 17);
 		pnlCardQuanLyDocGia.add(lblThngSinh);
-		
+
 		JLabel lblNmSinh = new JLabel("Năm Sinh: ");
 		lblNmSinh.setForeground(Color.WHITE);
 		lblNmSinh.setFont(new Font("Verdana", Font.PLAIN, 14));
 		lblNmSinh.setBounds(78, 520, 83, 17);
 		pnlCardQuanLyDocGia.add(lblNmSinh);
-		
+
 		txtTenDG_QLDG = new JTextField();
 		txtTenDG_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtTenDG_QLDG.setBounds(196, 319, 146, 24);
 		pnlCardQuanLyDocGia.add(txtTenDG_QLDG);
 		txtTenDG_QLDG.setColumns(10);
-		
+
 		txtSoCMND_QLDG = new JTextField();
 		txtSoCMND_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtSoCMND_QLDG.setColumns(10);
 		txtSoCMND_QLDG.setBounds(196, 353, 146, 24);
 		pnlCardQuanLyDocGia.add(txtSoCMND_QLDG);
-		
+
 		txtSoDT_QLDG = new JTextField();
 		txtSoDT_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtSoDT_QLDG.setColumns(10);
 		txtSoDT_QLDG.setBounds(196, 389, 146, 24);
 		pnlCardQuanLyDocGia.add(txtSoDT_QLDG);
-		
+
 		txtNgaySinh_QLDG = new JTextField();
 		txtNgaySinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtNgaySinh_QLDG.setColumns(10);
 		txtNgaySinh_QLDG.setBounds(196, 436, 42, 24);
 		pnlCardQuanLyDocGia.add(txtNgaySinh_QLDG);
-		
+
 		txtThangSinh_QLDG = new JTextField();
 		txtThangSinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtThangSinh_QLDG.setColumns(10);
 		txtThangSinh_QLDG.setBounds(196, 481, 42, 24);
 		pnlCardQuanLyDocGia.add(txtThangSinh_QLDG);
-		
+
 		txtNamSinhQLDG = new JTextField();
 		txtNamSinhQLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtNamSinhQLDG.setColumns(10);
@@ -1173,12 +1175,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnSuaPM = new JButton("Sửa");
 		btnSuaPM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)tableMuonSach.getModel();
+				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
 				String mapm = Df.getValueAt(selectedIndex, 0).toString();
 				String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
 				String tenNV = Df.getValueAt(selectedIndex, 2).toString();
-				GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm,maDG,tenNV);
+				GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV);
 				tpm.setVisible(true);
 				tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
@@ -1198,7 +1200,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				if (dialog == JOptionPane.YES_OPTION) {
 					PhieuMuonDAO pm = new PhieuMuonDAO();
 					pm.xoaPM(idPM);
-				
+
 					dulieubangPhieuMuon();
 				}
 			}
@@ -1227,7 +1229,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						if (list.size() > 0) {
 							tableModelMuonSach.setRowCount(0);
 							for (PhieuMuon pm : list) {
-								String[] rowtable = { pm.getMaPM(),pm.getTenDG(),pm.getTenNV(), pm.getNgayMuon(),
+								String[] rowtable = { pm.getMaPM(), pm.getTenDG(), pm.getTenNV(), pm.getNgayMuon(),
 										pm.getNgayTra() };
 								tableModelMuonSach.addRow(rowtable);
 							}
@@ -1243,16 +1245,16 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnTimPM.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnTimPM.setBounds(1043, 285, 114, 35);
 		pnlCardMuonSach.add(btnTimPM);
-		
+
 		JButton btnXemPM = new JButton("Xem");
 		btnXemPM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
 				int selectedIndex = tableMuonSach.getSelectedRow();
-				
+
 				String maPM = Df.getValueAt(selectedIndex, 0).toString();
 				String tenDG = Df.getValueAt(selectedIndex, 1).toString();
-				GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM,tenDG);
+				GD_ChiTietPhieuMuon ctpm = new GD_ChiTietPhieuMuon(maPM, tenDG);
 				ctpm.setVisible(true);
 				ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
@@ -1260,6 +1262,38 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnXemPM.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnXemPM.setBounds(266, 577, 85, 40);
 		pnlCardMuonSach.add(btnXemPM);
+
+		JButton btnGiaHanPhieu = new JButton("Gia Hạn Phiếu Mượn");
+		btnGiaHanPhieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PhieuMuonDAO pmd = new PhieuMuonDAO();
+				DefaultTableModel Df = (DefaultTableModel) tableMuonSach.getModel();
+				int selectedIndex = tableMuonSach.getSelectedRow();
+				String maPM = Df.getValueAt(selectedIndex, 0).toString();
+				String ngayTraCu = Df.getValueAt(selectedIndex, 4).toString();
+				if(pmd.validationDaGiaHan(maPM)) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar c = Calendar.getInstance();
+
+				try {
+					c.setTime(sdf.parse(ngayTraCu));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				c.add(Calendar.DAY_OF_MONTH, 3);  
+				
+				String ngayTraMoi = sdf.format(c.getTime());
+				pmd.giaHanPM(maPM, ngayTraMoi);
+				dulieubangPhieuMuon();
+				}else {
+					JOptionPane.showMessageDialog(null, "Phieu muon chi duoc gia han 1 lan");
+				}
+			}
+		});
+		btnGiaHanPhieu.setFont(new Font("Verdana", Font.PLAIN, 15));
+		btnGiaHanPhieu.setBounds(202, 239, 200, 30);
+		pnlCardMuonSach.add(btnGiaHanPhieu);
 
 ///////////////////////////////////////////
 		DataBase.getInstance().connect();
@@ -1275,7 +1309,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		ArrayList<PhieuMuon> list = dsPhieuMuon.doctubangPhieuMuon();
 		tableModelMuonSach.setRowCount(0);
 		for (PhieuMuon phieumuon : list) {
-			String[] rowdata1 = { phieumuon.getMaPM(),phieumuon.getTenDG(),phieumuon.getTenNV(),
+			String[] rowdata1 = { phieumuon.getMaPM(), phieumuon.getTenDG(), phieumuon.getTenNV(),
 					phieumuon.getNgayMuon(), phieumuon.getNgayTra() };
 			tableModelMuonSach.addRow(rowdata1);
 		}
@@ -1287,7 +1321,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableModelQuanLyThanhLySach.setRowCount(0);
 		for (PhieuThanhLy ptl : list) {
 			String[] rowdata1 = { ptl.getMaPTL(), ptl.getTenNV(), ptl.getNgayTL() };
-					
+
 			tableModelQuanLyThanhLySach.addRow(rowdata1);
 		}
 		tableQuanLyThanhLySach_1.setModel(tableModelQuanLyThanhLySach);

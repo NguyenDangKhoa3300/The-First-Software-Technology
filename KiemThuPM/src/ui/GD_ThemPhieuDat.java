@@ -74,7 +74,7 @@ public class GD_ThemPhieuDat extends JFrame {
 		lblThmPhiut.setBackground(new Color(255, 140, 0));
 		lblThmPhiut.setOpaque(true);
 		lblThmPhiut.setFont(new Font("Tahoma", Font.BOLD, 26));
-		lblThmPhiut.setBounds(0, 0, 609, 89);
+		lblThmPhiut.setBounds(0, 0, 609, 90);
 		contentPane.add(lblThmPhiut);
 		/* Event nut luu*/
 		JButton btnLuu = new JButton("Lưu");

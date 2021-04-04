@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class GD_ChiTietPhieuThanhLy extends JFrame {
 	private String maPTL = "";
@@ -97,12 +98,13 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 436);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 140, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(338, 10, 368, 379);
+		scrollPane.setBounds(338, 0, 368, 399);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -141,11 +143,13 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		scrollPane.setViewportView(table);
 
 		JLabel lblNewLabel = new JLabel("Nhập mã sách:");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(23, 83, 94, 17);
 		contentPane.add(lblNewLabel);
 
 		txtMaSach = new JTextField();
+		txtMaSach.setEditable(false);
 		txtMaSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMaSach.setBounds(127, 80, 126, 23);
 		contentPane.add(txtMaSach);
@@ -173,82 +177,96 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		contentPane.add(txtDonGia);
 
 		JLabel lblNhpnGi = new JLabel("Nhập đơn giá:");
+		lblNhpnGi.setForeground(new Color(255, 255, 255));
 		lblNhpnGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNhpnGi.setBounds(23, 118, 94, 17);
 		contentPane.add(lblNhpnGi);
 
-		JButton btnThem = new JButton("Thêm");
-		btnThem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String maSach = txtMaSach.getText();
-				String donGia = txtDonGia.getText();
-				ArrayList<String> ck = dsCTPhieuTL.validationTonTaiThemPhieuThanhLy(maSach);
-				if (dsCTPhieuTL.validationTrungThemPhieuThanhLy(maSach)) {
-					if (ck.get(0).equalsIgnoreCase("kotrung")) {
-						dsCTPhieuTL.themPhieuThanhLy(getMaPTL(), maSach, donGia);
-						txtMaSach.setText("");
-						txtDonGia.setText("");
-						bangdulieuCTPTL();
-					} else {
-						JOptionPane.showMessageDialog(null, "Trung ma sach o phieu " + ck.get(1) + "!");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Ma sach khong hop le!");
-				}
-			}
-		});
-		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnThem.setBounds(10, 256, 85, 35);
-		contentPane.add(btnThem);
-
-		JButton btnXoa = new JButton("Xóa");
-		btnXoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel) table.getModel();
-				int selectedIndex = table.getSelectedRow();
-				String id = Df.getValueAt(selectedIndex, 0).toString();
-				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-						JOptionPane.YES_NO_OPTION);
-				if (dialog == JOptionPane.YES_OPTION) {
-					CTPhieuThanhLyDAO ctptl = new CTPhieuThanhLyDAO();
-					ctptl.xoaCTPTL(id);
-					JOptionPane.showMessageDialog(null, "Deleted");
-					bangdulieuCTPTL();
-				}
-			}
-		});
-		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnXoa.setBounds(116, 256, 85, 35);
-		contentPane.add(btnXoa);
-
-		JButton btnSua = new JButton("Sửa");
-		btnSua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel) table.getModel();
-				int selectedIndex = table.getSelectedRow();
-				String maCTPTLs = Df.getValueAt(selectedIndex, 0).toString();
-				String maSachs = txtMaSach.getText();
-				String donGias = txtDonGia.getText();
-				if (dsCTPhieuTL.getMaSach(maCTPTLs).equalsIgnoreCase(maSachs)) {
-					dsCTPhieuTL.suaChiTietPhieuTL(maCTPTLs, maSachs, donGias);
-					bangdulieuCTPTL();
-					txtMaSach.setText("");
-					txtDonGia.setText("");
-				}else {
-					JOptionPane.showMessageDialog(null, "Khong duoc sua ma sach");
-					txtMaSach.setText(dsCTPhieuTL.getMaSach(maCTPTLs));
-				}
-			}
-		});
-		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSua.setBounds(231, 256, 85, 35);
-		contentPane.add(btnSua);
-
 		JLabel LabelMaPTL = new JLabel("Mã phiếu:");
+		LabelMaPTL.setForeground(new Color(255, 255, 255));
 		LabelMaPTL.setFont(new Font("Tahoma", Font.BOLD, 18));
 		LabelMaPTL.setBounds(23, 13, 161, 22);
 		contentPane.add(LabelMaPTL);
 		LabelMaPTL.setText("Mã Phiếu: " + maPTL);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 102));
+		panel.setBounds(0, 147, 339, 252);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				JButton btnThem = new JButton("Thêm");
+				btnThem.setForeground(new Color(255, 255, 255));
+				btnThem.setBackground(new Color(0, 0, 255));
+				btnThem.setBounds(10, 109, 85, 35);
+				panel.add(btnThem);
+				btnThem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String maSach = txtMaSach.getText();
+						String donGia = txtDonGia.getText();
+						ArrayList<String> ck = dsCTPhieuTL.validationTonTaiThemPhieuThanhLy(maSach);
+						if (dsCTPhieuTL.validationTrungThemPhieuThanhLy(maSach)) {
+							if (ck.get(0).equalsIgnoreCase("kotrung")) {
+								dsCTPhieuTL.themPhieuThanhLy(getMaPTL(), maSach, donGia);
+								txtMaSach.setText("");
+								txtDonGia.setText("");
+								bangdulieuCTPTL();
+							} else {
+								JOptionPane.showMessageDialog(null, "Trung ma sach o phieu " + ck.get(1) + "!");
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Ma sach khong hop le!");
+						}
+					}
+				});
+				btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
+						JButton btnXoa = new JButton("Xóa");
+						btnXoa.setForeground(new Color(255, 255, 255));
+						btnXoa.setBackground(new Color(0, 0, 255));
+						btnXoa.setBounds(116, 109, 85, 35);
+						panel.add(btnXoa);
+						btnXoa.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								DefaultTableModel Df = (DefaultTableModel) table.getModel();
+								int selectedIndex = table.getSelectedRow();
+								String id = Df.getValueAt(selectedIndex, 0).toString();
+								int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+										JOptionPane.YES_NO_OPTION);
+								if (dialog == JOptionPane.YES_OPTION) {
+									CTPhieuThanhLyDAO ctptl = new CTPhieuThanhLyDAO();
+									ctptl.xoaCTPTL(id);
+									
+									bangdulieuCTPTL();
+								}
+							}
+						});
+						btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						
+								JButton btnSua = new JButton("Sửa");
+								btnSua.setForeground(new Color(255, 255, 255));
+								btnSua.setBackground(new Color(0, 0, 255));
+								btnSua.setBounds(231, 109, 85, 35);
+								panel.add(btnSua);
+								btnSua.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										DefaultTableModel Df = (DefaultTableModel) table.getModel();
+										int selectedIndex = table.getSelectedRow();
+										String maCTPTLs = Df.getValueAt(selectedIndex, 0).toString();
+										String maSachs = txtMaSach.getText();
+										String donGias = txtDonGia.getText();
+										if (dsCTPhieuTL.getMaSach(maCTPTLs).equalsIgnoreCase(maSachs)) {
+											dsCTPhieuTL.suaChiTietPhieuTL(maCTPTLs, maSachs, donGias);
+											bangdulieuCTPTL();
+											txtMaSach.setText("");
+											txtDonGia.setText("");
+										}else {
+											JOptionPane.showMessageDialog(null, "Khong duoc sua ma sach");
+											txtMaSach.setText(dsCTPhieuTL.getMaSach(maCTPTLs));
+										}
+									}
+								});
+								btnSua.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
 		int x = 800;

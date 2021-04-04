@@ -780,7 +780,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 				GD_ChiTietPhieuThanhLy ctPTL = new GD_ChiTietPhieuThanhLy(maPTL);				
 				ctPTL.setVisible(true);
 				ctPTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				GD_DanhSachHienCo dshc = new GD_DanhSachHienCo();
+				GD_DanhSachHienCo dshc = new GD_DanhSachHienCo(ctPTL);
+				
 				dshc.setVisible(true);
 				dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}

@@ -96,7 +96,7 @@ public class PhieuMuonDAO {
 		String manv = getMaNV(tenNV);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into PhieuMuon values('" + maPM + "','" + maDG + "','" + ngayMuon + "','" + ngayTra
+			String querry = "Insert into PhieuMuon (maPM,madocgia,ngaymuon,ngaytra,manv) values('" + maPM + "','" + maDG + "','" + ngayMuon + "','" + ngayTra
 					+ "','" + manv + "'" + ");";
 
 			PreparedStatement ps = con.prepareStatement(querry);
@@ -165,6 +165,26 @@ public class PhieuMuonDAO {
 			ps.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Updated");
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
+			e.printStackTrace();
+		}
+
+	}
+	public void giaHanPM(String maPM,String ngayTraMoi) {
+	
+
+		try {
+			Connection con = DataBase.getInstance().getConnection();
+			String querry = "Update PhieuMuon set ngaytra = '"+ngayTraMoi+"',giahan = 'daGH' where maPM = '"+maPM+"'";
+
+			PreparedStatement ps = con.prepareStatement(querry);
+
+			ps.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Da Gia Han!");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -285,6 +305,28 @@ public class PhieuMuonDAO {
 			e.printStackTrace();
 		}
 
+	}
+	public boolean validationDaGiaHan(String maPM) {
+		boolean ck = true;
+		Connection con = DataBase.getInstance().getConnection();
+		String sql = "select GiaHan from PhieuMuon where mapm ='"+maPM+"'";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String fromDB = rs.getString(1);
+				if (fromDB != null) {
+					ck = false;
+					break;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ck;
 	}
 
 	public boolean validationTrungThemPhieuMuon(String maDG) {

@@ -71,7 +71,9 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 	public String getMaPTL() {
 		return maPTL;
 	}
-
+	public void setTextMaSach(String maSach) {
+		txtMaSach.setText(maSach);
+	}
 	public void bangdulieuCTPTL() {
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
 		

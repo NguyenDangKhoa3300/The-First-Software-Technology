@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import entities.Sach;
+import entities.SachHienCo;
 
 public class SachDAO {
 	public SachDAO() {
@@ -45,12 +46,10 @@ public class SachDAO {
 	public ArrayList<Sach> TimSachBangMa(String ma) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<Sach> list = new ArrayList<>();
-		String sql = "SELECT [MaSach]\r\n" + "      ,[TenSach]\r\n" + "      ,[TheLoai]\r\n" + "      ,[NamXB]\r\n"
-				+ "      ,[TenNXB]\r\n" + "      ,[Tinhtrangsach]\r\n" + "  FROM Sach, NhaXuatBan\r\n"
-				+ "  WHERE Sach.MaSach = ? AND Sach.MaNXB = NhaXuatBan.MaNXB";
+		String sql = "select s.MaSach,s.TenSach,s.TheLoai,s.NamXB, nxb.TenNXB ,s.Tinhtrangsach from sach s, NhaXuatBan nxb where s.MaNXB = nxb.MaNXB and s.TenSach LIKE N'%"+ma+"%';";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, ma);
+			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String maSach = rs.getString(1);
@@ -128,6 +127,31 @@ public void suaSach(String maSach, String tenSach, String theLoai, String namXB,
 			e.printStackTrace();
 		}
 
+	}
+	public ArrayList<SachHienCo> timSachHienCo(String tenSachs){
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<SachHienCo> dsshc = new ArrayList<SachHienCo>();
+		String sql = "select s.MaSach , s.TenSach, s.TheLoai, s.NamXB, nxb.TenNXB, s.Tinhtrangsach from Sach s, NhaXuatBan nxb where s.MaNXB = nxb.MaNXB and s.tenSach LIKE '%"+tenSachs+"%'";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach = rs.getString(1);
+				String tenSach = rs.getString(2);
+				String theLoai = rs.getString(3);
+				String namXB = rs.getString(4);
+				String tenNXB = rs.getString(5);
+				String tinhTrangSach = rs.getString(6);
+				SachHienCo ds = new SachHienCo(maSach, tenSach, theLoai, namXB,tenNXB,tinhTrangSach);
+				dsshc.add(ds);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dsshc;
 	}
 
 	public String getMaNXB(String tenNXB) {

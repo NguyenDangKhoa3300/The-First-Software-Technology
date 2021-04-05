@@ -172,6 +172,31 @@ public class CTPhieuThanhLyDAO {
 		}
 		return dsshc;
 	}
+	public ArrayList<SachHienCo> timBangSachHienCo(String tenSachs){
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<SachHienCo> dsshc = new ArrayList<SachHienCo>();
+		String sql = "select s.MaSach , s.TenSach, s.TheLoai, s.NamXB, nxb.TenNXB, s.Tinhtrangsach from Sach s, NhaXuatBan nxb where s.MaNXB = nxb.MaNXB and s.tensach Like '%"+tenSachs+"%'";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maSach = rs.getString(1);
+				String tenSach = rs.getString(2);
+				String theLoai = rs.getString(3);
+				String namXB = rs.getString(4);
+				String tenNXB = rs.getString(5);
+				String tinhTrangSach = rs.getString(6);
+				SachHienCo ds = new SachHienCo(maSach, tenSach, theLoai, namXB,tenNXB,tinhTrangSach);
+				dsshc.add(ds);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dsshc;
+	}
 	public boolean validationTrungThemPhieuThanhLy (String maSach){
 		boolean ck = false;
 		Connection con = DataBase.getInstance().getConnection();		

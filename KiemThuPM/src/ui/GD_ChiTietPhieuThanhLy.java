@@ -72,23 +72,25 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 	public String getMaPTL() {
 		return maPTL;
 	}
+
 	public void setTextMaSach(String maSach) {
 		txtMaSach.setText(maSach);
 	}
+
 	public void bangdulieuCTPTL() {
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
-		
+
 		ArrayList<ChitietPhieuThanhLy> list = dsCTPhieuTL.doctubangPhieuDat(getMaPTL());
-		
-			Df.setRowCount(0);
 
-			for (ChitietPhieuThanhLy ptl : list) {
-				String[] rowtable = { ptl.getMaCTPTL(), ptl.getTenSach(), ptl.getDonGia() };
-				Df.addRow(rowtable);
+		Df.setRowCount(0);
 
-			}
-			table.setModel(Df);
-		
+		for (ChitietPhieuThanhLy ptl : list) {
+			String[] rowtable = { ptl.getMaCTPTL(), ptl.getTenSach(), ptl.getDonGia() };
+			Df.addRow(rowtable);
+
+		}
+		table.setModel(Df);
+
 	}
 
 	/**
@@ -188,85 +190,107 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		LabelMaPTL.setBounds(23, 13, 161, 22);
 		contentPane.add(LabelMaPTL);
 		LabelMaPTL.setText("Mã Phiếu: " + maPTL);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 102));
 		panel.setBounds(0, 147, 339, 252);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-				JButton btnThem = new JButton("Thêm");
-				btnThem.setForeground(new Color(255, 255, 255));
-				btnThem.setBackground(new Color(0, 0, 255));
-				btnThem.setBounds(10, 109, 85, 35);
-				panel.add(btnThem);
-				btnThem.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						String maSach = txtMaSach.getText();
-						String donGia = txtDonGia.getText();
-						ArrayList<String> ck = dsCTPhieuTL.validationTonTaiThemPhieuThanhLy(maSach);
-						if (dsCTPhieuTL.validationTrungThemPhieuThanhLy(maSach)) {
-							if (ck.get(0).equalsIgnoreCase("kotrung")) {
-								dsCTPhieuTL.themPhieuThanhLy(getMaPTL(), maSach, donGia);
-								txtMaSach.setText("");
-								txtDonGia.setText("");
-								bangdulieuCTPTL();
-							} else {
-								JOptionPane.showMessageDialog(null, "Trung ma sach o phieu " + ck.get(1) + "!");
-							}
+
+		JButton btnThem = new JButton("Thêm");
+		btnThem.setForeground(new Color(255, 255, 255));
+		btnThem.setBackground(new Color(0, 0, 255));
+		btnThem.setBounds(10, 109, 85, 35);
+		panel.add(btnThem);
+		btnThem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String maSach = txtMaSach.getText();
+				String donGia = txtDonGia.getText();
+				ArrayList<String> ck = dsCTPhieuTL.validationTonTaiThemPhieuThanhLy(maSach);
+				if (maSach.length() > 0 && donGia.length() > 0) {
+					if (dsCTPhieuTL.validationTrungThemPhieuThanhLy(maSach)) {
+						if (ck.get(0).equalsIgnoreCase("kotrung")) {
+							dsCTPhieuTL.themPhieuThanhLy(getMaPTL(), maSach, donGia);
+							txtMaSach.setText("");
+							txtDonGia.setText("");
+							bangdulieuCTPTL();
 						} else {
-							JOptionPane.showMessageDialog(null, "Ma sach khong hop le!");
+							JOptionPane.showMessageDialog(null, "Trung ma sach o phieu " + ck.get(1) + "!");
 						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Ma sach khong hop le!");
 					}
-				});
-				btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				
-						JButton btnXoa = new JButton("Xóa");
-						btnXoa.setForeground(new Color(255, 255, 255));
-						btnXoa.setBackground(new Color(0, 0, 255));
-						btnXoa.setBounds(116, 109, 85, 35);
-						panel.add(btnXoa);
-						btnXoa.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								DefaultTableModel Df = (DefaultTableModel) table.getModel();
-								int selectedIndex = table.getSelectedRow();
-								String id = Df.getValueAt(selectedIndex, 0).toString();
-								int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-										JOptionPane.YES_NO_OPTION);
-								if (dialog == JOptionPane.YES_OPTION) {
-									CTPhieuThanhLyDAO ctptl = new CTPhieuThanhLyDAO();
-									ctptl.xoaCTPTL(id);
-									
-									bangdulieuCTPTL();
-								}
-							}
-						});
-						btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 14));
-						
-								JButton btnSua = new JButton("Sửa");
-								btnSua.setForeground(new Color(255, 255, 255));
-								btnSua.setBackground(new Color(0, 0, 255));
-								btnSua.setBounds(231, 109, 85, 35);
-								panel.add(btnSua);
-								btnSua.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										DefaultTableModel Df = (DefaultTableModel) table.getModel();
-										int selectedIndex = table.getSelectedRow();
-										String maCTPTLs = Df.getValueAt(selectedIndex, 0).toString();
-										String maSachs = txtMaSach.getText();
-										String donGias = txtDonGia.getText();
-										if (dsCTPhieuTL.getMaSach(maCTPTLs).equalsIgnoreCase(maSachs)) {
-											dsCTPhieuTL.suaChiTietPhieuTL(maCTPTLs, maSachs, donGias);
-											bangdulieuCTPTL();
-											txtMaSach.setText("");
-											txtDonGia.setText("");
-										}else {
-											JOptionPane.showMessageDialog(null, "Khong duoc sua ma sach");
-											txtMaSach.setText(dsCTPhieuTL.getMaSach(maCTPTLs));
-										}
-									}
-								});
-								btnSua.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				} else if (maSach.length() == 0) {
+					JOptionPane.showMessageDialog(null, "Chưa Chọn Sách!");
+				} else if (donGia.length() == 0) {
+					JOptionPane.showMessageDialog(null, "Chưa Nhập Đơn Giá!");
+				}
+			}
+		});
+		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setForeground(new Color(255, 255, 255));
+		btnXoa.setBackground(new Color(0, 0, 255));
+		btnXoa.setBounds(116, 109, 85, 35);
+		panel.add(btnXoa);
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
+				int selectedIndex = table.getSelectedRow();
+				if(selectedIndex != -1 ) {									
+				String id = Df.getValueAt(selectedIndex, 0).toString();
+				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+						JOptionPane.YES_NO_OPTION);
+				if (dialog == JOptionPane.YES_OPTION) {
+					CTPhieuThanhLyDAO ctptl = new CTPhieuThanhLyDAO();
+					ctptl.xoaCTPTL(id);
+
+					bangdulieuCTPTL();
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chưa Chọn Sách!");
+			}
+				}
+		});
+		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+		JButton btnSua = new JButton("Sửa");
+		btnSua.setForeground(new Color(255, 255, 255));
+		btnSua.setBackground(new Color(0, 0, 255));
+		btnSua.setBounds(231, 109, 85, 35);
+		panel.add(btnSua);
+		btnSua.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
+				int selectedIndex = table.getSelectedRow();
+				if(selectedIndex != -1) {
+				String maCTPTLs = Df.getValueAt(selectedIndex, 0).toString();
+				String maSachs = txtMaSach.getText();
+				String donGias = txtDonGia.getText();
+				if(maSachs.length() > 0 && donGias.length() > 0 ) {
+				if (dsCTPhieuTL.getMaSach(maCTPTLs).equalsIgnoreCase(maSachs)) {
+					dsCTPhieuTL.suaChiTietPhieuTL(maCTPTLs, maSachs, donGias);
+					bangdulieuCTPTL();
+					txtMaSach.setText("");
+					txtDonGia.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Khong duoc sua ma sach");
+					txtMaSach.setText(dsCTPhieuTL.getMaSach(maCTPTLs));
+				}
+				}else if(maSachs.length() == 0){
+					JOptionPane.showMessageDialog(null, "Chưa Chọn Sách!");
+					
+				}else if(donGias.length() == 0){
+					JOptionPane.showMessageDialog(null, "Chưa Nhập Đơn Giá!");
+					
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chưa Chọn Sách!");
+			}
+			}
+		});
+		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
 		int x = 800;

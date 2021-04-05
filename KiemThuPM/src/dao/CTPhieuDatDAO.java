@@ -36,6 +36,7 @@ public class CTPhieuDatDAO {
 		}
 		return dsCTPD;
 	}
+	
 	public ArrayList<String> JComBoBoxNXB() {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<String> listNXB = new ArrayList<String>();

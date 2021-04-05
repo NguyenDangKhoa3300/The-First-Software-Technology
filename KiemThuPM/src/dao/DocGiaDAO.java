@@ -43,10 +43,11 @@ public class DocGiaDAO {
 	public ArrayList<DocGia> TimDocGiaBangMa(String ma) {
 		Connection con = DataBase.getInstance().getConnection();
 		ArrayList<DocGia> list = new ArrayList<>();
-		String sql = "select * from DocGia where MaSV = ?";
+		String sql = "select * from DocGia where HoTen LIKE N'%"+ma+"%';";
+		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, ma);
+			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String maDG = rs.getString(1);
@@ -56,6 +57,7 @@ public class DocGiaDAO {
 				String sdt = rs.getString(5);
 				DocGia dg = new DocGia(maDG, tenDG, namSinh, cmnd, sdt);
 				list.add(dg);
+				System.out.println(maDG);
 			}
 
 		} catch (SQLException e) {

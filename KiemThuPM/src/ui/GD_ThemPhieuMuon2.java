@@ -29,6 +29,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class GD_ThemPhieuMuon2 extends JFrame {
 
@@ -79,12 +80,14 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 739, 521);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 139));
+		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 66, 388, 253);
+		scrollPane.setBounds(0, 66, 398, 253);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -115,23 +118,8 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
-		lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTmcGi.setBounds(21, 26, 83, 17);
-		contentPane.add(lblTmcGi);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textField.setBounds(114, 23, 126, 23);
-		contentPane.add(textField);
-		textField.setColumns(10);
-
-		JButton btnTm = new JButton("Tìm");
-		btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnTm.setBounds(270, 22, 68, 25);
-		contentPane.add(btnTm);
-
 		JLabel lblMcGi = new JLabel("Mã Độc Giả: ");
+		lblMcGi.setForeground(new Color(255, 255, 255));
 		lblMcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMcGi.setBounds(443, 110, 82, 17);
 		contentPane.add(lblMcGi);
@@ -144,10 +132,13 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		txtMaDG.setColumns(10);
 
 		JButton btnLu = new JButton("Lưu");
+		btnLu.setForeground(new Color(255, 255, 255));
+		btnLu.setBackground(new Color(0, 0, 255));
 		btnLu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				String maDG = txtMaDG.getText();
+				if(maDG.length() > 0) {
 				if (pm.validationTrungThemPhieuMuon(maDG)) {
 					LocalDate currentDate = LocalDate.now();
 
@@ -160,8 +151,11 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 					mainframe.dulieubangPhieuMuon();
 				}else {
-					JOptionPane.showMessageDialog(null, "Doc gia chua tra phieu muon!");
+					JOptionPane.showMessageDialog(null, "Độc Giả Chưa Trả Phiếu Mượn!");
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Chưa Chọn Độc Giả!");
+			}
 			}
 		});
 		btnLu.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -169,6 +163,7 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		contentPane.add(btnLu);
 
 		JLabel lblChnNhnVin = new JLabel("Chọn Nhân Viên:");
+		lblChnNhnVin.setForeground(new Color(255, 255, 255));
 		lblChnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblChnNhnVin.setBounds(418, 153, 107, 17);
 		contentPane.add(lblChnNhnVin);
@@ -185,10 +180,34 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		for (int i = 0; i < dsnv.size(); i++) {
 			comboBoxNV.addItem(dsnv.get(i));
 		}
-		JLabel lblLpPhiuMn = new JLabel("Lập Phiếu Mượn");
-		lblLpPhiuMn.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblLpPhiuMn.setBounds(443, 21, 154, 23);
-		contentPane.add(lblLpPhiuMn);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 140, 0));
+		panel.setBounds(0, 0, 725, 66);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
+				lblTmcGi.setForeground(new Color(255, 255, 255));
+				lblTmcGi.setBounds(34, 35, 83, 17);
+				panel.add(lblTmcGi);
+				lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
+						textField = new JTextField();
+						textField.setBounds(127, 32, 126, 23);
+						panel.add(textField);
+						textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						textField.setColumns(10);
+						
+								JButton btnTm = new JButton("Tìm");
+								btnTm.setBounds(283, 31, 68, 25);
+								panel.add(btnTm);
+								btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+								JLabel lblLpPhiuMn = new JLabel("Lập Phiếu Mượn");
+								lblLpPhiuMn.setForeground(new Color(255, 255, 255));
+								lblLpPhiuMn.setBounds(456, 30, 170, 26);
+								panel.add(lblLpPhiuMn);
+								lblLpPhiuMn.setFont(new Font("Tahoma", Font.BOLD, 21));
 		bangdulieuDocGiaHienCo();
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();

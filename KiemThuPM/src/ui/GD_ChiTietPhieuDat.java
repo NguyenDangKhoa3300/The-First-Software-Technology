@@ -1,4 +1,5 @@
 package ui;
+
 import dao.DataBase;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,9 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.CTPhieuDatDAO;
 import entities.ChiTietPhieuDat;
-
-
-
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -53,6 +51,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 	private JTable table;
 	private String tenNXB;
 	private JComboBox comboBox;
+
 	/**
 	 * Launch the application.
 	 */
@@ -74,35 +73,38 @@ public class GD_ChiTietPhieuDat extends JFrame {
 	 */
 	public GD_ChiTietPhieuDat() {
 		initialize();
-		
+
 	}
+
 	public GD_ChiTietPhieuDat(String maPD) {
 		this.maPD = maPD;
 		initialize();
 		bangdulieuCTPD();
-		
+
 	}
-	
+
 	public String getMaPD() {
-		return maPD;				
+		return maPD;
 	}
+
 	public void bangdulieuCTPD() {
-		DefaultTableModel Df = (DefaultTableModel)table.getModel();
+		DefaultTableModel Df = (DefaultTableModel) table.getModel();
 		ChiTietPhieuDat ctpd = new ChiTietPhieuDat();
 		ArrayList<ChiTietPhieuDat> list = dsCTPhieuDat.doctubangPhieuDat(getMaPD());
-		
-			Df.setRowCount(0);		
-			
-			for (ChiTietPhieuDat pd : list) {				
-				String[] rowtable = {pd.getMaCTPD(),pd.getMaNXB(),pd.getTenSach(),pd.getSoLuong(),pd.getDonGia()};
-				Df.addRow(rowtable);	
-				
-			}					
-			table.setModel(Df);
-		
+
+		Df.setRowCount(0);
+
+		for (ChiTietPhieuDat pd : list) {
+			String[] rowtable = { pd.getMaCTPD(), pd.getMaNXB(), pd.getTenSach(), pd.getSoLuong(), pd.getDonGia() };
+			Df.addRow(rowtable);
+
+		}
+		table.setModel(Df);
+
 	}
+
 	private void initialize() {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 938, 523);
 		contentPane = new JPanel();
@@ -110,45 +112,39 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(379, 10, 545, 339);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)table.getModel();
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				String valueCombo = Df.getValueAt(selectedIndex,1).toString();
-				 for (int i=0; i<comboBox.getItemCount(); i++) {
-				      if (comboBox.getItemAt(i).equals(valueCombo)) {
-				    	  comboBox.setSelectedIndex(i);
-				        break;
-				      }
-				    }
-				txtTenSach.setText(Df.getValueAt(selectedIndex,2).toString());
-				txtSoLuong.setText(Df.getValueAt(selectedIndex,3).toString());
-				txtDonGia.setText(Df.getValueAt(selectedIndex,4).toString());
+				String valueCombo = Df.getValueAt(selectedIndex, 1).toString();
+				for (int i = 0; i < comboBox.getItemCount(); i++) {
+					if (comboBox.getItemAt(i).equals(valueCombo)) {
+						comboBox.setSelectedIndex(i);
+						break;
+					}
+				}
+				txtTenSach.setText(Df.getValueAt(selectedIndex, 2).toString());
+				txtSoLuong.setText(Df.getValueAt(selectedIndex, 3).toString());
+				txtDonGia.setText(Df.getValueAt(selectedIndex, 4).toString());
 			}
 		});
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Mã CTPD","Nh\u00E0 xu\u1EA5t b\u1EA3n", "T\u00EAn s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class,String.class, String.class, String.class, String.class
-			};
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Mã CTPD", "Nh\u00E0 xu\u1EA5t b\u1EA3n",
+				"T\u00EAn s\u00E1ch", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class, String.class, String.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false,false, false, false, false
-			};
+
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -164,11 +160,11 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(4).setPreferredWidth(65);
 		scrollPane.setViewportView(table);
-		
+
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tenNXB =  (String) comboBox.getItemAt(comboBox.getSelectedIndex());
+				tenNXB = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
 
 			}
 		});
@@ -178,91 +174,90 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		for (int i = 0; i < dsNXB.size(); i++) {
 			comboBox.addItem(dsNXB.get(i));
 		}
-		
-		
+
 		JLabel lblNhXutBn = new JLabel("Nhà xuất bản:");
 		lblNhXutBn.setForeground(new Color(255, 255, 255));
 		lblNhXutBn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNhXutBn.setBounds(10, 110, 112, 17);
 		contentPane.add(lblNhXutBn);
-		
+
 		JLabel lblNewLabel = new JLabel("Tên sách:");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(10, 150, 62, 17);
 		contentPane.add(lblNewLabel);
-		
+
 		txtTenSach = new JTextField();
 		txtTenSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTenSach.setBounds(132, 146, 221, 19);
 		contentPane.add(txtTenSach);
 		txtTenSach.setColumns(10);
-		
+
 		JLabel lblSLng = new JLabel("Số lượng:");
 		lblSLng.setForeground(new Color(255, 255, 255));
 		lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSLng.setBounds(10, 190, 62, 17);
 		contentPane.add(lblSLng);
-		
+
 		txtSoLuong = new JTextField();
 		txtSoLuong.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				String value = txtSoLuong.getText();
-	            
-	            if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-	            	txtSoLuong.setEditable(true);
-	               
-	            } else {
-	            	String mess = "Khong duoc nhap chu!";
-	               JOptionPane.showMessageDialog(null, mess);
-	               txtSoLuong.setText("");
-	            }
+
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+					txtSoLuong.setEditable(true);
+
+				} else {
+					String mess = "Khong duoc nhap chu!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtSoLuong.setText("");
+				}
 			}
 		});
 		txtSoLuong.setBounds(133, 188, 96, 19);
 		contentPane.add(txtSoLuong);
 		txtSoLuong.setColumns(10);
-		
+
 		JLabel lblnGi = new JLabel("Đơn giá:");
 		lblnGi.setForeground(new Color(255, 255, 255));
 		lblnGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblnGi.setBounds(10, 228, 62, 17);
 		contentPane.add(lblnGi);
-		
+
 		txtDonGia = new JTextField();
 		txtDonGia.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-					String value = txtDonGia.getText();
-	            
-	            if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-	            	txtDonGia.setEditable(true);
-	               
-	            } else {
-	            	String mess = "Khong duoc nhap chu!";
-	               JOptionPane.showMessageDialog(null, mess);
-	               txtDonGia.setText("");
-	            }
+				String value = txtDonGia.getText();
+
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+					txtDonGia.setEditable(true);
+
+				} else {
+					String mess = "Khong duoc nhap chu!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtDonGia.setText("");
+				}
 			}
 		});
 		txtDonGia.setBounds(133, 226, 96, 19);
 		contentPane.add(txtDonGia);
 		txtDonGia.setColumns(10);
-		
+
 		lblmaPD = new JLabel("Phiếu đặt:");
 		lblmaPD.setForeground(new Color(255, 255, 255));
 		lblmaPD.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblmaPD.setBounds(10, 21, 151, 22);
 		contentPane.add(lblmaPD);
-		lblmaPD.setText("Phiếu đặt: " +this.maPD);
-		
+		lblmaPD.setText("Phiếu đặt: " + this.maPD);
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 102));
 		panel.setBounds(0, 351, 924, 135);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setBackground(new Color(0, 0, 255));
 		btnThem.setForeground(new Color(255, 255, 255));
@@ -270,18 +265,23 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		panel.add(btnThem);
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tenSach = txtTenSach.getText();
-				String soLuong = txtSoLuong.getText();
-				String donGia = txtDonGia.getText();
-				new CTPhieuDatDAO().themPhieuDat(maPD, tenNXB, tenSach, soLuong, donGia);
-				bangdulieuCTPD();
-				txtTenSach.setText("");
-				txtSoLuong.setText("");
-				txtDonGia.setText("");
+				if (txtTenSach.getText().length() > 0 && txtSoLuong.getText().length() > 0
+						&& txtDonGia.getText().length() > 0) {
+					String tenSach = txtTenSach.getText();
+					String soLuong = txtSoLuong.getText();
+					String donGia = txtDonGia.getText();
+					new CTPhieuDatDAO().themPhieuDat(maPD, tenNXB, tenSach, soLuong, donGia);
+					bangdulieuCTPD();
+					txtTenSach.setText("");
+					txtSoLuong.setText("");
+					txtDonGia.setText("");
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua nhap du thong tin!");
+				}
 			}
 		});
 		btnThem.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		
+
 		JButton btnSua = new JButton("Sửa");
 		btnSua.setForeground(new Color(255, 255, 255));
 		btnSua.setBackground(new Color(0, 0, 255));
@@ -289,21 +289,30 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		panel.add(btnSua);
 		btnSua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel)table.getModel();
+				DefaultTableModel Df = (DefaultTableModel) table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				String maCTPD = Df.getValueAt(selectedIndex, 0).toString();
-				String tenSach = txtTenSach.getText();
-				String soLuong = txtSoLuong.getText();
-				String donGia = txtDonGia.getText();
-				new CTPhieuDatDAO().suaPhieuDat(tenNXB, tenSach, soLuong, donGia,maCTPD);
-				bangdulieuCTPD();
-				txtTenSach.setText("");
-				txtSoLuong.setText("");
-				txtDonGia.setText("");
+				if (selectedIndex != -1) {
+					if (txtTenSach.getText().length() > 0 && txtSoLuong.getText().length() > 0
+							&& txtDonGia.getText().length() > 0) {
+						String maCTPD = Df.getValueAt(selectedIndex, 0).toString();
+						String tenSach = txtTenSach.getText();
+						String soLuong = txtSoLuong.getText();
+						String donGia = txtDonGia.getText();
+						new CTPhieuDatDAO().suaPhieuDat(tenNXB, tenSach, soLuong, donGia, maCTPD);
+						bangdulieuCTPD();
+						txtTenSach.setText("");
+						txtSoLuong.setText("");
+						txtDonGia.setText("");
+					} else {
+						JOptionPane.showMessageDialog(null, "Chua nhap du thong tin!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chưa chọn sách!");
+				}
 			}
 		});
 		btnSua.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		
+
 		JButton btnXoa = new JButton("Xóa");
 		btnXoa.setForeground(new Color(255, 255, 255));
 		btnXoa.setBackground(new Color(0, 0, 255));
@@ -313,23 +322,27 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) table.getModel();
 				int selectedIndex = table.getSelectedRow();
-				String idTenSach = Df.getValueAt(selectedIndex, 0).toString();
-				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-						JOptionPane.YES_NO_OPTION);
-				if (dialog == JOptionPane.YES_OPTION) {
-					CTPhieuDatDAO ctpd = new CTPhieuDatDAO();
-					ctpd.xoaCTPD(idTenSach);
-					
-					bangdulieuCTPD();
+				if (selectedIndex != -1) {
+					String idTenSach = Df.getValueAt(selectedIndex, 0).toString();
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
+						CTPhieuDatDAO ctpd = new CTPhieuDatDAO();
+						ctpd.xoaCTPD(idTenSach);
+
+						bangdulieuCTPD();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chưa chọn sách!");
 				}
 			}
 		});
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		Toolkit toolkit = Toolkit.getDefaultToolkit();  
-		Dimension screenSize = toolkit.getScreenSize(); 
-		int x = (screenSize.width -  getWidth()) / 2;  
-		int y = (screenSize.height - getHeight()) / 2;  
-		setLocation(x, y);  
-		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = toolkit.getScreenSize();
+		int x = (screenSize.width - getWidth()) / 2;
+		int y = (screenSize.height - getHeight()) / 2;
+		setLocation(x, y);
+
 	}
 }

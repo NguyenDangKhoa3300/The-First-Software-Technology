@@ -296,6 +296,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnLuuDKTV = new JButton("Lưu");
 		btnLuuDKTV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(hoTenDG.getText().length() > 0 && soCMNDDG.getText().length() > 0 && soDTDG.getText().length() > 0 ) {
+				
 				String hoTen = hoTenDG.getText();
 				String soCMND = soCMNDDG.getText();
 				String soDT = soDTDG.getText();
@@ -303,6 +305,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 				DocGiaDAO dg = new DocGiaDAO();
 				dg.themDG(hoTen, birthday, soCMND, soDT);
 				dulieubangDocGia();
+			}else {
+				JOptionPane.showMessageDialog(null, "Chua nhap du thong tin!");
+			}
+				hoTenDG.setText("");
+				soCMNDDG.setText("");
+				soDTDG.setText("");
 			}
 		});
 		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -827,7 +835,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnThemSach.setBounds(189, 361, 200, 30);
 		pnlCardQuanLySach.add(btnThemSach);
 
-		JLabel lblNhapMaSach = new JLabel("Nhập Mã Sách:");
+		JLabel lblNhapMaSach = new JLabel("Nhập Tên Sách:");
 		lblNhapMaSach.setForeground(Color.WHITE);
 		lblNhapMaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
 		lblNhapMaSach.setBounds(594, 354, 172, 40);
@@ -882,15 +890,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 					String namXB = Df.getValueAt(selectedIndex, 3).toString();
 					String tenNXB = Df.getValueAt(selectedIndex, 4).toString();
 					String trinhTrang = Df.getValueAt(selectedIndex, 5).toString();
-					
 
-					GD_SuaSach spd = new GD_SuaSach(maSach, tenSach, theLoai, namXB, tenNXB,trinhTrang);
+					GD_SuaSach spd = new GD_SuaSach(maSach, tenSach, theLoai, namXB, tenNXB, trinhTrang);
 					spd.setVisible(true);
 					spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Chua chon sach!");
 				}
-			
+
 			}
 		});
 		btnSuaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -902,19 +909,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableQuanLySach.getModel();
 				int selectedIndex = tableQuanLySach.getSelectedRow();
-				if(selectedIndex != -1) {
-				String maSach = Df.getValueAt(selectedIndex, 0).toString();
-				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-						JOptionPane.YES_NO_OPTION);
-				if (dialog == JOptionPane.YES_OPTION) {
-					SachDAO s = new SachDAO();
-					s.xoaSach(maSach);
+				if (selectedIndex != -1) {
+					String maSach = Df.getValueAt(selectedIndex, 0).toString();
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
+						SachDAO s = new SachDAO();
+						s.xoaSach(maSach);
 
-					dulieubangSach();
+						dulieubangSach();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon sach!");
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon sach!");
-			}				
 			}
 		});
 		btnXoaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -993,10 +1000,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 				if (o.equals(btnTimDocGia)) {
 					String ten = txtTimDocGia.getText().toString();
 					if (ten.length() <= 0) {
-						JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Mã Độc Giả");
+						JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Tên Độc Giả");
 						dulieubangDocGia();
 					} else {
 						ArrayList<DocGia> list = dsDocGia.TimDocGiaBangMa(ten);
+
 						if (list.size() > 0) {
 							tableModelDocGia.setRowCount(0);
 							for (DocGia dg : list) {
@@ -1022,19 +1030,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
 				int selectedIndex = tableDocGia_1.getSelectedRow();
-				if(selectedIndex != -1) {
-				String idDG = Df.getValueAt(selectedIndex, 0).toString();
-				int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
-						JOptionPane.YES_NO_OPTION);
-				if (dialog == JOptionPane.YES_OPTION) {
-					DocGiaDAO dg = new DocGiaDAO();
-					dg.xoaDG(idDG);
+				if (selectedIndex != -1) {
+					String idDG = Df.getValueAt(selectedIndex, 0).toString();
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
+						DocGiaDAO dg = new DocGiaDAO();
+						dg.xoaDG(idDG);
 
-					dulieubangDocGia();
+						dulieubangDocGia();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
-			}
 			}
 		});
 		btnXoaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -1044,29 +1052,38 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JButton btnSuaDocGia = new JButton("Sửa");
 		btnSuaDocGia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
-				int selectedIndex = tableDocGia_1.getSelectedRow();
-				if(selectedIndex != -1 ) {
-				String maDG = Df.getValueAt(selectedIndex, 0).toString();
-				String hoTen = txtTenDG_QLDG.getText();
-				String soCMND = txtSoCMND_QLDG.getText();
-				String soDT = txtSoDT_QLDG.getText();
-				String birthday = txtNamSinhQLDG.getText() + "-" + txtThangSinh_QLDG.getText() + "-"
-						+ txtNgaySinh_QLDG.getText();
-				DocGiaDAO dg = new DocGiaDAO();
-				dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
-				dulieubangDocGia();
-				dulieubangPhieuMuon();
-				txtTenDG_QLDG.setText("");
-				txtSoCMND_QLDG.setText("");
-				txtSoDT_QLDG.setText("");
-				txtNamSinhQLDG.setText("");
-				txtThangSinh_QLDG.setText("");
-				txtNgaySinh_QLDG.setText("");
-			}else {
-				JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
-			}
-				}
+				
+
+					DefaultTableModel Df = (DefaultTableModel) tableDocGia_1.getModel();
+					int selectedIndex = tableDocGia_1.getSelectedRow();
+					if (selectedIndex != -1) {
+						if (txtTenDG_QLDG.getText().length() > 0 && txtSoCMND_QLDG.getText().length() > 0
+								&& txtSoDT_QLDG.getText().length() > 0 && txtNgaySinh_QLDG.getText().length() > 0
+								&& txtThangSinh_QLDG.getText().length() > 0 && txtNamSinhQLDG.getText().length() > 0) {
+						String maDG = Df.getValueAt(selectedIndex, 0).toString();
+						String hoTen = txtTenDG_QLDG.getText();
+						String soCMND = txtSoCMND_QLDG.getText();
+						String soDT = txtSoDT_QLDG.getText();
+						String birthday = txtNamSinhQLDG.getText() + "-" + txtThangSinh_QLDG.getText() + "-"
+								+ txtNgaySinh_QLDG.getText();
+						DocGiaDAO dg = new DocGiaDAO();
+						dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
+						dulieubangDocGia();
+						dulieubangPhieuMuon();
+						txtTenDG_QLDG.setText("");
+						txtSoCMND_QLDG.setText("");
+						txtSoDT_QLDG.setText("");
+						txtNamSinhQLDG.setText("");
+						txtThangSinh_QLDG.setText("");
+						txtNgaySinh_QLDG.setText("");
+						}else {
+							JOptionPane.showMessageDialog(null, "Chua nhap du thong tin doc gia!");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
+					}
+				} 
+			
 		});
 		btnSuaDocGia.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnSuaDocGia.setBounds(700, 539, 85, 40);

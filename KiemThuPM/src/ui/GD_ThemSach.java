@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import dao.CTPhieuDatDAO;
 import dao.SachDAO;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -138,11 +140,14 @@ public class GD_ThemSach extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String tenSach = txtTenSach.getText();
 				String theLoai = txtTheLoai.getText();
-				
 				String tinhTrang  = txtTinhTrang.getText();
+				if(tenSach.length() > 0 && theLoai.length() > 0 && tinhTrang.length() > 0) {
 				new SachDAO().themSach(tenSach, theLoai, namXB, tenNXB, tinhTrang);
 				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 				mainframe.dulieubangSach();
+			}else {
+				JOptionPane.showMessageDialog(null, "Chưa điền đẩy đủ thông tin!");
+			}
 			}
 		});
 		btnNewButton.setBackground(new Color(0, 0, 255));

@@ -205,11 +205,13 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				String value = txtSoLuong.getText();
 
-				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
 					txtSoLuong.setEditable(true);
 
 				} else {
-					String mess = "Khong duoc nhap chu!";
+					String mess = "Chỉ được nhập số!";
 					JOptionPane.showMessageDialog(null, mess);
 					txtSoLuong.setText("");
 				}
@@ -231,7 +233,9 @@ public class GD_ChiTietPhieuDat extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				String value = txtDonGia.getText();
 
-				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
 					txtDonGia.setEditable(true);
 
 				} else {

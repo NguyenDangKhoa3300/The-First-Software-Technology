@@ -97,9 +97,9 @@ public class PhieuThanhLyDAO {
 
 			JOptionPane.showMessageDialog(null, "Added");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Gặp Lỗi! Kiểm tra lại thông tin vừa chọn!");
 			e.printStackTrace();
 		}
 
@@ -117,9 +117,9 @@ public class PhieuThanhLyDAO {
 
 			JOptionPane.showMessageDialog(null, "Updated");
 			
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Gặp Lỗi! Kiểm tra lại thông tin vừa chọn!");
 			e.printStackTrace();
 		}
 

@@ -57,7 +57,7 @@ public class DocGiaDAO {
 				String sdt = rs.getString(5);
 				DocGia dg = new DocGia(maDG, tenDG, namSinh, cmnd, sdt);
 				list.add(dg);
-				System.out.println(maDG);
+				
 			}
 
 		} catch (SQLException e) {
@@ -65,6 +65,7 @@ public class DocGiaDAO {
 		}
 		return list;
 	}
+	
 
 	public void themDG(String hoTen, String namSinh, String soCMND, String soDT) {
 
@@ -80,9 +81,9 @@ public class DocGiaDAO {
 
 			JOptionPane.showMessageDialog(null, "Added");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Gặp Lỗi! Kiểm tra lại thông tin vừa nhập!");
 			e.printStackTrace();
 		}
 
@@ -152,9 +153,9 @@ public void suaDocGia(String masv, String hoTen, String namSinh, String CMND, St
 
 			JOptionPane.showMessageDialog(null, "Updated");
 			
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
+			JOptionPane.showMessageDialog(null, "Gặp Lỗi! Kiểm tra lại thông tin vừa nhập!");
 			e.printStackTrace();
 		}
 

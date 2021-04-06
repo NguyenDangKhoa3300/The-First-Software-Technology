@@ -11,7 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import dao.PhieuMuonDAO;
+import dao.DocGiaDAO;
 import dao.PhieuDatDAO;
+import entities.DocGia;
 import entities.DocGia_PM;
 
 import javax.swing.JLabel;
@@ -29,6 +31,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class GD_SuaPhieuMuon extends JFrame {
 
@@ -41,9 +44,11 @@ public class GD_SuaPhieuMuon extends JFrame {
 	private String maPM;
 	private String maDGFromeMain;
 	private String dateAfter1Week;
+	private String ngayMuon;
 	private PhieuMuonDAO pm = new PhieuMuonDAO();
 	private JLabel lblSuaPhieuMuon;
 	private JComboBox comboBoxNV;
+	private DocGiaDAO docGiaDAO = new DocGiaDAO();
 
 	/**
 	 * Launch the application.
@@ -87,10 +92,12 @@ public class GD_SuaPhieuMuon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GD_SuaPhieuMuon(String maPM, String maDG, String tenNVFromMain) {
+	public GD_SuaPhieuMuon(String maPM, String maDG, String tenNVFromMain,String ngayMuonFromMain) {
 		initialize();
 		this.maPM = maPM;
 		this.maDGFromeMain = maDG;
+		
+		this.ngayMuon = ngayMuonFromMain;
 		lblSuaPhieuMuon.setText("Sửa Phiếu Mượn: " + maPM);
 		for (int i = 0; i < comboBoxNV.getItemCount(); i++) {
 			if (comboBoxNV.getItemAt(i).equals(tenNVFromMain)) {
@@ -109,12 +116,13 @@ public class GD_SuaPhieuMuon extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 739, 521);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 139));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 66, 388, 253);
+		scrollPane.setBounds(0, 66, 398, 253);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -145,23 +153,8 @@ public class GD_SuaPhieuMuon extends JFrame {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		scrollPane.setViewportView(table);
 
-		JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
-		lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTmcGi.setBounds(21, 26, 83, 17);
-		contentPane.add(lblTmcGi);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textField.setBounds(114, 23, 126, 23);
-		contentPane.add(textField);
-		textField.setColumns(10);
-
-		JButton btnTm = new JButton("Tìm");
-		btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnTm.setBounds(270, 22, 68, 25);
-		contentPane.add(btnTm);
-
 		JLabel lblMcGi = new JLabel("Mã Độc Giả: ");
+		lblMcGi.setForeground(new Color(255, 255, 255));
 		lblMcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblMcGi.setBounds(443, 110, 82, 17);
 		contentPane.add(lblMcGi);
@@ -174,6 +167,8 @@ public class GD_SuaPhieuMuon extends JFrame {
 		txtMaDG.setColumns(10);
 
 		JButton btnLu = new JButton("Lưu");
+		btnLu.setBackground(new Color(0, 0, 255));
+		btnLu.setForeground(new Color(255, 255, 255));
 		btnLu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String maDG = txtMaDG.getText();
@@ -185,12 +180,12 @@ public class GD_SuaPhieuMuon extends JFrame {
 						LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
 
 						dateAfter1Week = "" + result;
-						new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, dateLap, dateAfter1Week, tenNV);
+						new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, ngayMuon, dateAfter1Week, tenNV);
 						txtMaDG.setText("");
 						GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 						mainframe.dulieubangPhieuMuon();
 					} else {
-						JOptionPane.showMessageDialog(null, "Doc gia chua tra phieu muon!");
+						JOptionPane.showMessageDialog(null, "Độc Giả chưa Trả Phiếu Mượn!");
 					}
 				} else {
 					LocalDate currentDate = LocalDate.now();
@@ -199,7 +194,7 @@ public class GD_SuaPhieuMuon extends JFrame {
 					LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
 
 					dateAfter1Week = "" + result;
-					new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, dateLap, dateAfter1Week, tenNV);
+					new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, ngayMuon, dateAfter1Week, tenNV);
 					txtMaDG.setText("");
 					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 					mainframe.dulieubangPhieuMuon();
@@ -211,6 +206,7 @@ public class GD_SuaPhieuMuon extends JFrame {
 		contentPane.add(btnLu);
 
 		JLabel lblChnNhnVin = new JLabel("Chọn Nhân Viên:");
+		lblChnNhnVin.setForeground(new Color(255, 255, 255));
 		lblChnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblChnNhnVin.setBounds(418, 153, 107, 17);
 		contentPane.add(lblChnNhnVin);
@@ -227,10 +223,59 @@ public class GD_SuaPhieuMuon extends JFrame {
 		for (int i = 0; i < dsnv.size(); i++) {
 			comboBoxNV.addItem(dsnv.get(i));
 		}
-		lblSuaPhieuMuon = new JLabel("Sửa Phiếu Mượn");
-		lblSuaPhieuMuon.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblSuaPhieuMuon.setBounds(418, 21, 272, 23);
-		contentPane.add(lblSuaPhieuMuon);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 140, 0));
+		panel.setBounds(0, 0, 725, 66);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+				JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
+				lblTmcGi.setForeground(new Color(255, 255, 255));
+				lblTmcGi.setBounds(28, 35, 83, 17);
+				panel.add(lblTmcGi);
+				lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
+						textField = new JTextField();
+						textField.setBounds(121, 32, 126, 23);
+						panel.add(textField);
+						textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						textField.setColumns(10);
+						
+								JButton btnTm = new JButton("Tìm");
+								btnTm.setBounds(277, 31, 68, 25);
+								panel.add(btnTm);
+								btnTm.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										String ten = textField.getText();
+										if (ten.length() <= 0) {
+											JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Độc giả!");
+											bangdulieuDocGiaHienCo();
+										} else {
+											ArrayList<DocGia> list = docGiaDAO.TimDocGiaBangMa(ten);
+											if (list.size() > 0) {
+												DefaultTableModel Df = (DefaultTableModel) table.getModel();
+
+												Df.setRowCount(0);
+												for (DocGia shc : list) {
+													String[] rowtable = { shc.getMaDG(), shc.getTenDG(), shc.getCmnd() };
+													Df.addRow(rowtable);
+												}
+												table.setModel(Df);
+
+											}else {
+												JOptionPane.showMessageDialog(null, "Không Thấy Độc Giả Cần Tìm!");
+												bangdulieuDocGiaHienCo();
+											}
+										}
+									}
+								});
+								btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+								lblSuaPhieuMuon = new JLabel("Sửa Phiếu Mượn");
+								lblSuaPhieuMuon.setForeground(new Color(255, 255, 255));
+								lblSuaPhieuMuon.setBounds(443, 30, 272, 23);
+								panel.add(lblSuaPhieuMuon);
+								lblSuaPhieuMuon.setFont(new Font("Tahoma", Font.BOLD, 19));
 		bangdulieuDocGiaHienCo();
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();

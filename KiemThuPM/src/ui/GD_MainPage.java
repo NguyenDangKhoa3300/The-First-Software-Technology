@@ -61,6 +61,8 @@ import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.SystemColor;
 import javax.swing.JComboBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GD_MainPage extends javax.swing.JFrame {
 	private static GD_MainPage window;
@@ -243,12 +245,43 @@ public class GD_MainPage extends javax.swing.JFrame {
 		hoTenDG.setColumns(10);
 
 		soCMNDDG = new JTextField();
+		soCMNDDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					soCMNDDG.setEditable(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Chỉ được nhập số!");
+					soCMNDDG.setText("");
+				}
+				
+				
+			}
+		});
 		soCMNDDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		soCMNDDG.setColumns(10);
 		soCMNDDG.setBounds(243, 216, 126, 23);
 		pnlCardDangKyTheTV.add(soCMNDDG);
 
 		soDTDG = new JTextField();
+		soDTDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					soDTDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					soDTDG.setText("");
+				}
+			}
+		});
+		
 		soDTDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		soDTDG.setColumns(10);
 		soDTDG.setBounds(243, 258, 126, 23);
@@ -304,13 +337,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 				String birthday = namSinhDG_DKTV + "-" + thangSinhDG_DKTV + "-" + ngaySinhDG_DKTV;
 				DocGiaDAO dg = new DocGiaDAO();
 				dg.themDG(hoTen, birthday, soCMND, soDT);
+				
 				dulieubangDocGia();
+				
 			}else {
-				JOptionPane.showMessageDialog(null, "Chua nhap du thong tin!");
+				JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin!");
 			}
-				hoTenDG.setText("");
-				soCMNDDG.setText("");
-				soDTDG.setText("");
+				
 			}
 		});
 		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1070,17 +1103,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
 						dulieubangDocGia();
 						dulieubangPhieuMuon();
-						txtTenDG_QLDG.setText("");
-						txtSoCMND_QLDG.setText("");
-						txtSoDT_QLDG.setText("");
-						txtNamSinhQLDG.setText("");
-						txtThangSinh_QLDG.setText("");
-						txtNgaySinh_QLDG.setText("");
+						
 						}else {
-							JOptionPane.showMessageDialog(null, "Chua nhap du thong tin doc gia!");
+							JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin Độc giả!");
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
+						JOptionPane.showMessageDialog(null, "Chưa Chọn Độc Giả!");
 					}
 				} 
 			
@@ -1165,30 +1193,105 @@ public class GD_MainPage extends javax.swing.JFrame {
 		txtTenDG_QLDG.setColumns(10);
 
 		txtSoCMND_QLDG = new JTextField();
+		txtSoCMND_QLDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					txtSoCMND_QLDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtSoCMND_QLDG.setText("");
+				}
+			}
+		});
 		txtSoCMND_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtSoCMND_QLDG.setColumns(10);
 		txtSoCMND_QLDG.setBounds(196, 353, 146, 24);
 		pnlCardQuanLyDocGia.add(txtSoCMND_QLDG);
 
 		txtSoDT_QLDG = new JTextField();
+		txtSoDT_QLDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					txtSoDT_QLDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtSoDT_QLDG.setText("");
+				}
+			}
+		});
 		txtSoDT_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtSoDT_QLDG.setColumns(10);
 		txtSoDT_QLDG.setBounds(196, 389, 146, 24);
 		pnlCardQuanLyDocGia.add(txtSoDT_QLDG);
 
 		txtNgaySinh_QLDG = new JTextField();
+		txtNgaySinh_QLDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					txtNgaySinh_QLDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtNgaySinh_QLDG.setText("");
+				}
+			}
+		});
 		txtNgaySinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtNgaySinh_QLDG.setColumns(10);
 		txtNgaySinh_QLDG.setBounds(196, 436, 42, 24);
 		pnlCardQuanLyDocGia.add(txtNgaySinh_QLDG);
 
 		txtThangSinh_QLDG = new JTextField();
+		txtThangSinh_QLDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					txtThangSinh_QLDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtThangSinh_QLDG.setText("");
+				}
+			}
+		});
 		txtThangSinh_QLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtThangSinh_QLDG.setColumns(10);
 		txtThangSinh_QLDG.setBounds(196, 481, 42, 24);
 		pnlCardQuanLyDocGia.add(txtThangSinh_QLDG);
 
 		txtNamSinhQLDG = new JTextField();
+		txtNamSinhQLDG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() >= '0' && e.getKeyCode() <= '9' || e.getKeyCode() == KeyEvent.VK_BACK_SPACE
+						|| e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN 
+						|| e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+					txtNamSinhQLDG.setEditable(true);
+
+				} else {
+					String mess = "Chỉ được nhập số!";
+					JOptionPane.showMessageDialog(null, mess);
+					txtNamSinhQLDG.setText("");
+				}
+			}
+		});
 		txtNamSinhQLDG.setFont(new Font("Verdana", Font.PLAIN, 14));
 		txtNamSinhQLDG.setColumns(10);
 		txtNamSinhQLDG.setBounds(196, 521, 42, 24);
@@ -1276,7 +1379,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 					String mapm = Df.getValueAt(selectedIndex, 0).toString();
 					String maDG = new PhieuMuonDAO().getMaDG(Df.getValueAt(selectedIndex, 1).toString());
 					String tenNV = Df.getValueAt(selectedIndex, 2).toString();
-					GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV);
+					String ngayMuon = Df.getValueAt(selectedIndex, 3).toString();
+					GD_SuaPhieuMuon tpm = new GD_SuaPhieuMuon(mapm, maDG, tenNV,ngayMuon);
 					tpm.setVisible(true);
 					tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
@@ -1394,10 +1498,10 @@ public class GD_MainPage extends javax.swing.JFrame {
 						pmd.giaHanPM(maPM, ngayTraMoi);
 						dulieubangPhieuMuon();
 					} else {
-						JOptionPane.showMessageDialog(null, "Phieu muon chi duoc gia han 1 lan!");
+						JOptionPane.showMessageDialog(null, "Mỗi phiếu mượn chỉ được gia hạn 1 lần!");
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu mượn!");
 				}
 			}
 		});

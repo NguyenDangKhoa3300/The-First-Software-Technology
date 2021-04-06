@@ -105,9 +105,9 @@ public class PhieuMuonDAO {
 
 			JOptionPane.showMessageDialog(null, "Added");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Gặp Lỗi! Kiểm tra lại thông tin vừa chọn!");
 			e.printStackTrace();
 		}
 
@@ -144,7 +144,7 @@ public class PhieuMuonDAO {
 
 			JOptionPane.showMessageDialog(null, "Added");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -166,9 +166,9 @@ public class PhieuMuonDAO {
 
 			JOptionPane.showMessageDialog(null, "Updated");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
+			JOptionPane.showMessageDialog(null, "Dữ liệu nhập không hợp lệ!");
 			e.printStackTrace();
 		}
 
@@ -184,11 +184,11 @@ public class PhieuMuonDAO {
 
 			ps.executeUpdate();
 
-			JOptionPane.showMessageDialog(null, "Da Gia Han!");
+			JOptionPane.showMessageDialog(null, "Đã gia hạn!");
 
-			ps.executeUpdate();
+			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Du lieu nhap khong hop le!");
+			JOptionPane.showMessageDialog(null, "Dữ liệu nhập không hợp lệ!");
 			e.printStackTrace();
 		}
 

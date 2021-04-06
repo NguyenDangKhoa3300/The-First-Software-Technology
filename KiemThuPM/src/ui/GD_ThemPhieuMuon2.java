@@ -11,8 +11,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import dao.PhieuMuonDAO;
+import dao.DocGiaDAO;
 import dao.PhieuDatDAO;
+import entities.DocGia;
 import entities.DocGia_PM;
+import entities.PhieuMuon;
+import entities.SachHienCo;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,7 +45,7 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 	private String dateLap;
 	private String dateAfter1Week;
 	private PhieuMuonDAO pm = new PhieuMuonDAO();
-
+	private DocGiaDAO docGiaDAO = new DocGiaDAO();
 	/**
 	 * Launch the application.
 	 */
@@ -138,24 +142,24 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String maDG = txtMaDG.getText();
-				if(maDG.length() > 0) {
-				if (pm.validationTrungThemPhieuMuon(maDG)) {
-					LocalDate currentDate = LocalDate.now();
+				if (maDG.length() > 0) {
+					if (pm.validationTrungThemPhieuMuon(maDG)) {
+						LocalDate currentDate = LocalDate.now();
 
-					dateLap = "" + currentDate;
-					LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
+						dateLap = "" + currentDate;
+						LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
 
-					dateAfter1Week = "" + result;
-					pm.themPhieuMuon(maDG, dateLap, dateAfter1Week, tenNV);
-					txtMaDG.setText("");
-					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
-					mainframe.dulieubangPhieuMuon();
-				}else {
-					JOptionPane.showMessageDialog(null, "Độc Giả Chưa Trả Phiếu Mượn!");
+						dateAfter1Week = "" + result;
+						pm.themPhieuMuon(maDG, dateLap, dateAfter1Week, tenNV);
+						txtMaDG.setText("");
+						GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
+						mainframe.dulieubangPhieuMuon();
+					} else {
+						JOptionPane.showMessageDialog(null, "Độc Giả Chưa Trả Phiếu Mượn!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chưa Chọn Độc Giả!");
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "Chưa Chọn Độc Giả!");
-			}
 			}
 		});
 		btnLu.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -180,34 +184,59 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 		for (int i = 0; i < dsnv.size(); i++) {
 			comboBoxNV.addItem(dsnv.get(i));
 		}
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 140, 0));
 		panel.setBounds(0, 0, 725, 66);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-				JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
-				lblTmcGi.setForeground(new Color(255, 255, 255));
-				lblTmcGi.setBounds(34, 35, 83, 17);
-				panel.add(lblTmcGi);
-				lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				
-						textField = new JTextField();
-						textField.setBounds(127, 32, 126, 23);
-						panel.add(textField);
-						textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-						textField.setColumns(10);
-						
-								JButton btnTm = new JButton("Tìm");
-								btnTm.setBounds(283, 31, 68, 25);
-								panel.add(btnTm);
-								btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-								JLabel lblLpPhiuMn = new JLabel("Lập Phiếu Mượn");
-								lblLpPhiuMn.setForeground(new Color(255, 255, 255));
-								lblLpPhiuMn.setBounds(456, 30, 170, 26);
-								panel.add(lblLpPhiuMn);
-								lblLpPhiuMn.setFont(new Font("Tahoma", Font.BOLD, 21));
+
+		JLabel lblTmcGi = new JLabel("Tìm Độc Giả:");
+		lblTmcGi.setForeground(new Color(255, 255, 255));
+		lblTmcGi.setBounds(34, 35, 83, 17);
+		panel.add(lblTmcGi);
+		lblTmcGi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+
+		textField = new JTextField();
+		textField.setBounds(127, 32, 126, 23);
+		panel.add(textField);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textField.setColumns(10);
+
+		JButton btnTm = new JButton("Tìm");
+		btnTm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ten = textField.getText();
+				if (ten.length() <= 0) {
+					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Độc giả!");
+					bangdulieuDocGiaHienCo();
+				} else {
+					ArrayList<DocGia> list = docGiaDAO.TimDocGiaBangMa(ten);
+					if (list.size() > 0) {
+						DefaultTableModel Df = (DefaultTableModel) table.getModel();
+
+						Df.setRowCount(0);
+						for (DocGia shc : list) {
+							String[] rowtable = { shc.getMaDG(), shc.getTenDG(), shc.getCmnd() };
+							Df.addRow(rowtable);
+						}
+						table.setModel(Df);
+
+					}else {
+						JOptionPane.showMessageDialog(null, "Không Thấy Độc Giả Cần Tìm!");
+						bangdulieuDocGiaHienCo();
+					}
+				}
+			}
+		});
+		btnTm.setBounds(283, 31, 68, 25);
+		panel.add(btnTm);
+		btnTm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel lblLpPhiuMn = new JLabel("Lập Phiếu Mượn");
+		lblLpPhiuMn.setForeground(new Color(255, 255, 255));
+		lblLpPhiuMn.setBounds(456, 30, 170, 26);
+		panel.add(lblLpPhiuMn);
+		lblLpPhiuMn.setFont(new Font("Tahoma", Font.BOLD, 21));
 		bangdulieuDocGiaHienCo();
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();

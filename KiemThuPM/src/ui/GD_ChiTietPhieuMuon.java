@@ -195,9 +195,13 @@ public class GD_ChiTietPhieuMuon extends JFrame {
 				DefaultTableModel Df = (DefaultTableModel) tableSachMuon.getModel();
 				int selectedIndex = tableSachMuon.getSelectedRow();
 				if (selectedIndex != -1) {
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
 					String maSach = Df.getValueAt(selectedIndex, 0).toString();
 					pmd.xoaChiTietPhieuMuon(maSach);
 					bangdulieuSachDangMuon();
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Sách!");
 				}

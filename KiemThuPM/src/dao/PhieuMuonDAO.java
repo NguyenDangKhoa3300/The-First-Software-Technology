@@ -68,6 +68,31 @@ public class PhieuMuonDAO {
 		}
 		return list;
 	}
+	public ArrayList<PhieuMuon> TimDocGiaTraSach(String tenDGs) {
+		Connection con = DataBase.getInstance().getConnection();
+		ArrayList<PhieuMuon> list = new ArrayList<>();
+		String sql = "select MaPM, Madocgia,HoTen , Ngaymuon, Ngaytra from DocGia, PhieuMuon where HoTen LIKE N'%"+tenDGs+"%' AND MaSV = Madocgia";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String maPM = rs.getString(1);
+				String maDG = rs.getString(2);
+				String tenDG = rs.getString(3);
+				String ngayMuon = rs.getString(4);
+				String ngayTra = rs.getString(5);
+
+				PhieuMuon pm = new PhieuMuon(maPM, maDG, tenDG, ngayMuon, ngayTra);
+				list.add(pm);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public ArrayList<DocGia_PM> doctubangThemPhieuMuon() {
 		Connection con = DataBase.getInstance().getConnection();

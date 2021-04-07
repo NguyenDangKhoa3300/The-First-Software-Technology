@@ -14,6 +14,7 @@ import entities.SachHienCo;
 import entities.DocGia_PM;
 
 public class PhieuMuonDAO {
+	
 	public PhieuMuonDAO() {
 
 	}
@@ -126,6 +127,7 @@ public class PhieuMuonDAO {
 				
 				SachHienCo ds = new SachHienCo(maSach, tenSach);
 				dsshc.add(ds);
+				
 			}
 
 		} catch (SQLException e) {
@@ -133,8 +135,34 @@ public class PhieuMuonDAO {
 		}
 		return dsshc;
 	}
+	public boolean kiemTraSachDangMuon(String maPM){
+		boolean ck = true;
+		int soLuong = 0;
+		Connection con = DataBase.getInstance().getConnection();
+		
+		String sql = "Select ctpm.MaSach, s.TenSach from ChiTietPhieuMuon ctpm, Sach s where ctpm.MaPM = '"+maPM+"' and s.MaSach = ctpm.MaSach;";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				soLuong++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(soLuong < 5) {
+			ck = true;
+		}else {
+			ck = false;
+		}
+		return ck;
+	}
 	public void themPhieuChiTietMuon(String maPM, String maSach) {
 		try {
+			if(kiemTraSachDangMuon(maPM)) {
+			
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Insert into ChiTietPhieuMuon values('" + maPM + "','" + maSach + "');";
 
@@ -144,7 +172,9 @@ public class PhieuMuonDAO {
 
 			JOptionPane.showMessageDialog(null, "Added");
 
-			
+			}else {
+				JOptionPane.showMessageDialog(null, "Không Được Mượn Quá 5 Cuốn!");
+			}
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

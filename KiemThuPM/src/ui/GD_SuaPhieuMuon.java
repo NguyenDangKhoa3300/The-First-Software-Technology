@@ -174,30 +174,22 @@ public class GD_SuaPhieuMuon extends JFrame {
 				String maDG = txtMaDG.getText();
 				if (!maDG.equalsIgnoreCase(getmaDG())) {
 					if (pm.validationTrungThemPhieuMuon(maDG)) {
-						LocalDate currentDate = LocalDate.now();
-
-						dateLap = "" + currentDate;
-						LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
-
-						dateAfter1Week = "" + result;
-						new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, ngayMuon, dateAfter1Week, tenNV);
+						
+						new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, tenNV);
 						txtMaDG.setText("");
 						GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 						mainframe.dulieubangPhieuMuon();
+						mainframe.dulieubangTraSach();
 					} else {
 						JOptionPane.showMessageDialog(null, "Độc Giả chưa Trả Phiếu Mượn!");
 					}
 				} else {
-					LocalDate currentDate = LocalDate.now();
-
-					dateLap = "" + currentDate;
-					LocalDate result = currentDate.plus(1, ChronoUnit.WEEKS);
-
-					dateAfter1Week = "" + result;
-					new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, ngayMuon, dateAfter1Week, tenNV);
+					
+					new PhieuMuonDAO().suaPhieuMuon(getmaPM(), maDG, tenNV);
 					txtMaDG.setText("");
 					GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 					mainframe.dulieubangPhieuMuon();
+					mainframe.dulieubangTraSach();
 				}
 			}
 		});

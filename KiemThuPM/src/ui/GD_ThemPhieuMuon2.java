@@ -154,6 +154,7 @@ public class GD_ThemPhieuMuon2 extends JFrame {
 						txtMaDG.setText("");
 						GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 						mainframe.dulieubangPhieuMuon();
+						mainframe.dulieubangTraSach();
 					} else {
 						JOptionPane.showMessageDialog(null, "Độc Giả Chưa Trả Phiếu Mượn!");
 					}

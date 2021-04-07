@@ -152,13 +152,12 @@ public class PhieuMuonDAO {
 
 	}
 
-	public void suaPhieuMuon(String maPM, String maDG, String ngayMuon, String ngayTra, String tenNV) {
+	public void suaPhieuMuon(String maPM, String maDG, String tenNV) {
 		String manv = getMaNV(tenNV);
 
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Update PhieuMuon set madocgia = '" + maDG + "',ngaymuon = '" + ngayMuon + "',ngaytra = '"
-					+ ngayTra + "',manv = '" + manv + "' where maPM = '" + maPM + "'";
+			String querry = "Update PhieuMuon set madocgia = '" + maDG + "',manv = '" + manv + "' where maPM = '" + maPM + "'";
 
 			PreparedStatement ps = con.prepareStatement(querry);
 

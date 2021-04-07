@@ -218,6 +218,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		scrollPane.setViewportView(tableTraSach);
 		
 		JButton btnXem_1 = new JButton("Xem");
+		btnXem_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableTraSach.getModel();
@@ -234,10 +235,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 				}
 			}
 		});
-		btnXem_1.setBounds(266, 577, 85, 40);
+		btnXem_1.setBounds(397, 577, 85, 40);
 		pnlCardTraSach.add(btnXem_1);
 		
 		JButton btnXa = new JButton("Xóa");
+		btnXa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel Df = (DefaultTableModel) tableTraSach.getModel();
@@ -257,7 +259,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				}
 			}
 		});
-		btnXa.setBounds(466, 577, 85, 40);
+		btnXa.setBounds(794, 577, 85, 40);
 		pnlCardTraSach.add(btnXa);
 		
 		JPanel pnlCardQuanLyDocGia = new JPanel();

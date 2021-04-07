@@ -72,7 +72,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JTable tableDocGia_1;
 	private JTable tableQuanLyThanhLySach_1;
 	private DefaultTableModel tableModelMuonSach, tableModelDocGia, tableModelQuanLySach, tableModelQuanLyNhapSach,
-			tableModelQuanLyThanhLySach;
+			tableModelQuanLyThanhLySach , tableModelTraSach;
 	private PhieuMuonDAO dsPhieuMuon = new PhieuMuonDAO();
 	private DocGiaDAO dsDocGia = new DocGiaDAO();
 	private SachDAO dsSach = new SachDAO();
@@ -100,6 +100,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JTextField txtNgaySinh_QLDG;
 	private JTextField txtThangSinh_QLDG;
 	private JTextField txtNamSinhQLDG;
+	private JTable tableTraSach;
 
 	/**
 	 * Launch the application.
@@ -151,7 +152,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JPanel pnlThanhLySach = new JPanel();
 		JPanel pnlQuanLyDocGia = new JPanel();
 		JPanel pnlMuonSach = new JPanel();
-
+		JPanel pnlTraSach = new JPanel();
+		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1032);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -191,7 +193,73 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardMuonSach.setBackground(Color.DARK_GRAY);
 		pnlCard.add(pnlCardMuonSach, "pnlCardMuonSach");
 		pnlCardMuonSach.setLayout(null);
+		
+		JPanel pnlCardTraSach = new JPanel();
+		pnlCard.add(pnlCardTraSach, "pnlCardTraSach");
+		pnlCardTraSach.setLayout(null);
+		pnlCardTraSach.setBackground(new Color(51, 102, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(219, 333, 874, 221);
+		pnlCardTraSach.add(scrollPane);
+		
+		tableTraSach = new JTable();
+		String[] headerTraSach = " Mã Phiếu Mượn; Tên Độc Giả; Tên Nhân Viên; Ngày Mượn; Ngày Trả".split(";");
+		tableModelTraSach = new DefaultTableModel(headerTraSach, 0);
+		tableTraSach = new JTable(tableModelTraSach);
+		
+		tableTraSach.getColumnModel().getColumn(0).setResizable(false);
+		tableTraSach.getColumnModel().getColumn(0).setPreferredWidth(95);
+		tableTraSach.getColumnModel().getColumn(1).setResizable(false);
+		tableTraSach.getColumnModel().getColumn(1).setPreferredWidth(105);
+		tableTraSach.getColumnModel().getColumn(2).setResizable(false);
+		tableTraSach.getColumnModel().getColumn(2).setPreferredWidth(105);
+		tableTraSach.getColumnModel().getColumn(3).setResizable(false);
+		scrollPane.setViewportView(tableTraSach);
+		
+		JButton btnXem_1 = new JButton("Xem");
+		btnXem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableTraSach.getModel();
+				int selectedIndex = tableTraSach.getSelectedRow();
+				if (selectedIndex != -1) {
+					String maPM = Df.getValueAt(selectedIndex, 0).toString();
+					String tenDG = Df.getValueAt(selectedIndex, 1).toString();
+					GD_ChiTietPhieuTra ctpt = new GD_ChiTietPhieuTra(maPM,tenDG);
+					ctpt.setVisible(true);
+					ctpt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+				} else {
+					JOptionPane.showMessageDialog(null, "Chưa Chọn Phiếu Mượn Để Xác Nhận Trả!");
+				}
+			}
+		});
+		btnXem_1.setBounds(266, 577, 85, 40);
+		pnlCardTraSach.add(btnXem_1);
+		
+		JButton btnXa = new JButton("Xóa");
+		btnXa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel Df = (DefaultTableModel) tableTraSach.getModel();
+				int selectedIndex = tableTraSach.getSelectedRow();
+				if (selectedIndex != -1) {
+					String idPM = Df.getValueAt(selectedIndex, 0).toString();
+					int dialog = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning!",
+							JOptionPane.YES_NO_OPTION);
+					if (dialog == JOptionPane.YES_OPTION) {
+						PhieuMuonDAO pm = new PhieuMuonDAO();
+						pm.xoaPM(idPM);
+						dulieubangPhieuMuon();
+						dulieubangTraSach();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+				}
+			}
+		});
+		btnXa.setBounds(466, 577, 85, 40);
+		pnlCardTraSach.add(btnXa);
+		
 		JPanel pnlCardQuanLyDocGia = new JPanel();
 		pnlCardQuanLyDocGia.setBackground(new Color(51, 153, 204));
 		pnlCard.add(pnlCardQuanLyDocGia, "pnlCardQuanLyDocGia");
@@ -389,6 +457,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlNhapSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlDashBoard.setBounds(0, 182, 281, 67);
@@ -418,6 +487,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlNhapSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlQuanLySach.setLayout(null);
@@ -446,6 +516,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlMuonSach);
 				resetColor(pnlNhapSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlDangKyTheTV.setLayout(null);
@@ -475,6 +546,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlMuonSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlNhapSach.setLayout(null);
@@ -504,6 +576,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlNhapSach);
 				resetColor(pnlMuonSach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlThanhLySach.setLayout(null);
@@ -990,6 +1063,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlNhapSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlQuanLyDocGia.setLayout(null);
@@ -1321,6 +1395,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 				resetColor(pnlDangKyTheTV);
 				resetColor(pnlNhapSach);
 				resetColor(pnlThanhLySach);
+				resetColor(pnlTraSach);
 			}
 		});
 		pnlMuonSach.setLayout(null);
@@ -1335,6 +1410,36 @@ public class GD_MainPage extends javax.swing.JFrame {
 		lblNewLabel_3.setIcon(new ImageIcon("D:\\KiemThuPM\\src\\images\\icons8_course_assign_30px.png"));
 		lblNewLabel_3.setBounds(28, 10, 39, 48);
 		pnlMuonSach.add(lblNewLabel_3);
+		
+		
+		pnlTraSach.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cardLayout.show(pnlCard, "pnlCardTraSach");
+				setColor(pnlTraSach);
+				resetColor(pnlDashBoard);
+				resetColor(pnlQuanLySach);
+				resetColor(pnlQuanLyDocGia);
+				resetColor(pnlDangKyTheTV);
+				resetColor(pnlNhapSach);
+				resetColor(pnlMuonSach);
+				resetColor(pnlThanhLySach);
+			}
+		});
+		pnlTraSach.setLayout(null);
+		pnlTraSach.setBackground(new Color(153, 153, 153));
+		pnlTraSach.setBounds(0, 692, 281, 67);
+		pnlSideBar.add(pnlTraSach);
+		
+		JLabel lblTrSch = new JLabel("Trả Sách");
+		lblTrSch.setForeground(Color.WHITE);
+		lblTrSch.setFont(new Font("Verdana", Font.BOLD, 15));
+		lblTrSch.setBounds(77, 10, 141, 48);
+		pnlTraSach.add(lblTrSch);
+		
+		JLabel lblNewLabel_6_1 = new JLabel("");
+		lblNewLabel_6_1.setBounds(28, 10, 39, 48);
+		pnlTraSach.add(lblNewLabel_6_1);
 
 		JLabel lblTieuDePhieuMuon = new JLabel("Phiếu Mượn");
 		lblTieuDePhieuMuon.setForeground(Color.WHITE);
@@ -1406,6 +1511,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						pm.xoaPM(idPM);
 
 						dulieubangPhieuMuon();
+						dulieubangTraSach();
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
@@ -1497,6 +1603,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						String ngayTraMoi = sdf.format(c.getTime());
 						pmd.giaHanPM(maPM, ngayTraMoi);
 						dulieubangPhieuMuon();
+						dulieubangTraSach();
 					} else {
 						JOptionPane.showMessageDialog(null, "Mỗi phiếu mượn chỉ được gia hạn 1 lần!");
 					}
@@ -1508,6 +1615,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnGiaHanPhieu.setFont(new Font("Verdana", Font.PLAIN, 15));
 		btnGiaHanPhieu.setBounds(202, 239, 200, 30);
 		pnlCardMuonSach.add(btnGiaHanPhieu);
+		
 
 ///////////////////////////////////////////
 		DataBase.getInstance().connect();
@@ -1516,6 +1624,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		dulieubangSach();
 		dulieubangDocGia();
 		dulieubangPhieuMuon();
+		dulieubangTraSach();
 ///////////////////////////////////		
 	}
 
@@ -1528,6 +1637,17 @@ public class GD_MainPage extends javax.swing.JFrame {
 			tableModelMuonSach.addRow(rowdata1);
 		}
 		tableMuonSach.setModel(tableModelMuonSach);
+	}
+	
+	public void dulieubangTraSach() {
+		ArrayList<PhieuMuon> list = dsPhieuMuon.doctubangPhieuMuon();
+		tableModelTraSach.setRowCount(0);
+		for (PhieuMuon phieumuon : list) {
+			String[] rowdata1 = { phieumuon.getMaPM(), phieumuon.getTenDG(), phieumuon.getTenNV(),
+					phieumuon.getNgayMuon(), phieumuon.getNgayTra() };
+			tableModelTraSach.addRow(rowdata1);
+		}
+		tableTraSach.setModel(tableModelTraSach);
 	}
 
 	public void dulieubangPhieuThanhLy() {

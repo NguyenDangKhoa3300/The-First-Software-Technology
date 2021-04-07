@@ -101,6 +101,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private JTextField txtThangSinh_QLDG;
 	private JTextField txtNamSinhQLDG;
 	private JTable tableTraSach;
+	private JTextField txtTenDG_TraSach;
 
 	/**
 	 * Launch the application.
@@ -261,6 +262,52 @@ public class GD_MainPage extends javax.swing.JFrame {
 		});
 		btnXa.setBounds(794, 577, 85, 40);
 		pnlCardTraSach.add(btnXa);
+		
+		JLabel lblTrSch_1 = new JLabel("Trả Sách");
+		lblTrSch_1.setFont(new Font("SansSerif", Font.BOLD, 50));
+		lblTrSch_1.setForeground(Color.WHITE);
+		lblTrSch_1.setBounds(219, 97, 336, 64);
+		pnlCardTraSach.add(lblTrSch_1);
+		
+		txtTenDG_TraSach = new JTextField();
+		txtTenDG_TraSach.setFont(new Font("Verdana", Font.PLAIN, 15));
+		txtTenDG_TraSach.setBounds(806, 279, 146, 26);
+		pnlCardTraSach.add(txtTenDG_TraSach);
+		txtTenDG_TraSach.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Tìm");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ten = txtTenDG_TraSach.getText();
+				if (ten.length() <= 0) {
+					JOptionPane.showMessageDialog(null, "Bạn Chưa Nhập Tên Độc Giả");
+					dulieubangTraSach();
+				} else {
+					ArrayList<PhieuMuon> list = dsPhieuMuon.TimDocGiaTraSach(ten);
+					if (list.size() > 0) {
+						tableModelTraSach.setRowCount(0);
+						for (PhieuMuon pm : list) {
+							String[] rowtable = { pm.getMaPM(), pm.getTenDG(), pm.getTenNV(), pm.getNgayMuon(),
+									pm.getNgayTra() };
+							tableModelTraSach.addRow(rowtable);
+						}
+						tableTraSach.setModel(tableModelTraSach);
+					} else {
+						JOptionPane.showMessageDialog(null, "Không Tìm Thấy Độc Giả");
+						dulieubangTraSach();
+					}
+				}
+			}
+		});
+		btnNewButton.setBounds(980, 279, 90, 26);
+		pnlCardTraSach.add(btnNewButton);
+		
+		JLabel lblNewLabel_8 = new JLabel("Tìm Độc Giả:");
+		lblNewLabel_8.setForeground(new Color(255, 255, 255));
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_8.setBounds(709, 283, 87, 19);
+		pnlCardTraSach.add(lblNewLabel_8);
 		
 		JPanel pnlCardQuanLyDocGia = new JPanel();
 		pnlCardQuanLyDocGia.setBackground(new Color(51, 153, 204));

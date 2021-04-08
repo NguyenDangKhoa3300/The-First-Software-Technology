@@ -18,8 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -169,5 +172,10 @@ public class GD_ChiTietPhieuTra extends JFrame {
 		lblTenDG.setForeground(new Color(255, 255, 255));
 		lblTenDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTenDG.setText(tenDGFromMain);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();  
+		Dimension screenSize = toolkit.getScreenSize(); 
+		int x = (screenSize.width - getWidth()) / 2;  
+		int y = (screenSize.height - getHeight()) / 2;  
+		setLocation(x, y);  
 	}
 }

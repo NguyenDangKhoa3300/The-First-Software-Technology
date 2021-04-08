@@ -208,7 +208,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 		
 		tableTraSach = new JTable();
 		String[] headerTraSach = " Mã Phiếu Mượn; Tên Độc Giả; Tên Nhân Viên; Ngày Mượn; Ngày Trả".split(";");
-		tableModelTraSach = new DefaultTableModel(headerTraSach, 0);
+		tableModelTraSach = new DefaultTableModel(headerTraSach, 0){
+
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableTraSach = new JTable(tableModelTraSach);
 		
 		tableTraSach.getColumnModel().getColumn(0).setResizable(false);
@@ -785,7 +792,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 		tableQuanLyNhapSach = new JTable();
 		tableQuanLyNhapSach.setEnabled(false);
 		String[] headers3 = "Mã Phiếu Đặt; Tên Nhân Viên; Ngày Đặt".split(";");
-		tableModelQuanLyNhapSach = new DefaultTableModel(headers3, 0);
+		tableModelQuanLyNhapSach = new DefaultTableModel(headers3, 0){
+
+			boolean[] columnEditables = new boolean[] { false, false, false};
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableQuanLyNhapSach = new JTable(tableModelQuanLyNhapSach);
 		scrollPaneQuanLyDatSach.setViewportView(tableQuanLyNhapSach);
 
@@ -950,7 +964,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		tableQuanLyThanhLySach = new JTable();
 		String[] headers4 = "Mã Phiếu Thanh Lý; Tên Nhân Viên; Ngày Thanh Lý".split(";");
-		tableModelQuanLyThanhLySach = new DefaultTableModel(headers4, 0);
+		tableModelQuanLyThanhLySach = new DefaultTableModel(headers4, 0){
+
+			boolean[] columnEditables = new boolean[] { false, false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableQuanLyThanhLySach_1 = new JTable(tableModelQuanLyThanhLySach);
 
 		scrollPaneQuanLyPTL.setViewportView(tableQuanLyThanhLySach_1);
@@ -1097,7 +1118,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		tableQuanLySach = new JTable();
 		String[] headers2 = "Mã Sách; Tên Sách; Thể Loại; Năm Xuất Bản; Tên Nhà Xuất Bản; Tình Trạng Sách".split(";");
-		tableModelQuanLySach = new DefaultTableModel(headers2, 0);
+		tableModelQuanLySach = new DefaultTableModel(headers2, 0){
+
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false,false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableQuanLySach = new JTable(tableModelQuanLySach);
 		scrollPaneQuanLySach.setViewportView(tableQuanLySach);
 
@@ -1523,7 +1551,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		tableMuonSach = new JTable();
 		String[] headers = " Mã Phiếu Mượn; Tên Độc Giả; Tên Nhân Viên; Ngày Mượn; Ngày Trả".split(";");
-		tableModelMuonSach = new DefaultTableModel(headers, 0);
+		tableModelMuonSach = new DefaultTableModel(headers, 0){
+
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};
 		tableMuonSach = new JTable(tableModelMuonSach);
 		scrollPanePhieuMuon.setViewportView(tableMuonSach);
 

@@ -28,6 +28,8 @@ import entities.PhieuMuon;
 import entities.PhieuThanhLy;
 import entities.Sach;
 import net.miginfocom.swing.MigLayout;
+
+
 import java.awt.Color;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
@@ -1193,7 +1195,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 					if (dialog == JOptionPane.YES_OPTION) {
 						DocGiaDAO dg = new DocGiaDAO();
 						dg.xoaDG(idDG);
-
+						dulieubangPhieuMuon();
+						dulieubangTraSach();
 						dulieubangDocGia();
 					}
 				} else {
@@ -1226,7 +1229,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dg.suaDocGia(maDG, hoTen, birthday, soCMND, soDT);
 						dulieubangDocGia();
 						dulieubangPhieuMuon();
-						
+						dulieubangTraSach();
 						}else {
 							JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Thông Tin Độc giả!");
 						}
@@ -1675,6 +1678,10 @@ public class GD_MainPage extends javax.swing.JFrame {
 		dulieubangPhieuMuon();
 		dulieubangTraSach();
 ///////////////////////////////////		
+		//color table
+		TableColorCellRender colorTable = new TableColorCellRender();
+		
+		tableTraSach.setDefaultRenderer(Object.class, colorTable);
 	}
 
 	public void dulieubangPhieuMuon() {

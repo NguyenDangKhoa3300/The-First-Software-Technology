@@ -27,7 +27,9 @@ import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 
 import javax.swing.JTextField;
@@ -88,6 +90,9 @@ public class GD_ChiTietPhieuDat extends JFrame {
 	}
 
 	public void bangdulieuCTPD() {
+		Locale localeVN = new Locale("vi", "VN");
+	    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+	    String donGia = null;
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
 		ChiTietPhieuDat ctpd = new ChiTietPhieuDat();
 		ArrayList<ChiTietPhieuDat> list = dsCTPhieuDat.doctubangPhieuDat(getMaPD());
@@ -95,7 +100,8 @@ public class GD_ChiTietPhieuDat extends JFrame {
 		Df.setRowCount(0);
 
 		for (ChiTietPhieuDat pd : list) {
-			String[] rowtable = { pd.getMaCTPD(), pd.getMaNXB(), pd.getTenSach(), pd.getSoLuong(), pd.getDonGia() };
+			donGia = currencyVN.format(Double.parseDouble(pd.getDonGia()));
+			String[] rowtable = { pd.getMaCTPD(), pd.getMaNXB(), pd.getTenSach(), pd.getSoLuong(), donGia };
 			Df.addRow(rowtable);
 
 		}
@@ -132,7 +138,10 @@ public class GD_ChiTietPhieuDat extends JFrame {
 				}
 				txtTenSach.setText(Df.getValueAt(selectedIndex, 2).toString());
 				txtSoLuong.setText(Df.getValueAt(selectedIndex, 3).toString());
-				txtDonGia.setText(Df.getValueAt(selectedIndex, 4).toString());
+				
+				String s = Df.getValueAt(selectedIndex, 4).toString().replaceAll("\\D+","");
+				
+				txtDonGia.setText(s);
 			}
 		});
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Mã CTPD", "Nh\u00E0 xu\u1EA5t b\u1EA3n",
@@ -239,7 +248,7 @@ public class GD_ChiTietPhieuDat extends JFrame {
 					txtDonGia.setEditable(true);
 
 				} else {
-					String mess = "Khong duoc nhap chu!";
+					String mess = "Chỉ được nhập số!";
 					JOptionPane.showMessageDialog(null, mess);
 					txtDonGia.setText("");
 				}
@@ -276,11 +285,11 @@ public class GD_ChiTietPhieuDat extends JFrame {
 					String donGia = txtDonGia.getText();
 					new CTPhieuDatDAO().themPhieuDat(maPD, tenNXB, tenSach, soLuong, donGia);
 					bangdulieuCTPD();
-					txtTenSach.setText("");
-					txtSoLuong.setText("");
-					txtDonGia.setText("");
+					//txtTenSach.setText("");
+					//txtSoLuong.setText("");
+					//txtDonGia.setText("");
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua nhap du thong tin!");
+					JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin!");
 				}
 			}
 		});

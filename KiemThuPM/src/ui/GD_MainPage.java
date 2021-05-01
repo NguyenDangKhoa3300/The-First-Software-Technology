@@ -96,8 +96,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private String ngaySinhDG_DKTV;
 	private String thangSinhDG_DKTV;
 	private String namSinhDG_DKTV;
-	private final String URL_IMAGE = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\libraryandgirl.png";
-	private final String URL_IMAGELOGO = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\ImageBook.png";
+	private final String URL_IMAGE = "/images/libraryandgirl.png";
+	private final String URL_IMAGELOGO = "/images/ImageBook.png";
 	// QLDG
 	private JTextField txtTenDG_QLDG;
 	private JTextField txtSoCMND_QLDG;
@@ -192,7 +192,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		
 		JLabel labelImage = new JLabel("");
 		pnlCardDashBoard.add(labelImage);
-		labelImage.setIcon(new ImageIcon(new ImageIcon(URL_IMAGE).getImage().getScaledInstance(1400, 850, Image.SCALE_DEFAULT)));
+		
+		labelImage.setIcon(new ImageIcon(new ImageIcon(GD_DangNhap.class.getResource(URL_IMAGE)).getImage().getScaledInstance(1400, 850, Image.SCALE_DEFAULT)));
 		JPanel pnlCardQuanLySach = new JPanel();
 		pnlCardQuanLySach.setBackground(UIManager.getColor("activeCaptionBorder"));
 		pnlCard.add(pnlCardQuanLySach, "pnlCardQuanLySach");
@@ -1525,7 +1526,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JLabel labelLoGo = new JLabel("");
 		labelLoGo.setBounds(0, 0, 281, 183);
 		pnlSideBar.add(labelLoGo);
-		labelLoGo.setIcon(new ImageIcon(new ImageIcon(URL_IMAGELOGO).getImage().getScaledInstance(280, 180, Image.SCALE_DEFAULT)));
+		
+		labelLoGo.setIcon(new ImageIcon(new ImageIcon(GD_DangNhap.class.getResource(URL_IMAGELOGO)).getImage().getScaledInstance(280, 180, Image.SCALE_DEFAULT)));
 		JLabel lblTieuDePhieuMuon = new JLabel("Phiếu Mượn");
 		lblTieuDePhieuMuon.setForeground(Color.WHITE);
 		lblTieuDePhieuMuon.setFont(new Font("SansSerif", lblTieuDePhieuMuon.getFont().getStyle(), 50));

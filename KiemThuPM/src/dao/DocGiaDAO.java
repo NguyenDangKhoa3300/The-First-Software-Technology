@@ -73,7 +73,7 @@ public class DocGiaDAO {
 
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into DocGia values('" + maDG + "','" + hoTen + "','" + namSinh + "','" + soCMND + "','"+ soDT + "'"+");";
+			String querry = "Insert into DocGia values('" + maDG + "',N'" + hoTen + "','" + namSinh + "','" + soCMND + "','"+ soDT + "'"+");";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 
@@ -145,7 +145,7 @@ public void suaDocGia(String masv, String hoTen, String namSinh, String CMND, St
 		
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Update DocGia set hoten = '"+hoTen+"',namSinh = '"+namSinh+"',CMND = '" +CMND+"',soDienThoai = '"+soDT+"' where masv = '"+ masv+"'";
+			String querry = "Update DocGia set hoten = N'"+hoTen+"',namSinh = '"+namSinh+"',CMND = '" +CMND+"',soDienThoai = '"+soDT+"' where masv = '"+ masv+"'";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 

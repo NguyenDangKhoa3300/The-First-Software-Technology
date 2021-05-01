@@ -33,8 +33,8 @@ public class GD_DangNhap extends JFrame {
 	private JPanel contentPane;
 	private JTextField taiKhoanField;
 	private JPasswordField passwordField;
-	private final String URL_LOGO = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\LoGoBook.png";
-	private final String URL_LOGO2 = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\TrippleK.png";
+	private final String URL_LOGO = "/images/LoGoBook.png";
+	private final String URL_LOGO2 = "/images/TrippleK.png";
 	private final String TAIKHOAN = "taikhoanthuvien";
 	private final String MATKHAU = "123123";
 	/**
@@ -76,15 +76,16 @@ public class GD_DangNhap extends JFrame {
 		labelLoGo.setBounds(0, 0, 425, 263);
 		panel.add(labelLoGo);
 		
-		ImageIcon imageIcon = new ImageIcon(new ImageIcon(URL_LOGO).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT));
-		labelLoGo.setIcon(imageIcon);
+		
+		
+		
+		labelLoGo.setIcon(new ImageIcon(new ImageIcon(GD_DangNhap.class.getResource(URL_LOGO)).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT)));
 		
 		JLabel loGoTripleK = new JLabel("");
 		loGoTripleK.setBounds(0, 262, 425, 265);
 		panel.add(loGoTripleK);
 		
-		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(URL_LOGO2).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT));
-		loGoTripleK.setIcon(imageIcon2);
+		loGoTripleK.setIcon(new ImageIcon(new ImageIcon(GD_DangNhap.class.getResource(URL_LOGO2)).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT)));
 		
 		JButton btnNewButton = new JButton("\u0110\u0103ng nh\u1EADp");
 		btnNewButton.addActionListener(new ActionListener() {

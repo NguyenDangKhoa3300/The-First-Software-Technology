@@ -176,7 +176,7 @@ public class GD_ChiTietPhieuMuon extends JFrame {
 						pmd.themPhieuChiTietMuon(getMaPM(), maSach);
 						bangdulieuSachDangMuon();
 					} else {
-						JOptionPane.showMessageDialog(null, "Sach da duoc muon!");
+						JOptionPane.showMessageDialog(null, "Sách đã được mượn!");
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Sách!");

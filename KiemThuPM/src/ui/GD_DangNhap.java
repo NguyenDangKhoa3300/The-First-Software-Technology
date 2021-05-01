@@ -1,31 +1,42 @@
 package ui;
-
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Container;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
 
-import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class GD_DangNhap extends JFrame implements ActionListener{
-
-	private JFrame frame;
-	private JTextField txtTaiKhoan;
-	private JPasswordField txtPassWord;
-	private JButton btnDangNhap;
-	private JButton btnHuy;
-
+public class GD_DangNhap extends JFrame {
+	static GD_DangNhap frame;
+	private JPanel contentPane;
+	private JTextField taiKhoanField;
+	private JPasswordField passwordField;
+	private final String URL_LOGO = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\LoGoBook.png";
+	private final String URL_LOGO2 = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\TrippleK.png";
+	private final String TAIKHOAN = "taikhoanthuvien";
+	private final String MATKHAU = "123123";
 	/**
 	 * Launch the application.
 	 */
@@ -33,8 +44,9 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GD_DangNhap window = new GD_DangNhap();
-					window.frame.setVisible(true);
+					frame = new GD_DangNhap();
+					frame.setUndecorated(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,76 +55,110 @@ public class GD_DangNhap extends JFrame implements ActionListener{
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public GD_DangNhap() {
-		initialize();
-	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 350);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 861, 517);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(0, 0, 425, 537);
+		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblTittle = new JLabel("\u0110\u0103ng Nh\u1EADp");
-		lblTittle.setFont(new Font("Verdana", Font.PLAIN, 25));
-		lblTittle.setBounds(217, 30, 148, 44);
-		panel.add(lblTittle);
+		JLabel labelLoGo = new JLabel("");
+		labelLoGo.setBounds(0, 0, 425, 263);
+		panel.add(labelLoGo);
 		
-		JLabel lblTaiKhoan = new JLabel("T\u00E0i Kho\u1EA3n");
-		lblTaiKhoan.setFont(new Font("Verdana", Font.PLAIN, 20));
-		lblTaiKhoan.setBounds(53, 106, 105, 26);
-		panel.add(lblTaiKhoan);
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon(URL_LOGO).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT));
+		labelLoGo.setIcon(imageIcon);
 		
-		JLabel lblMatKhau = new JLabel("M\u1EADt Kh\u1EA9u");
-		lblMatKhau.setFont(new Font("Verdana", Font.PLAIN, 20));
-		lblMatKhau.setBounds(53, 175, 105, 26);
-		panel.add(lblMatKhau);
+		JLabel loGoTripleK = new JLabel("");
+		loGoTripleK.setBounds(0, 262, 425, 265);
+		panel.add(loGoTripleK);
 		
-		txtTaiKhoan = new JTextField();
-		txtTaiKhoan.setBounds(193, 103, 321, 30);
-		panel.add(txtTaiKhoan);
-		txtTaiKhoan.setColumns(10);
+		ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(URL_LOGO2).getImage().getScaledInstance(425, 263, Image.SCALE_DEFAULT));
+		loGoTripleK.setIcon(imageIcon2);
 		
-		txtPassWord = new JPasswordField();
-		txtPassWord.setBounds(193, 175, 321, 30);
-		panel.add(txtPassWord);
-		
-		btnHuy = new JButton("H\u1EE7y");
-		btnHuy.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnHuy.setBounds(349, 246, 85, 35);
-		panel.add(btnHuy);
-		
-		btnDangNhap = new JButton("\u0110\u0103ng Nh\u1EADp");
-		btnDangNhap.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnDangNhap.setBounds(128, 246, 169, 35);
-		panel.add(btnDangNhap);
-		
-		btnDangNhap.addActionListener(this);
-		btnHuy.addActionListener(this);
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		Object o = e.getSource();
-		char chPassWord[]= txtPassWord.getPassword();
-		String strPassword = new String(chPassWord);
-		if (o.equals(btnDangNhap)) {
-			if(strPassword.length()==0 || txtTaiKhoan.getText().toString().length()==0) {
-				JOptionPane.showMessageDialog(null, "Chưa Nhập Đủ Dữ Liệu");
+		JButton btnNewButton = new JButton("\u0110\u0103ng nh\u1EADp");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tk = taiKhoanField.getText();
+				String pw = new String(passwordField.getPassword());			
+				if(tk.length() == 0 || pw.length() == 0) {
+					JOptionPane.showMessageDialog(null, "Chưa nhập đủ thông tin!");
+				}else {
+					if(tk.equals(TAIKHOAN) && pw.equals(MATKHAU)) {
+						GD_MainPage mp = new GD_MainPage();
+						mp.main(null);
+						mp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+						dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+						
+						
+					}else if(tk.equals(TAIKHOAN) && !pw.equals(MATKHAU)){
+						JOptionPane.showMessageDialog(null, "Nhập sai mật khẩu!");
+					}else if(!tk.equals(TAIKHOAN) && pw.equals(MATKHAU)){
+						JOptionPane.showMessageDialog(null, "Nhập sai tài khoản!");
+					}else {
+						JOptionPane.showMessageDialog(null, "Nhập sai tài khoản và mật khẩu!");
+					}
+				}
+				
 			}
-		}
+		});
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(SystemColor.textHighlight);
+		btnNewButton.setBounds(570, 395, 156, 36);
+		contentPane.add(btnNewButton);
 		
-		if (o.equals(btnHuy)) {
-			System.exit(0);
-		}
+		taiKhoanField = new JTextField();
+		taiKhoanField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		taiKhoanField.setBounds(571, 185, 156, 28);
+		contentPane.add(taiKhoanField);
+		taiKhoanField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("T\u00E0i Kho\u1EA3n");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(570, 138, 117, 22);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblMtKhu = new JLabel("M\u1EADt Kh\u1EA9u");
+		lblMtKhu.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMtKhu.setBounds(570, 233, 117, 22);
+		contentPane.add(lblMtKhu);
+		
+		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		passwordField.setBounds(571, 288, 156, 28);
+		contentPane.add(passwordField);
+		
+		JLabel lblNewLabel_1 = new JLabel("X");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblNewLabel_1.setBounds(836, 0, 30, 23);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel labelDangNhap = new JLabel("\u0110\u0103ng nh\u1EADp");
+		labelDangNhap.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 24));
+		labelDangNhap.setBounds(593, 22, 133, 29);
+		contentPane.add(labelDangNhap);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();  
+		Dimension screenSize = toolkit.getScreenSize(); 
+		int x = (screenSize.width - getWidth()) / 2;  
+		int y = (screenSize.height - getHeight()) / 2;  
+		setLocation(x, y);  
 	}
 }

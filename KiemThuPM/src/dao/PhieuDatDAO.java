@@ -110,7 +110,7 @@ public class PhieuDatDAO {
 		try {
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Select manv from nhanvien where tenNV = N'"+tenNV+"'";
-			System.out.println(querry);
+			
 			PreparedStatement ps = con.prepareStatement(querry);
 			
 			ResultSet rs = ps.executeQuery();

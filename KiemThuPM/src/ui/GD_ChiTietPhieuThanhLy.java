@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -29,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -78,6 +80,10 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 	}
 
 	public void bangdulieuCTPTL() {
+		Locale localeVN = new Locale("vi", "VN");
+	    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+	    String donGia = null;
+	    
 		DefaultTableModel Df = (DefaultTableModel) table.getModel();
 
 		ArrayList<ChitietPhieuThanhLy> list = dsCTPhieuTL.doctubangPhieuDat(getMaPTL());
@@ -85,7 +91,8 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 		Df.setRowCount(0);
 
 		for (ChitietPhieuThanhLy ptl : list) {
-			String[] rowtable = { ptl.getMaCTPTL(), ptl.getTenSach(), ptl.getDonGia() };
+			donGia = currencyVN.format(Double.parseDouble(ptl.getDonGia()));
+			String[] rowtable = { ptl.getMaCTPTL(), ptl.getTenSach(), donGia };
 			Df.addRow(rowtable);
 
 		}
@@ -119,7 +126,10 @@ public class GD_ChiTietPhieuThanhLy extends JFrame {
 				String mactptl = Df.getValueAt(selectedIndex, 0).toString();
 
 				txtMaSach.setText(dsCTPhieuTL.getMaSach(mactptl));
-				txtDonGia.setText(Df.getValueAt(selectedIndex, 2).toString());
+				
+				String s = Df.getValueAt(selectedIndex, 2).toString().replaceAll("\\D+","");
+				
+				txtDonGia.setText(s);
 
 			}
 		});

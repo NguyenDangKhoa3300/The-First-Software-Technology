@@ -11,6 +11,8 @@ import java.awt.FlowLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -94,7 +96,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 	private String ngaySinhDG_DKTV;
 	private String thangSinhDG_DKTV;
 	private String namSinhDG_DKTV;
-
+	private final String URL_IMAGE = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\libraryandgirl.png";
+	private final String URL_IMAGELOGO = "G:\\Eclipse\\WorkSpace\\KiemThuPM\\src\\images\\ImageBook.png";
 	// QLDG
 	private JTextField txtTenDG_QLDG;
 	private JTextField txtSoCMND_QLDG;
@@ -159,7 +162,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1920, 1032);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -185,8 +188,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JPanel pnlCardDashBoard = new JPanel();
 		pnlCardDashBoard.setBackground(UIManager.getColor("ScrollBar.foreground"));
 		pnlCard.add(pnlCardDashBoard, "pnlCardDashBoard");
-		pnlCardDashBoard.setLayout(null);
-
+		pnlCardDashBoard.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel labelImage = new JLabel("");
+		pnlCardDashBoard.add(labelImage);
+		labelImage.setIcon(new ImageIcon(new ImageIcon(URL_IMAGE).getImage().getScaledInstance(1400, 850, Image.SCALE_DEFAULT)));
 		JPanel pnlCardQuanLySach = new JPanel();
 		pnlCardQuanLySach.setBackground(UIManager.getColor("activeCaptionBorder"));
 		pnlCard.add(pnlCardQuanLySach, "pnlCardQuanLySach");
@@ -248,7 +254,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		btnXem_1.setBounds(397, 577, 85, 40);
 		pnlCardTraSach.add(btnXem_1);
 		
-		JButton btnXa = new JButton("Xóa");
+		JButton btnXa = new JButton("Trả");
 		btnXa.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnXa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,7 +271,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dulieubangTraSach();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu!");
 				}
 			}
 		});
@@ -329,44 +335,44 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardDangKyTheTV.setLayout(null);
 
 		JLabel lblNewLabel_7 = new JLabel("Họ Tên:");
-		lblNewLabel_7.setForeground(Color.BLACK);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7.setBounds(127, 183, 106, 17);
+		lblNewLabel_7.setForeground(Color.WHITE);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7.setBounds(361, 177, 65, 22);
 		pnlCardDangKyTheTV.add(lblNewLabel_7);
 
 		JLabel lblNewLabel_7_1 = new JLabel("Số CMND:");
-		lblNewLabel_7_1.setForeground(Color.BLACK);
-		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7_1.setBounds(127, 219, 106, 17);
+		lblNewLabel_7_1.setForeground(Color.WHITE);
+		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7_1.setBounds(361, 213, 82, 22);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_1);
 
 		JLabel lblNewLabel_7_2 = new JLabel("Số Điện Thoại: ");
-		lblNewLabel_7_2.setForeground(Color.BLACK);
-		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7_2.setBounds(127, 261, 106, 17);
+		lblNewLabel_7_2.setForeground(Color.WHITE);
+		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7_2.setBounds(361, 255, 124, 22);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2);
 
 		JLabel lblNewLabel_7_2_1 = new JLabel("Ngày sinh:");
-		lblNewLabel_7_2_1.setForeground(Color.BLACK);
-		lblNewLabel_7_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7_2_1.setBounds(127, 330, 106, 17);
+		lblNewLabel_7_2_1.setForeground(Color.WHITE);
+		lblNewLabel_7_2_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7_2_1.setBounds(314, 322, 86, 22);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1);
 
-		JLabel lblNewLabel_7_2_1_1 = new JLabel("Tháng Sinh");
-		lblNewLabel_7_2_1_1.setForeground(Color.BLACK);
-		lblNewLabel_7_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7_2_1_1.setBounds(327, 330, 106, 17);
+		JLabel lblNewLabel_7_2_1_1 = new JLabel("Tháng Sinh:");
+		lblNewLabel_7_2_1_1.setForeground(Color.WHITE);
+		lblNewLabel_7_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7_2_1_1.setBounds(511, 325, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_1);
 
 		JLabel lblNewLabel_7_2_1_2 = new JLabel("Năm Sinh:");
-		lblNewLabel_7_2_1_2.setForeground(Color.BLACK);
-		lblNewLabel_7_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7_2_1_2.setBounds(558, 330, 106, 17);
+		lblNewLabel_7_2_1_2.setForeground(Color.WHITE);
+		lblNewLabel_7_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_7_2_1_2.setBounds(737, 325, 106, 17);
 		pnlCardDangKyTheTV.add(lblNewLabel_7_2_1_2);
 
 		hoTenDG = new JTextField();
-		hoTenDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		hoTenDG.setBounds(243, 180, 126, 23);
+		hoTenDG.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		hoTenDG.setBounds(687, 177, 156, 28);
 		pnlCardDangKyTheTV.add(hoTenDG);
 		hoTenDG.setColumns(10);
 
@@ -386,9 +392,9 @@ public class GD_MainPage extends javax.swing.JFrame {
 				
 			}
 		});
-		soCMNDDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		soCMNDDG.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		soCMNDDG.setColumns(10);
-		soCMNDDG.setBounds(243, 216, 126, 23);
+		soCMNDDG.setBounds(687, 213, 156, 28);
 		pnlCardDangKyTheTV.add(soCMNDDG);
 
 		soDTDG = new JTextField();
@@ -408,18 +414,19 @@ public class GD_MainPage extends javax.swing.JFrame {
 			}
 		});
 		
-		soDTDG.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		soDTDG.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		soDTDG.setColumns(10);
-		soDTDG.setBounds(243, 258, 126, 23);
+		soDTDG.setBounds(687, 255, 156, 28);
 		pnlCardDangKyTheTV.add(soDTDG);
 
 		comboBoxDKTVNgay = new JComboBox();
+		comboBoxDKTVNgay.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBoxDKTVNgay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ngaySinhDG_DKTV = comboBoxDKTVNgay.getItemAt(comboBoxDKTVNgay.getSelectedIndex()).toString();
 			}
 		});
-		comboBoxDKTVNgay.setBounds(226, 330, 58, 21);
+		comboBoxDKTVNgay.setBounds(421, 318, 53, 30);
 		pnlCardDangKyTheTV.add(comboBoxDKTVNgay);
 
 		for (int i = 1; i <= 31; i++) {
@@ -427,12 +434,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 		}
 
 		comboBoxDKTVThang = new JComboBox();
+		comboBoxDKTVThang.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBoxDKTVThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				thangSinhDG_DKTV = comboBoxDKTVThang.getItemAt(comboBoxDKTVThang.getSelectedIndex()).toString();
 			}
 		});
-		comboBoxDKTVThang.setBounds(430, 330, 72, 21);
+		comboBoxDKTVThang.setBounds(627, 318, 53, 30);
 		pnlCardDangKyTheTV.add(comboBoxDKTVThang);
 
 		for (int i = 1; i <= 12; i++) {
@@ -440,12 +448,13 @@ public class GD_MainPage extends javax.swing.JFrame {
 		}
 
 		comboBoxDKTVNam = new JComboBox();
+		comboBoxDKTVNam.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		comboBoxDKTVNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				namSinhDG_DKTV = comboBoxDKTVNam.getItemAt(comboBoxDKTVNam.getSelectedIndex()).toString();
 			}
 		});
-		comboBoxDKTVNam.setBounds(657, 330, 77, 21);
+		comboBoxDKTVNam.setBounds(841, 318, 82, 30);
 		pnlCardDangKyTheTV.add(comboBoxDKTVNam);
 
 		for (int i = 1980; i <= 2021; i++) {
@@ -472,8 +481,8 @@ public class GD_MainPage extends javax.swing.JFrame {
 				
 			}
 		});
-		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLuuDKTV.setBounds(254, 514, 93, 36);
+		btnLuuDKTV.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnLuuDKTV.setBounds(408, 514, 124, 51);
 		pnlCardDangKyTheTV.add(btnLuuDKTV);
 
 		JButton btnDatLaiDKTV = new JButton("Đặt Lại");
@@ -484,13 +493,14 @@ public class GD_MainPage extends javax.swing.JFrame {
 				soDTDG.setText("");
 			}
 		});
-		btnDatLaiDKTV.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnDatLaiDKTV.setBounds(462, 514, 93, 36);
+		btnDatLaiDKTV.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDatLaiDKTV.setBounds(686, 514, 132, 51);
 		pnlCardDangKyTheTV.add(btnDatLaiDKTV);
 
 		JLabel lblngKTh = new JLabel("Đăng Ký Thẻ Thư Viện");
-		lblngKTh.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblngKTh.setBounds(330, 46, 318, 61);
+		lblngKTh.setForeground(Color.WHITE);
+		lblngKTh.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblngKTh.setBounds(450, 49, 336, 37);
 		pnlCardDangKyTheTV.add(lblngKTh);
 
 		JPanel pnlCardNhapSach = new JPanel();
@@ -751,7 +761,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						e1.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu đặt!");
 				}
 			}
 		});
@@ -777,7 +787,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					spd.setVisible(true);
 					spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu đặt!");
 				}
 			}
 		});
@@ -816,7 +826,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					ctPD.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu dat!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu đặt!");
 				}
 			}
 		});
@@ -904,7 +914,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					sptl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu thanh lý!");
 				}
 			}
 		});
@@ -950,7 +960,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu thanh lý!");
 				}
 			}
 		});
@@ -992,7 +1002,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					dshc.setVisible(true);
 					dshc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu thanh ly!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu thanh lý!");
 				}
 			}
 		});
@@ -1014,7 +1024,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 		pnlCardQuanLySach.add(btnThemSach);
 
 		JLabel lblNhapMaSach = new JLabel("Nhập Tên Sách:");
-		lblNhapMaSach.setForeground(Color.WHITE);
+		lblNhapMaSach.setForeground(Color.DARK_GRAY);
 		lblNhapMaSach.setFont(new Font("Verdana", Font.PLAIN, 20));
 		lblNhapMaSach.setBounds(594, 354, 172, 40);
 		pnlCardQuanLySach.add(lblNhapMaSach);
@@ -1073,7 +1083,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 					spd.setVisible(true);
 					spd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon sach!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn sách!");
 				}
 
 			}
@@ -1098,7 +1108,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dulieubangSach();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon sach!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn sách!");
 				}
 			}
 		});
@@ -1108,7 +1118,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 
 		JLabel lblTitleQuanLySach = new JLabel("Quản Lý Sách");
 		lblTitleQuanLySach.setFont(new Font("Verdana", Font.BOLD, 50));
-		lblTitleQuanLySach.setForeground(Color.WHITE);
+		lblTitleQuanLySach.setForeground(Color.DARK_GRAY);
 		lblTitleQuanLySach.setBounds(189, 155, 428, 64);
 		pnlCardQuanLySach.add(lblTitleQuanLySach);
 
@@ -1228,7 +1238,7 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dulieubangDocGia();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon doc gia!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn độc giả!");
 				}
 			}
 		});
@@ -1451,15 +1461,6 @@ public class GD_MainPage extends javax.swing.JFrame {
 		txtNamSinhQLDG.setBounds(196, 521, 42, 24);
 		pnlCardQuanLyDocGia.add(txtNamSinhQLDG);
 
-/////////////////////////////////////////////////////////////////////////////		
-
-////////////PanelCard Mượn Sách
-
-		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon("D:\\Download\\logo_transparent.png"));
-		lblLogo.setBounds(51, 22, 179, 145);
-		pnlSideBar.add(lblLogo);
-
 		pnlMuonSach.setBounds(0, 400, 281, 67);
 		pnlSideBar.add(pnlMuonSach);
 
@@ -1520,7 +1521,11 @@ public class GD_MainPage extends javax.swing.JFrame {
 		JLabel lblNewLabel_6_1 = new JLabel("");
 		lblNewLabel_6_1.setBounds(28, 10, 39, 48);
 		pnlTraSach.add(lblNewLabel_6_1);
-
+		
+		JLabel labelLoGo = new JLabel("");
+		labelLoGo.setBounds(0, 0, 281, 183);
+		pnlSideBar.add(labelLoGo);
+		labelLoGo.setIcon(new ImageIcon(new ImageIcon(URL_IMAGELOGO).getImage().getScaledInstance(280, 180, Image.SCALE_DEFAULT)));
 		JLabel lblTieuDePhieuMuon = new JLabel("Phiếu Mượn");
 		lblTieuDePhieuMuon.setForeground(Color.WHITE);
 		lblTieuDePhieuMuon.setFont(new Font("SansSerif", lblTieuDePhieuMuon.getFont().getStyle(), 50));
@@ -1576,12 +1581,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 					tpm.setVisible(true);
 					tpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu mượn!");
 				}
 			}
 		});
 		btnSuaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnSuaPM.setBounds(503, 577, 85, 40);
+		btnSuaPM.setBounds(652, 587, 85, 40);
 		pnlCardMuonSach.add(btnSuaPM);
 
 		JButton btnXoaPM = new JButton("Xóa");
@@ -1601,12 +1606,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 						dulieubangTraSach();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu mượn!");
 				}
 			}
 		});
 		btnXoaPM.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXoaPM.setBounds(727, 577, 85, 40);
+		btnXoaPM.setBounds(876, 587, 85, 40);
 		pnlCardMuonSach.add(btnXoaPM);
 
 		JLabel lblNhapMaPM = new JLabel("Nhập Mã Phiếu Mượn:");
@@ -1658,12 +1663,12 @@ public class GD_MainPage extends javax.swing.JFrame {
 					ctpm.setVisible(true);
 					ctpm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} else {
-					JOptionPane.showMessageDialog(null, "Chua chon phieu muon!");
+					JOptionPane.showMessageDialog(null, "Chưa chọn phiếu mượn!");
 				}
 			}
 		});
 		btnXemPM.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnXemPM.setBounds(266, 577, 85, 40);
+		btnXemPM.setBounds(415, 587, 85, 40);
 		pnlCardMuonSach.add(btnXemPM);
 
 		JButton btnGiaHanPhieu = new JButton("Gia Hạn Phiếu Mượn");

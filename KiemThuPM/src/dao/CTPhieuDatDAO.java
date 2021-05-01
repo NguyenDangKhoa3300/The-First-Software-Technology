@@ -63,7 +63,7 @@ public class CTPhieuDatDAO {
 		try {
 			Connection con = DataBase.getInstance().getConnection();
 			String querry = "Insert into ChiTietPhieuDat values('"+maPD+"','"
-					+maNXB+"','"+tenSach+"',"+soLuong+","+donGia+",'"+maCTPD+"');";
+					+maNXB+"',N'"+tenSach+"',"+soLuong+","+donGia+",'"+maCTPD+"');";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 
@@ -83,7 +83,7 @@ public class CTPhieuDatDAO {
 		String maNXB = getMaNXB(tenNXB);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Update ChiTietPhieuDat set MaNXB = '"+maNXB+"',tensach = '"+tenSach+"',soluong = " +soLuong+",dongia = "+donGia+" where maCTPD = '"+ maCTPD+"'";
+			String querry = "Update ChiTietPhieuDat set MaNXB = '"+maNXB+"',tensach = N'"+tenSach+"',soluong = " +soLuong+",dongia = "+donGia+" where maCTPD = '"+ maCTPD+"'";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 

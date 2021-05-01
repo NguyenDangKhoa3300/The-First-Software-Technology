@@ -74,7 +74,7 @@ public class GD_ThemSach extends JFrame {
 		
 		txtTenSach = new JTextField();
 		txtTenSach.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtTenSach.setBounds(173, 168, 126, 23);
+		txtTenSach.setBounds(173, 168, 201, 23);
 		contentPane.add(txtTenSach);
 		txtTenSach.setColumns(10);
 		
@@ -145,6 +145,9 @@ public class GD_ThemSach extends JFrame {
 				new SachDAO().themSach(tenSach, theLoai, namXB, tenNXB, tinhTrang);
 				GD_MainPage mainframe = new GD_MainPage().getInstanceOfMainPage();
 				mainframe.dulieubangSach();
+				txtTenSach.setText("");
+				txtTheLoai.setText("");
+				txtTinhTrang.setText("");
 			}else {
 				JOptionPane.showMessageDialog(null, "Chưa điền đẩy đủ thông tin!");
 			}

@@ -90,7 +90,7 @@ public void suaSach(String maSach, String tenSach, String theLoai, String namXB,
 		String maNXB = getMaNXB(tenNXB);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Update Sach set tensach = '"+tenSach+"',theLoai = '" +theLoai+"',namXB = '"+namXB+"', maNXB = '"+ maNXB+"',tinhTrangsach ='"+tinhTrang +"' where maSach = '"+ maSach+"'";
+			String querry = "Update Sach set tensach = N'"+tenSach+"',theLoai = N'" +theLoai+"',namXB = '"+namXB+"', maNXB = '"+ maNXB+"',tinhTrangsach = N'"+tinhTrang +"' where maSach = '"+ maSach+"'";
 			
 			PreparedStatement ps = con.prepareStatement(querry);
 
@@ -112,8 +112,8 @@ public void suaSach(String maSach, String tenSach, String theLoai, String namXB,
 		String maNXB = getMaNXB(tenNXB);
 		try {
 			Connection con = DataBase.getInstance().getConnection();
-			String querry = "Insert into Sach values('"+maSach+"','"
-					+tenSach+"','"+theLoai+"','"+namXB+"','"+maNXB+"','"+tinhTrang+"');";
+			String querry = "Insert into Sach values('"+maSach+"',N'"
+					+tenSach+"',N'"+theLoai+"','"+namXB+"','"+maNXB+"',N'"+tinhTrang+"');";
 
 			PreparedStatement ps = con.prepareStatement(querry);
 
